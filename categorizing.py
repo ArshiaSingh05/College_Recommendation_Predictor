@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sb
 from sklearn.preprocessing import MinMaxScaler
 # Categorizing the data
-
+df = pd.read_csv("cleaned_data.csv")
 # Ensure UG fee column is numeric
 data['UG fee (tuition fee)'] = pd.to_numeric(data['UG fee (tuition fee)'], errors='coerce').fillna(0)
 # Define budget category based on quartiles
