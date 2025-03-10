@@ -32,9 +32,13 @@ with st.sidebar:
 
 # Prediction button
 if st.button("Predict"):
-    input_data = np.array([[average_rating, placement_fee_ratio, ug_fee_scaled, pg_fee_scaled]])
+    input_data = pd.DataFrame([[average_rating, placement_fee_ratio, ug_fee_scaled, pg_fee_scaled]],
+                              columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)'])
+    
     prediction = model.predict(input_data)[0]
+    
     st.success(f"The predicted college category is: **{prediction}**")
+
 
 # Graph Resizing Logic
 sidebar_closed = st.sidebar.empty()
