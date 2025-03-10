@@ -1,9 +1,9 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sb
+import seaborn as sns
 
-data=pd.read_excel("College_data(excel).xlsx")
+data=pd.read_csv("College_data.csv")
 
 #checking the data
 print(data.head(),"\n")
@@ -49,8 +49,6 @@ data[cols_to_fill]=data[cols_to_fill].fillna(data[cols_to_fill].median())
 data['State'] = data['State'].str.title().str.strip()
 
 #Checking outliers with boxplot
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 plt.figure(figsize=(12, 6))
 sns.boxplot(data[['Overall Rating', 'Academic (Rating)', 'Accommodation (Rating)',
