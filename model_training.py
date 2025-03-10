@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import joblib
+import pickle
 
 data = pd.read_csv("cleaned_data.csv")
 X = data[['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)']]
@@ -17,9 +18,6 @@ r2 = r2_score(y_test, y_pred)
 print(f"Mean Squared Error (MSE): {mse}")
 print(f"R-squared (R²): {r2}")
 
-#Saving the model to reuse it without retraining
-joblib.dump(model, 'trained_model.pkl')
-model = joblib.load('training_model.pkl')
 # Predictions
 y_pred = model.predict(X_test)
 
@@ -35,3 +33,11 @@ r2 = r2_score(y_test, y_pred)
 print(f"Mean Squared Error (MSE): {mse}")
 print(f"Mean Absolute Error (MAE): {mae}")
 print(f"R² Score: {r2}")
+
+#Saving the model to reuse it without retraining
+joblib.dump(model, 'trained_model.pkl')
+print("Model saved successfully as 'model.pkl'")
+
+# Save the trained model
+with open('training_model.pkl', 'wb') as file:
+    pickle.dump(model, file)
