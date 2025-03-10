@@ -1,4 +1,4 @@
-College_Name,State,Stream,UG_fee,PG_fee,Rating,Academic,Accommodation,Faculty,Infrastructure,Placement,Social_Life
+﻿College_Name,State,Stream,UG fee (tuition fee),PG fee,Overall Rating,Academic (Rating),Accommodation (Rating),Faculty (Rating),Infrastructure (Rating),Placement (Rating),Social Life (Rating)
 Indian Institute of Technology Madras ,Tamil nadu,Engineering,"75,116","23,070",8.7,9,7.9,8.7,8.8,8.8,9
 "College of Engineering, Anna University ",Tamil nadu,Engineering,"50,000","50,000",8.4,8.7,7.7,8.1,8.7,8.3,8.7
 "NIT Trichy, Tiruchirappalli ",Tamil nadu,Engineering,"1,49,250","99,250",8.5,8.6,7.8,8.2,8.7,8.8,8.7
@@ -116,7 +116,7 @@ Noida Institute of Engineering and Technology ,Delhi ncr,Engineering,"6,14,000",
 K L University ,Andhra pradesh,Engineering,"2,50,000","1,45,000",8.3,8.5,7.6,8.3,8.8,8.3,8.2
 "Andhra University, College of Engineering ",Andhra pradesh,Engineering,"10,000","1,09,000",7.7,8.2,6.9,7.8,8,7.2,7.9
 "Sri Venkateswara University College of Engineering, Tirupati ",Andhra pradesh,Engineering,"16,395","31,647",7.8,7.6,8.4,7.4,8.1,6.9,8.1
-"Vignan’s Foundation for Science, Technology, and Research, ",Andhra pradesh,Engineering,"2,50,000","1,10,000",8.2,8.2,8.4,8.5,8.2,7.7,8.4
+"Vignanâ€™s Foundation for Science, Technology, and Research, ",Andhra pradesh,Engineering,"2,50,000","1,10,000",8.2,8.2,8.4,8.5,8.2,7.7,8.4
 "JNTUK University College of Engineering, Kakinada, East ",Andhra pradesh,Engineering,"10,000","30,000",7.7,8,7.1,7.8,8.2,7,8.3
 Sree Vidyanikethan Engineering College ,Andhra pradesh,Engineering,"2,80,000","76,850",8.5,8.4,8.5,8.3,8.8,8.4,8.6
 G. Pulla Reddy Engineering College ,Andhra pradesh,Engineering,"80,000","80,000",8.3,8.5,7.7,8.5,8.5,8.2,8.4
@@ -1024,7 +1024,7 @@ K L University ,Andhra pradesh,Science,"1,45,000","85,000",8.3,8.5,7.6,8.3,8.8,8
 "Andhra University, College of Engineering ",Andhra pradesh,Science,--,--,7.7,8.2,6.9,7.8,8,7.2,7.9
 PES Institute of Medical Sciences and Research ,Andhra pradesh,Science,--,--,7.9,8.3,6.5,8.4,8.4,7.6,8.3
 Sri Venkateswara University ,Andhra pradesh,Science,"12,760","11,805",8.1,7.9,8.3,8.2,7.9,7.7,8.4
-"Vignan’s Foundation for Science, Technology, and Research, ",Andhra pradesh,Science,"70,000","70,000",8.2,8.2,8.4,8.5,8.2,7.7,8.4
+"Vignanâ€™s Foundation for Science, Technology, and Research, ",Andhra pradesh,Science,"70,000","70,000",8.2,8.2,8.4,8.5,8.2,7.7,8.4
 Shri Vishnu College of Pharmacy ,Andhra pradesh,Science,--,--,8,8.1,8,8.1,8.4,7.7,7.8
 "JNTUA College of Engineering, Ananthapur ",Andhra pradesh,Science,"58,750",--,7,7.1,7.3,6.7,7.5,6.3,7.3
 Sagi Ramakrishnam Raju Engineering College ,Andhra pradesh,Science,--,--,8.2,8.5,7.5,8.4,8.3,8.2,8.3
@@ -1515,7 +1515,7 @@ Akkineni Nageswara Rao College ,Andhra pradesh,Commerce,"3,315","9,210",8.6,9,9,
 "Besant Theosophical College, Madanapalle ",Andhra pradesh,Commerce,"6,000","20,000",8.3,8.5,8.5,8.5,8,8,8.5
 Ch S D St Theresa's Atonomous College ,Andhra pradesh,Commerce,"12,000",--,--,--,--,--,--,--,--
 Dantuluri Narayana Raju college ,Andhra pradesh,Commerce,"2,800","4,096",8.5,8.5,8.3,8.7,9.2,6.7,9.3
-Duvvuru Ramanamma Women’s College ,Andhra pradesh,Commerce,"15,000",--,--,--,--,--,--,--,--
+Duvvuru Ramanamma Womenâ€™s College ,Andhra pradesh,Commerce,"15,000",--,--,--,--,--,--,--,--
 Dharma Apparao College ,Andhra pradesh,Commerce,--,--,--,--,--,--,--,--,--
 "Dodla Kousalyamma Government College for Women, Nellore ",Andhra pradesh,Commerce,"4,840",--,--,--,--,--,--,--,--
 Government Degree College (Men) ,Andhra pradesh,Commerce,--,--,7.8,8.5,5.5,--,--,--,--
@@ -1771,7 +1771,7 @@ Sister Nivedita University ,West bengal,Commerce,"1,02,400","94,600",8.2,8.2,7.6
 St. Xavier's University ,West bengal,Commerce,"1,32,000","1,36,000",8.4,8.7,8,8.3,8.9,7.8,8.4
 "Techno India University, Kolkata ",West bengal,Commerce,"1,10,000",--,8,8.2,7.4,8.2,8.1,7.8,8.4
 "City College of Commerce and Business Administration, ",West bengal,Commerce,"5,430",--,6.9,7.8,5.9,8,7.1,5.6,7.2
-"Diamond Harbour Women’s University, South 24 Parganas ",West bengal,Commerce,"7,900",--,8.1,8.6,8.2,8.2,8,7.5,8.1
+"Diamond Harbour Womenâ€™s University, South 24 Parganas ",West bengal,Commerce,"7,900",--,8.1,8.6,8.2,8.2,8,7.5,8.1
 "Brainware University, Kolkata ",West bengal,Commerce,"1,00,000","1,77,200",7.9,8.3,7.6,7.9,8.2,7.8,7.3
 Seacom Skills University ,West bengal,Commerce,"1,50,000","35,000",7.5,8.4,6.4,8.9,7.4,6.7,7.3
 The Neotia University ,West bengal,Commerce,"86,000",--,8.2,8.7,7.5,8.5,8.2,7.8,8.6
@@ -1964,7 +1964,7 @@ K L University ,Andhra pradesh,Arts,"1,65,000","1,45,000",8.3,8.5,7.6,8.3,8.8,8.
 IFMR Graduate School of Business ,Andhra pradesh,Arts,--,--,8.2,8.3,8.1,8.4,8.3,8.5,7.8
 Sri Venkateswara University ,Andhra pradesh,Arts,"6,325","8,290",8.1,7.9,8.3,8.2,7.9,7.7,8.4
 GITAM Institute of Management ,Andhra pradesh,Arts,"80,000","5,000",8.5,8.6,7.3,8.8,9.2,8.4,8.7
-"Vignan’s Foundation for Science, Technology, and Research, ",Andhra pradesh,Arts,"70,000",--,8.2,8.2,8.4,8.5,8.2,7.7,8.4
+"Vignanâ€™s Foundation for Science, Technology, and Research, ",Andhra pradesh,Arts,"70,000",--,8.2,8.2,8.4,8.5,8.2,7.7,8.4
 Acharya Nagarjuna University ,Andhra pradesh,Arts,"5,950","6,900",7.3,7.7,7,7.2,8,5.7,8.2
 "Krea University, Sri City ",Andhra pradesh,Arts,"7,70,500",--,8.6,8.2,8.6,8.7,8.6,8.8,8.8
 Indian Institute of Management Visakhapatnam ,Andhra pradesh,Arts,--,--,8.9,8.8,9,9,8.8,8.8,8.8
@@ -3708,7 +3708,7 @@ Rashtrasant Tukadoji Maharaj Nagpur University ,Maharashtra,Pharmacy,"17,696","1
 "Y. B. Chavan College of Pharmacy, Aurangabad ",Maharashtra,Pharmacy,"1,30,000","1,60,000",7.9,8.8,7.2,8.3,8,7,7.8
 RC Patel Institute of Pharmacutical Education and ,Maharashtra,Pharmacy,"1,00,000","1,52,500",8.5,8.5,8.3,9.2,8.9,7.5,8.3
 Dr. D.Y. Patil Institute of Pharmaceutical Sciences ,Maharashtra,Pharmacy,"1,30,000","1,30,000",8.4,9,7.2,8.7,9.2,8.1,8.4
-Bharati Vidyapeeth’s College of Pharmacy ,Maharashtra,Pharmacy,"1,55,000","2,00,000",7.7,9,7.7,8.5,7.8,6,7
+Bharati Vidyapeethâ€™s College of Pharmacy ,Maharashtra,Pharmacy,"1,55,000","2,00,000",7.7,9,7.7,8.5,7.8,6,7
 Bharati Vidyapeeth College of Pharmacy ,Maharashtra,Pharmacy,"1,48,292","1,63,292",8.3,8,7.7,9,9.3,7.8,7.7
 "Smt Kishoritai Bhoyar College of Pharmacy, Nagpur ",Maharashtra,Pharmacy,"1,24,000","1,55,000",8.3,--,--,9,--,8,8
 Principal K.M. Kundnani College of Pharmacy ,Maharashtra,Pharmacy,"18,210","36,000",7.6,8.5,6,9,6.8,8,7.4
@@ -3797,7 +3797,7 @@ Raghavendhra Institute of Pharmaceutical Education and Research ,Andhra pradesh,
 K L University ,Andhra pradesh,Pharmacy,"1,85,000","1,75,000",8.3,8.5,7.6,8.3,8.8,8.3,8.2
 Bapatla College of Pharmacy ,Andhra pradesh,Pharmacy,"52,000","1,10,000",7.6,9,7.8,8.6,9.8,4.2,6
 Sri Venkateswara University ,Andhra pradesh,Pharmacy,"1,21,780","3,63,094",8.1,7.9,8.3,8.2,7.9,7.7,8.4
-"Vignan’s Foundation for Science, Technology, and Research, ",Andhra pradesh,Pharmacy,"1,50,000",--,8.2,8.2,8.4,8.5,8.2,7.7,8.4
+"Vignanâ€™s Foundation for Science, Technology, and Research, ",Andhra pradesh,Pharmacy,"1,50,000",--,8.2,8.2,8.4,8.5,8.2,7.7,8.4
 Shri Vishnu College of Pharmacy ,Andhra pradesh,Pharmacy,"80,020","1,07,900",8,8.1,8,8.1,8.4,7.7,7.8
 Jawaharlal Nehru Technological University ,Andhra pradesh,Pharmacy,"1,80,000",--,7.4,7.7,6.8,7.1,7.7,7.1,7.8
 Centurion University of Technology and Management ,Andhra pradesh,Pharmacy,"60,000",--,7.8,8,7.2,8.3,7.6,7.4,8.3
@@ -3862,7 +3862,7 @@ Birla Institute of Technology and Science ,Telangana,Pharmacy,"4,23,475","4,69,4
 "Scient Institute of Technology, Ibrahimpatnam, Hyderabad ",Telangana,Pharmacy,"61,500","1,17,500",7.5,7.9,6.6,7.3,8.1,7,8
 Guru Nanak Institutions Technical Campus ,Telangana,Pharmacy,"91,500","1,20,500",7.8,7.9,7.8,7.8,8.1,7.6,7.8
 "CMR Group of Institutions, Hyderabad ",Telangana,Pharmacy,"1,00,000","1,10,000",7.4,7.8,7.5,7.4,7.1,7.1,7.7
-"St. Mary’s Group of Institutions, Hyderabad ",Telangana,Pharmacy,"1,000","2,500",7.2,7.4,6.5,7.3,7.8,6.5,7.6
+"St. Maryâ€™s Group of Institutions, Hyderabad ",Telangana,Pharmacy,"1,000","2,500",7.2,7.4,6.5,7.3,7.8,6.5,7.6
 Sana Engineering College ,Telangana,Pharmacy,"1,20,000",--,6.5,7,6.5,7.3,7.5,4.8,6.1
 Nalla Narasimha Reddy Education Society's Group of ,Telangana,Pharmacy,"80,500","1,15,500",7.7,7.7,7.2,8,8.2,6.7,8.2
 Brilliant Grammar School Educational Society's Group of ,Telangana,Pharmacy,--,--,7.3,7.5,6.5,8,8,5,9
@@ -3873,7 +3873,7 @@ Institute of Science and Technology ,Telangana,Pharmacy,"96,000",--,7.7,9,7.5,8,
 "SVS Group of Institutions, Warangal ",Telangana,Pharmacy,"45,500","1,17,500",7.2,7.4,6.6,7.4,7.5,6.4,7.6
 Hasvita Group of Institutions ,Telangana,Pharmacy,--,--,8.3,9,7.5,8.5,8.5,8,8
 Vivekananda Group of Institutions ,Telangana,Pharmacy,--,--,8.8,8.4,8.9,8.7,8.8,9,9
-"Arvindaksha Educational Society’s Group of Institutions, Suryapet ",Telangana,Pharmacy,--,--,--,--,--,--,--,--,--
+"Arvindaksha Educational Societyâ€™s Group of Institutions, Suryapet ",Telangana,Pharmacy,--,--,--,--,--,--,--,--,--
 Madhira Institute of Technology & Science ,Telangana,Pharmacy,"70,000",--,6.6,6,6.2,6.6,6.8,6.8,7.1
 "Mohammadiya Educational Society, Khammam ",Telangana,Pharmacy,"35,000","1,10,000",--,--,--,--,--,--,--
 "Devi Ahilya Vishwavidyalaya, Indore ",Madhya pradesh,Pharmacy,"73,600","79,500",7.5,8,6.5,7.8,7.5,7,7.9
@@ -6082,7 +6082,7 @@ Birla Institute of Technology and Science ,Goa,Science,"3,99,475","78,625",8.5,8
 "Government College of Arts Science and Commerce Sanquelim, North Goa ",Goa,Science,"8,520",--,--,--,--,--,--,--,--
 National Centre for Antarctic and Ocean Research ,Goa,Science,--,--,9.2,9,9,--,--,--,--
 "Carmel College for Women, Salcete ",Goa,Science,"9,876",--,7.5,9,5.3,9.3,6.3,6.3,9
-"DCT’s Dhempe College of Arts and Science, Panji ",Goa,Science,"7,130",--,7.3,8.2,6.5,8,7.5,5.3,8.5
+"DCTâ€™s Dhempe College of Arts and Science, Panji ",Goa,Science,"7,130",--,7.3,8.2,6.5,8,7.5,5.3,8.5
 "Dnyanprassarak Mandal's College of Arts Science Commerce Management Studies & Technology, Bardez ",Goa,Science,--,--,6.6,7.2,5.2,7.8,7.2,5.8,6.4
 "Government College of Arts Science and Commerce Quepem, North Goa ",Goa,Science,"5,540",--,7.8,8,8,9.7,6.5,5,9.3
 "Parvatibai Chowgule College of Arts and Science, Salcete ",Goa,Science,"19,305","1,06,140",7.6,7.3,6.3,8.5,8.3,6.6,8.5
@@ -6118,7 +6118,7 @@ Indian Institute of Technology ,Goa,Arts,"29,919",--,8,8.4,7.9,8.5,7.9,7,8.4
 Birla Institute of Technology and Science ,Goa,Arts,--,--,8.5,8.4,8.3,7.8,8.7,8.7,8.9
 "CES College of Arts and Commerce, Salcete ",Goa,Arts,--,--,--,--,--,--,--,--,--
 "Carmel College for Women, Salcete ",Goa,Arts,"8,906",--,7.5,9,5.3,9.3,6.3,6.3,9
-"DCT’s Dhempe College of Arts and Science, Panji ",Goa,Arts,"6,660",--,7.3,8.2,6.5,8,7.5,5.3,8.5
+"DCTâ€™s Dhempe College of Arts and Science, Panji ",Goa,Arts,"6,660",--,7.3,8.2,6.5,8,7.5,5.3,8.5
 "Dnyanprassarak Mandal's College of Arts Science Commerce Management Studies & Technology, Bardez ",Goa,Arts,--,--,6.6,7.2,5.2,7.8,7.2,5.8,6.4
 "Government College of Arts Science and Commerce Quepem, North Goa ",Goa,Arts,"4,760",--,7.8,8,8,9.7,6.5,5,9.3
 Murgaon Education Societys College of Arts and Commerce ,Goa,Arts,"7,708",--,8.1,9,7.5,8.5,8.7,6.7,8
@@ -6462,7 +6462,7 @@ Karaikal Polytechnic College ,Puducherry,Engineering,"6,000",--,--,--,--,--,--,-
 Dr. B. R. Ambedkar Polytechnic College ,Puducherry,Engineering,"6,000",--,--,--,--,--,--,--,--
 Indira Gandhi Polytechnic College ,Puducherry,Engineering,"7,095","7,195",--,--,--,--,--,--,--
 "Sri Manakula Vinayagar Polytechnic College-[SMVPC], Pondicherry ",Puducherry,Engineering,"17,500",--,--,--,--,--,--,--,--
-Women’s Polytechnic College ,Puducherry,Engineering,"6,000","6,000",--,--,--,--,--,--,--
+Womenâ€™s Polytechnic College ,Puducherry,Engineering,"6,000","6,000",--,--,--,--,--,--,--
 Pondicherry University ,Puducherry,Management,"74,718","23,301",7.8,8,7.3,8,8.1,6.9,8.4
 Achariya School of Business & Technology ,Puducherry,Management,"60,000",--,8.5,8,8,9,9,9,8
 Manakula Vinayagar Institute of Technology ,Puducherry,Management,--,--,7.4,7.9,7.1,7.6,7.7,7.5,6.8

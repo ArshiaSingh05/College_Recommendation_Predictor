@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sb
 
-data=pd.read_csv("College_data.csv")
+data=pd.read_excel("College_data(excel).xlsx")
 
 #checking the data
 print(data.head(),"\n")
