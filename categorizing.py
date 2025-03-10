@@ -36,3 +36,6 @@ scaler = MinMaxScaler()
 data[['UG fee (scaled)', 'PG fee (scaled)']] = scaler.fit_transform(data[['UG fee (tuition fee)', 'PG fee']])
 
 print(data[['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)']].head())
+
+data.to_csv('cleaned_data.csv', index=False)
+
