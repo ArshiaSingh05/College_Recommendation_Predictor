@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle  # For loading the trained model
-import seaborn as sns  # Fixed alias
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load the trained model
@@ -12,7 +12,7 @@ with open('training_model.pkl', 'rb') as file:
 # Load Data
 data = pd.read_csv('cleaned_data.csv')
 
-# Clean the 'State' column to avoid matching issues
+# Clean the 'State' column
 data['State'] = data['State'].str.strip().str.title().fillna('Unknown')
 
 # Title and description
@@ -47,24 +47,52 @@ else:
     # **Graphs for Selected Area**
     st.write(f"### Colleges in {area}")
 
-    # **Average Rating Comparison**
+    # **Average Rating Comparison (Sorted)**
     st.write("### Average Rating Comparison")
-    plt.figure(figsize=(10, 6))
-    sns.barplot(x='College Name', y='Average Rating', data=filtered_data)
-    plt.xticks(rotation=90)
+    plt.figure(figsize=(12, 6))  # Bigger figure for better visibility
+    sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
+    sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
+    plt.xticks(rotation=45, ha='right')  # Better visibility
+    plt.xlabel("College Name")  # Add label
+    plt.ylabel("Average Rating")  # Add label
     st.pyplot(plt)
 
-    # **Placement vs Fee Ratio**
+    # **Placement vs Fee Ratio (Sorted)**
     st.write("### Placement vs Fee Ratio")
-    plt.figure(figsize=(10, 6))
-    sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=filtered_data)
-    plt.xticks(rotation=90)
+    plt.figure(figsize=(12, 6))
+    sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
+    sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
+    plt.xticks(rotation=45, ha='right')
+    plt.xlabel("College Name")
+    plt.ylabel("Placement vs Fee Ratio")
     st.pyplot(plt)
 
-    # **UG Fee Distribution**
+    # **UG Fee Distribution (Histogram)**
     st.write("### UG Fee Distribution")
-    plt.figure(figsize=(10, 6))
-    sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True)
+    plt.figure(figsize=(12, 6))
+    sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True, bins=15)  # More bins for better visualization
+    plt.xlabel("UG Fee (Tuition Fee)")
+    plt.ylabel("Frequency")
+    st.pyplot(plt)
+
+    # **UG Fee (Scaled) (Sorted)**
+    st.write("### UG Fee (Scaled)")
+    plt.figure(figsize=(12, 6))
+    sorted_data = filtered_data.sort_values(by='UG fee (scaled)', ascending=False)
+    sns.barplot(x='College Name', y='UG fee (scaled)', data=sorted_data)
+    plt.xticks(rotation=45, ha='right')
+    plt.xlabel("College Name")
+    plt.ylabel("UG Fee (Scaled)")
+    st.pyplot(plt)
+
+    # **PG Fee (Scaled) (Sorted)**
+    st.write("### PG Fee (Scaled)")
+    plt.figure(figsize=(12, 6))
+    sorted_data = filtered_data.sort_values(by='PG fee (scaled)', ascending=False)
+    sns.barplot(x='College Name', y='PG fee (scaled)', data=sorted_data)
+    plt.xticks(rotation=45, ha='right')
+    plt.xlabel("College Name")
+    plt.ylabel("PG Fee (Scaled)")
     st.pyplot(plt)
 
 # **Footer**
