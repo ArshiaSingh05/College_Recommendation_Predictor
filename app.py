@@ -13,6 +13,15 @@ with open('training_model.pkl', 'rb') as file:
 # Load Data
 data = pd.read_csv('cleaned_data.csv')
 
+# App Mode Selection
+mode = st.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
+# Apply color theme based on mode
+if mode == "GitHub Mode":
+    plt.style.use("dark_background")  # Dark mode for GitHub theme
+    sns.set_palette("Greens")  # Green color theme
+else:
+    plt.style.use("default")  # Light mode
+
 # Clean the 'State' column
 data['State'] = data['State'].str.strip().str.title().fillna('Unknown')
 
