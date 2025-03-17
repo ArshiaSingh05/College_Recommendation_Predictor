@@ -49,13 +49,14 @@ else:
 
 # ✅ Collapsible Sidebar for User Input
 with st.sidebar:
-    st.header("Adjust Parameters")
-    
-    # **Prediction Inputs**
-    average_rating = st.number_input("Average Rating", min_value=0.0, max_value=10.0, step=0.1)
-    placement_fee_ratio = st.number_input("Placement vs Fee Ratio", min_value=0.0, step=0.00001)
-    ug_fee_scaled = st.number_input("UG Fee (Scaled)", min_value=0.0, max_value=1.0, step=0.001)
-    pg_fee_scaled = st.number_input("PG Fee (Scaled)", min_value=0.0, max_value=1.0, step=0.001)
+    # Sidebar UI with Sliders instead of Buttons
+    st.sidebar.header("Adjust Parameters")
+
+    average_rating = st.sidebar.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
+    placement_vs_fee_ratio = st.sidebar.slider("Placement vs Fee Ratio", min_value=0.0, max_value=1.0, value=0.0, step=0.01)
+    ug_fee_scaled = st.sidebar.slider("UG Fee (Scaled)", min_value=0.0, max_value=5.0, value=0.0, step=0.1)
+    pg_fee_scaled = st.sidebar.slider("PG Fee (Scaled)", min_value=0.0, max_value=5.0, value=0.0, step=0.1)
+
 
     # **Graph & Area Selection**
     selected_area = st.selectbox("Select Area", sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
