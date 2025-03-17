@@ -6,11 +6,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pathlib
 
-st.title("🎓 College Recommendation Project")
-st.markdown("<div style='text-align: center;'>An AI-Powered College Finder</div>", unsafe_allow_html=True)
-
 # Set page config first
 st.set_page_config(page_title="Your App", layout="wide", initial_sidebar_state="collapsed")
+
+st.title("🎓 College Recommendation Project")
+st.markdown("<div style='text-align: center;'>An AI-Powered College Finder</div>", unsafe_allow_html=True)
 
 # Load the trained model
 with open('training_model.pkl', 'rb') as file:
