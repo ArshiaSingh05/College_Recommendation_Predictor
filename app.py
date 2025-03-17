@@ -114,6 +114,6 @@ st.markdown{
         Developed with ❤️ by Arshia Singh using Streamlit"
     </div>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html==True
 
 }
