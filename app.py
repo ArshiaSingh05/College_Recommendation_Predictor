@@ -36,7 +36,7 @@ else:
     st.markdown(
         """
         <style>
-        body{
+        .stApp{
             background-color:white;
             color:black;
         }
@@ -50,6 +50,12 @@ else:
 data['State'] = data['State'].str.strip().str.title().fillna('Unknown')
 
 # Title and description
+st.set_page_config(
+    page_title="Your App",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
 st.title("College Recommendation Predictor")
 st.write("Enter the following details to predict the recommended college category.")
 
