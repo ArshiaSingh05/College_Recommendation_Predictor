@@ -64,9 +64,13 @@ with st.sidebar:
     # **Prediction Button**
     if st.button("Predict"):
         feature_names = ['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)']
-        input_df = pd.DataFrame(input_data, columns=feature_names)
-        prediction = model.predict(input_df)[0] 
+        # ✅ Define input_data properly
+        input_data = [[average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]]  
+        input_df = pd.DataFrame(input_data, columns=feature_names)  # ✅ No more NameError
+        # ✅ Model Prediction
+        prediction = model.predict(input_df)[0]  
         st.success(f"The predicted college category is: **{prediction}**")
+
 
 # ✅ Display Selected Values
 st.subheader("Explore Colleges by Area")
