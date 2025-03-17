@@ -6,7 +6,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pathlib
 
-# ✅ Set page config first
+# Set page config first
 st.set_page_config(page_title="Your App", layout="wide", initial_sidebar_state="collapsed")
 
 # Load the trained model
@@ -19,7 +19,7 @@ data = pd.read_csv('cleaned_data.csv')
 # App Mode Selection
 mode = st.sidebar.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
 
-# ✅ Apply color theme based on mode
+# Apply color theme based on mode
 if mode == "GitHub Mode":
     st.markdown(
         """
@@ -47,7 +47,7 @@ else:
     )
     plt.style.use("default")
 
-# ✅ Collapsible Sidebar for User Input
+# Collapsible Sidebar for User Input
 with st.sidebar:
     # Sidebar UI with Sliders instead of Buttons
     st.sidebar.header("Adjust Parameters")
@@ -64,15 +64,15 @@ with st.sidebar:
     # **Prediction Button**
     if st.button("Predict"):
         feature_names = ['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)']
-        # ✅ Define input_data properly
+        # Define input_data properly
         input_data = [[average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]]  
-        input_df = pd.DataFrame(input_data, columns=feature_names)  # ✅ No more NameError
-        # ✅ Model Prediction
+        input_df = pd.DataFrame(input_data, columns=feature_names)  # No more NameError
+        # Model Prediction
         prediction = model.predict(input_df)[0]  
         st.success(f"The predicted college category is: **{prediction}**")
 
 
-# ✅ Display Selected Values
+# Display Selected Values
 st.subheader("Explore Colleges by Area")
 st.write(f"Selected Area: {selected_area}")
 
@@ -88,16 +88,20 @@ else:
 
     # **Average Rating Comparison**
     st.write("### Average Rating Comparison")
-    plt.figure(figsize=(14, 6))  # Increase figure size
+    # Filter colleges based on slider input
+    filtered_data = filtered_data[filtered_data['Average Rating'] >= average_rating]
+    # Sort the updated dataset
     sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
+    plt.figure(figsize=(14, 6))  # Increase figure size
     sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
     plt.xticks(rotation=60, ha='right', fontsize=9)
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])  # Show every 5th label
-    plt.xlabel("College Name",fontsize=14,labelpad=15)
-    plt.ylabel("Average Rating",fontsize=14,labelpad=15)
-    plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
+    plt.xlabel("College Name", fontsize=14, labelpad=15)
+    plt.ylabel("Average Rating", fontsize=14, labelpad=15)
+    plt.subplots_adjust(bottom=0.3)  # Adds space for labels
     st.pyplot(plt)
+
 
     # **Placement vs Fee Ratio**
     st.write("### Placement vs Fee Ratio")
@@ -109,7 +113,7 @@ else:
     plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name",fontsize=14,labelpad=15)
     plt.ylabel("Placement vs Fee Ratio",fontsize=14,labelpad=15)
-    plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
+    plt.subplots_adjust(bottom=0.3)  # Adds space for labels
     st.pyplot(plt)
 
     # **UG Fee Distribution**
@@ -131,7 +135,7 @@ else:
     plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name",fontsize=14,labelpad=15)
     plt.ylabel("UG Fee (Scaled)",fontsize=14,labelpad=15)
-    plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
+    plt.subplots_adjust(bottom=0.3)  # Adds space for labels
     st.pyplot(plt)
 
     # **PG Fee (Scaled)**
@@ -145,7 +149,7 @@ else:
     plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name",fontsize=14,labelpad=15)
     plt.ylabel("PG Fee (Scaled)",fontsize=14,labelpad=15)
-    plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
+    plt.subplots_adjust(bottom=0.3)  # Adds space for labels
     st.pyplot(plt)
 
 # **Footer**
