@@ -6,7 +6,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pathlib
 # ✅ Set page config first
-st.set_page_config(page_title="Your App", layout="wide")
+st.set_page_config(page_title="Your App", layout="wide",initial_sidebar_state="collapsed")
 
 # Load the trained model
 with open('training_model.pkl', 'rb') as file:
@@ -30,31 +30,31 @@ if mode == "GitHub Mode":
         <style>
             /* Change whole app background */
             .stApp {
-                background-color: black !important;
-                color: white !important;
+                background-color: black;
+                color: white;
             }
 
             /* Change sidebar background */
             section[data-testid="stSidebar"] {
-                background-color: #1c1c1c !important;
+                background-color: #1c1c1c;
             }
 
             /* Change text input fields */
             input, textarea {
-                background-color: #333 !important;
-                color: white !important;
+                background-color: #333;
+                color: white;
             }
 
             /* Change dropdown menu */
             select {
-                background-color: #222 !important;
-                color: white !important;
+                background-color: #222;
+                color: white;
             }
 
             /* Change button */
             button {
-                background-color: #333 !important;
-                color: white !important;
+                background-color: #333;
+                color: white;
                 border: 1px solid white;
             }
         </style>
@@ -76,6 +76,18 @@ else:
         unsafe_allow_html=True
     )
     plt.style.use("default")  # Light mode
+
+# ✅ Collapsible Sidebar
+with st.sidebar:
+    st.header("Adjust Parameters")
+    ug_fee = st.slider("UG Fee (Scaled)", 0.0, 100.0, 0.0)
+    pg_fee = st.slider("PG Fee (Scaled)", 0.0, 100.0, 0.0)
+    selected_area = st.selectbox("Select Area", ["Andaman", "Delhi", "Mumbai", "Bangalore"])
+    st.button("Predict")
+
+# ✅ Display Selected Values
+st.subheader("Explore Colleges by Area")
+st.write(f"Selected Area: {selected_area}")
 
 # Clean the 'State' column
 data['State'] = data['State'].str.strip().str.title().fillna('Unknown')
