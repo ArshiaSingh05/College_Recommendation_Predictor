@@ -97,24 +97,28 @@ else:
     st.pyplot(plt)
 
 # **Footer**
-st.markdown(
-    """
+footer = """
     <style>
-    footer{
-        position=fixed;
-        left=0;
-        bottom=0;
-        width=100%;
-        text-align=center;
-        font-size=12px;
-        color=black;
-        padding=10px;
-        background-color=#808080;
+    .footer{
+        position:fixed;
+        left:0;
+        bottom:0;
+        width:100%;
+        background-color:#90EE90;
+        color: #6c757d;
+        font-size:14px;
+        padding:14px;
+
+    }
+    .footer a{
+        color:black;
+        text-decoration:none;
+        font-weight:bold;
     }
     </style>
     <div class="footer">
         Developed with ❤️ by Arshia Singh using Streamlit
     </div>
-    """,
-    unsafe_allow_html=True
-)
+"""
+
+st.markdown(footer,unsafe_allow_html=True)
