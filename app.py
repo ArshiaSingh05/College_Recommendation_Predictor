@@ -5,6 +5,11 @@ import pickle  # For loading the trained model
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pathlib
+st.set_page_config(
+    page_title="Your App",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 
 # Load the trained model
 with open('training_model.pkl', 'rb') as file:
@@ -50,11 +55,6 @@ else:
 data['State'] = data['State'].str.strip().str.title().fillna('Unknown')
 
 # Title and description
-st.set_page_config(
-    page_title="Your App",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
 
 st.title("College Recommendation Predictor")
 st.write("Enter the following details to predict the recommended college category.")
