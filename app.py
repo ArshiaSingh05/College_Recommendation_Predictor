@@ -5,8 +5,9 @@ import pickle  # For loading the trained model
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pathlib
+
 # ✅ Set page config first
-st.set_page_config(page_title="Your App", layout="wide",initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Your App", layout="wide", initial_sidebar_state="collapsed")
 
 # Load the trained model
 with open('training_model.pkl', 'rb') as file:
@@ -15,127 +16,80 @@ with open('training_model.pkl', 'rb') as file:
 # Load Data
 data = pd.read_csv('cleaned_data.csv')
 
-## PAGE SETUP ##
-# light_mode_page=st.Page(
-#     page=
-#     title="Light mode Site"
-# )
-
 # App Mode Selection
-mode = st.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
-# Apply color theme based on mode
+mode = st.sidebar.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
+
+# ✅ Apply color theme based on mode
 if mode == "GitHub Mode":
     st.markdown(
         """
         <style>
-            /* Change whole app background */
-            .stApp {
-                background-color: black;
-                color: white;
-            }
-
-            /* Change sidebar background */
-            section[data-testid="stSidebar"] {
-                background-color: #1c1c1c;
-            }
-
-            /* Change text input fields */
-            input, textarea {
-                background-color: #333;
-                color: white;
-            }
-
-            /* Change dropdown menu */
-            select {
-                background-color: #222;
-                color: white;
-            }
-
-            /* Change button */
-            button {
-                background-color: #333;
-                color: white;
-                border: 1px solid white;
-            }
+            .stApp { background-color: black; color: white; }
+            section[data-testid="stSidebar"] { background-color: #1c1c1c; }
+            input, textarea { background-color: #333; color: white; }
+            select { background-color: #222; color: white; }
+            button { background-color: #333; color: white; border: 1px solid white; }
         </style>
         """,
         unsafe_allow_html=True
     )
-    plt.style.use("dark_background")  # Dark mode for GitHub theme
-    sns.set_palette("Greens")  # Green color theme
+    plt.style.use("dark_background")
+    sns.set_palette("Greens")
 else:
     st.markdown(
         """
         <style>
-        .stApp{
-            background-color:white;
-            color:black;
-        }
+        .stApp { background-color: white; color: black; }
         </style>
         """,
         unsafe_allow_html=True
     )
-    plt.style.use("default")  # Light mode
+    plt.style.use("default")
 
-# ✅ Collapsible Sidebar
+# ✅ Collapsible Sidebar for User Input
 with st.sidebar:
     st.header("Adjust Parameters")
-    ug_fee = st.slider("UG Fee (Scaled)", 0.0, 100.0, 0.0)
-    pg_fee = st.slider("PG Fee (Scaled)", 0.0, 100.0, 0.0)
-    selected_area = st.selectbox("Select Area", ["Andaman", "Delhi", "Mumbai", "Bangalore"])
-    st.button("Predict")
+    
+    # **Prediction Inputs**
+    average_rating = st.number_input("Average Rating", min_value=0.0, max_value=10.0, step=0.1)
+    placement_fee_ratio = st.number_input("Placement vs Fee Ratio", min_value=0.0, step=0.00001)
+    ug_fee_scaled = st.number_input("UG Fee (Scaled)", min_value=0.0, max_value=1.0, step=0.001)
+    pg_fee_scaled = st.number_input("PG Fee (Scaled)", min_value=0.0, max_value=1.0, step=0.001)
+
+    # **Graph & Area Selection**
+    selected_area = st.selectbox("Select Area", sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
+
+    # **Prediction Button**
+    if st.button("Predict"):
+        input_data = np.array([[average_rating, placement_fee_ratio, ug_fee_scaled, pg_fee_scaled]])
+        prediction = model.predict(input_data)[0]
+        st.success(f"The predicted college category is: **{prediction}**")
 
 # ✅ Display Selected Values
 st.subheader("Explore Colleges by Area")
 st.write(f"Selected Area: {selected_area}")
 
-# Clean the 'State' column
-data['State'] = data['State'].str.strip().str.title().fillna('Unknown')
-
-# Title and description
-
-st.title("College Recommendation Predictor")
-st.write("Enter the following details to predict the recommended college category.")
-
-# **User Input for Model Prediction**
-average_rating = st.number_input("Average Rating", min_value=0.0, max_value=10.0, step=0.1)
-placement_fee_ratio = st.number_input("Placement vs Fee Ratio", min_value=0.0, step=0.00001)
-ug_fee_scaled = st.number_input("UG Fee (Scaled)", min_value=0.0, max_value=1.0, step=0.001)
-pg_fee_scaled = st.number_input("PG Fee (Scaled)", min_value=0.0, max_value=1.0, step=0.001)
-
-# Prediction button
-if st.button("Predict"):
-    input_data = np.array([[average_rating, placement_fee_ratio, ug_fee_scaled, pg_fee_scaled]])
-    prediction = model.predict(input_data)[0]
-    
-    st.success(f"The predicted college category is: **{prediction}**")
-
-# **Area Selection for Graphs**
-st.write("### Explore Colleges by Area")
-area_options = sorted(data['State'].unique().tolist())  # Sorted list for better UX
-area = st.selectbox("Select Area", area_options)
-
-# Filter Data
-filtered_data = data[data['State'] == area]
+# **Filter Data by Selected Area**
+filtered_data = data[data['State'] == selected_area]
 
 # **Check if filtered_data is empty**
 if filtered_data.empty:
-    st.warning(f"No data available for {area}. Try selecting a different area.")
+    st.warning(f"No data available for {selected_area}. Try selecting a different area.")
 else:
     # **Graphs for Selected Area**
-    st.write(f"### Colleges in {area}")
+    st.write(f"### Colleges in {selected_area}")
 
-    # **Average Rating Comparison (Sorted)**
+    # **Average Rating Comparison**
     st.write("### Average Rating Comparison")
-    plt.figure(figsize=(12, 6))  # Bigger figure for better visibility
+    plt.figure(figsize=(12, 6))
     sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
     sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
-    plt.xticks(rotation=45, ha='right')  # Better visibility
-    plt.xlabel("College Name")  # Add label
-    plt.ylabel("Average Rating")  # Add label
+    plt.xticks(rotation=45, ha='right')
+    plt.xlabel("College Name")
+    plt.ylabel("Average Rating")
     st.pyplot(plt)
 
-    # **Placement vs Fee Ratio (Sorted)**
+    # **Placement vs Fee Ratio**
     st.write("### Placement vs Fee Ratio")
     plt.figure(figsize=(12, 6))
     sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
@@ -145,15 +99,15 @@ else:
     plt.ylabel("Placement vs Fee Ratio")
     st.pyplot(plt)
 
-    # **UG Fee Distribution (Histogram)**
+    # **UG Fee Distribution**
     st.write("### UG Fee Distribution")
     plt.figure(figsize=(12, 6))
-    sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True, bins=15)  # More bins for better visualization
+    sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True, bins=15)
     plt.xlabel("UG Fee (Tuition Fee)")
     plt.ylabel("Frequency")
     st.pyplot(plt)
 
-    # **UG Fee (Scaled) (Sorted)**
+    # **UG Fee (Scaled)**
     st.write("### UG Fee (Scaled)")
     plt.figure(figsize=(12, 6))
     sorted_data = filtered_data.sort_values(by='UG fee (scaled)', ascending=False)
@@ -163,7 +117,7 @@ else:
     plt.ylabel("UG Fee (Scaled)")
     st.pyplot(plt)
 
-    # **PG Fee (Scaled) (Sorted)**
+    # **PG Fee (Scaled)**
     st.write("### PG Fee (Scaled)")
     plt.figure(figsize=(12, 6))
     sorted_data = filtered_data.sort_values(by='PG fee (scaled)', ascending=False)
@@ -198,4 +152,4 @@ footer = """
     </div>
 """
 
-st.markdown(footer,unsafe_allow_html=True)
+st.markdown(footer, unsafe_allow_html=True)
