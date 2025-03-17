@@ -10,7 +10,7 @@ import pathlib
 st.set_page_config(page_title="Your App", layout="wide", initial_sidebar_state="collapsed")
 
 st.title("🎓 College Recommendation Project")
-st.markdown("<div style='text-align: center;'>An AI-Powered College Finder</div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center", unsafe_allow_html=True)
 
 # Load the trained model
 with open('training_model.pkl', 'rb') as file:
