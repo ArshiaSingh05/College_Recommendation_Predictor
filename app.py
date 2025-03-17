@@ -86,18 +86,6 @@ else:
     # **Graphs for Selected Area**
     st.write(f"### Colleges in {selected_area}")
 
-# Adjust based on your dataset
-num_colleges = len(filtered_data)
-def adjust_x_labels():
-    """Dynamically adjust x-axis labels based on the number of colleges."""
-    if num_colleges <= 10:
-        plt.xticks(rotation=30, ha='right', fontsize=12)
-    elif num_colleges <= 20:
-        plt.xticks(rotation=45, ha='right', fontsize=10)
-    else:
-        plt.xticks(rotation=60, ha='right', fontsize=9)
-    plt.subplots_adjust(bottom=0.3)  # Ensures labels are visible
-
     # **Average Rating Comparison**
     st.write("### Average Rating Comparison")
     # Filter colleges based on slider input
@@ -106,7 +94,12 @@ def adjust_x_labels():
     sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
     plt.figure(figsize=(14, 6))  # Increase figure size
     sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
-    adjust_x_labels()
+    # Adjust x-axis labels dynamically
+    num_colleges = len(sorted_data)
+    if num_colleges <= 10:  
+        plt.xticks(rotation=30, ha='right', fontsize=12)  # Less rotation for small lists
+    else:
+        plt.xticks(rotation=60, ha='right', fontsize=9)  # More rotation for large lists
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])  # Show every 5th label
     plt.xlabel("College Name", fontsize=14, labelpad=15)
