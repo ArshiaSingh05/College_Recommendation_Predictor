@@ -94,8 +94,8 @@ else:
     plt.xticks(rotation=60, ha='right', fontsize=9)
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])  # Show every 5th label
-    plt.xlabel("College Name")
-    plt.ylabel("Average Rating")
+    plt.xlabel("College Name",fontsize=14,labelpad=15)
+    plt.ylabel("Average Rating",fontsize=14,labelpad=15)
     plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
     st.pyplot(plt)
 
@@ -107,8 +107,8 @@ else:
     plt.xticks(rotation=60, ha='right', fontsize=9)
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])
-    plt.xlabel("College Name")
-    plt.ylabel("Placement vs Fee Ratio")
+    plt.xlabel("College Name",fontsize=14,labelpad=15)
+    plt.ylabel("Placement vs Fee Ratio",fontsize=14,labelpad=15)
     plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
     st.pyplot(plt)
 
@@ -116,8 +116,8 @@ else:
     st.write("### UG Fee Distribution")
     plt.figure(figsize=(12, 6))
     sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True, bins=15)
-    plt.xlabel("UG Fee (Tuition Fee)")
-    plt.ylabel("Frequency")
+    plt.xlabel("UG Fee (Tuition Fee)",fontsize=14,labelpad=15)
+    plt.ylabel("Frequency",fontsize=14,labelpad=15)
     st.pyplot(plt)
 
     # **UG Fee (Scaled)**
@@ -129,8 +129,8 @@ else:
     plt.xticks(rotation=60, ha='right', fontsize=9)
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])
-    plt.xlabel("College Name")
-    plt.ylabel("UG Fee (Scaled)")
+    plt.xlabel("College Name",fontsize=14,labelpad=15)
+    plt.ylabel("UG Fee (Scaled)",fontsize=14,labelpad=15)
     plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
     st.pyplot(plt)
 
@@ -143,8 +143,8 @@ else:
     plt.xticks(rotation=60, ha='right', fontsize=9)
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])
-    plt.xlabel("College Name",fontsize=12,labelpad=15)
-    plt.ylabel("PG Fee (Scaled)",fontsize=12,labelpad=15)
+    plt.xlabel("College Name",fontsize=14,labelpad=15)
+    plt.ylabel("PG Fee (Scaled)",fontsize=14,labelpad=15)
     plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
     st.pyplot(plt)
 
