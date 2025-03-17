@@ -102,17 +102,18 @@ st.markdown(
     <style>
     footer{
         position=fixed;
+        left=0;
         bottom=0;
         width=100%;
         text-align=center;
         font-size=12px;
-        color=gray;
+        color=black;
         padding=10px;
-        background=#f1f1f1;
+        background-color=#808080;
     }
     </style>
     <div class="footer">
-        Developed with ❤️ by Arshia Singh using Streamlit"
+        Developed with ❤️ by Arshia Singh using Streamlit
     </div>
     """,
     unsafe_allow_html=True
