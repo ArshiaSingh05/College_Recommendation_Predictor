@@ -107,8 +107,8 @@ footer = """
         background-color:#90EE90;
         color: #6c757d;
         font-size:14px;
-        padding:14px;
-
+        padding:15px;
+        text-align:center;
     }
     .footer a{
         color:black;
