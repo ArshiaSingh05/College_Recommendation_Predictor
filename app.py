@@ -83,19 +83,23 @@ else:
 
     # **Average Rating Comparison**
     st.write("### Average Rating Comparison")
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(14, 6))  # Increase figure size
     sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
     sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
-    plt.xticks(rotation=45, ha='right')
+    plt.xticks(rotation=60, ha='right', fontsize=9)
+    ticks = plt.gca().get_xticks()
+    plt.gca().set_xticks(ticks[::5])  # Show every 5th label
     plt.xlabel("College Name")
     plt.ylabel("Average Rating")
+    plt.tight_layout()
     st.pyplot(plt)
 
     # **Placement vs Fee Ratio**
+    st.write("### Placement vs Fee Ratio")
     plt.figure(figsize=(14, 6))
+    sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
     sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
     plt.xticks(rotation=60, ha='right', fontsize=9)
-    # Only show every 5th label
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name")
@@ -113,24 +117,30 @@ else:
 
     # **UG Fee (Scaled)**
     st.write("### UG Fee (Scaled)")
-    plt.figure(figsize=(12, 6))
-    filtered_data_ug = filtered_data[filtered_data['UG fee (scaled)'] <= 5.0]  # Ensure values are within slider range
-    sorted_data = filtered_data_ug.sort_values(by='UG fee (scaled)', ascending=False)
+    plt.figure(figsize=(14, 6))
+    sorted_data = filtered_data.sort_values(by='UG fee (scaled)', ascending=False)
     sns.barplot(x='College Name', y='UG fee (scaled)', data=sorted_data)
-    plt.xticks(rotation=45, ha='right')
+
+    plt.xticks(rotation=60, ha='right', fontsize=9)
+    ticks = plt.gca().get_xticks()
+    plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name")
     plt.ylabel("UG Fee (Scaled)")
+    plt.tight_layout()
     st.pyplot(plt)
 
     # **PG Fee (Scaled)**
     st.write("### PG Fee (Scaled)")
-    plt.figure(figsize=(12, 6))
-    filtered_data_pg = filtered_data[filtered_data['PG fee (scaled)'] <= 5.0]  # Ensure values are within slider range
-    sorted_data = filtered_data_pg.sort_values(by='PG fee (scaled)', ascending=False)
+    plt.figure(figsize=(14, 6))
+    sorted_data = filtered_data.sort_values(by='PG fee (scaled)', ascending=False)
     sns.barplot(x='College Name', y='PG fee (scaled)', data=sorted_data)
-    plt.xticks(rotation=45, ha='right')
+
+    plt.xticks(rotation=60, ha='right', fontsize=9)
+    ticks = plt.gca().get_xticks()
+    plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name")
     plt.ylabel("PG Fee (Scaled)")
+    plt.tight_layout()
     st.pyplot(plt)
 
 # **Footer**
