@@ -23,17 +23,27 @@ data = pd.read_csv('cleaned_data.csv')
 mode = st.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
 # Apply color theme based on mode
 if mode == "GitHub Mode":
+    st.markdown("""
+<style>
+body {
+    background-color: #00ff00;
+}
+</style>
+""", unsafe_allow_html=True)
+    plt.style.use("dark_background")  # Dark mode for GitHub theme
+    sns.set_palette("Greens")  # Green color theme
+else:
     st.markdown(
         """
         <style>
-        background-color:black;
+        body{
+            background-color:white;
+            color:black;
+        }
         </style>
         """,
         unsafe_allow_html=True
     )
-    plt.style.use("dark_background")  # Dark mode for GitHub theme
-    sns.set_palette("Greens")  # Green color theme
-else:
     plt.style.use("default")  # Light mode
 
 # Clean the 'State' column
