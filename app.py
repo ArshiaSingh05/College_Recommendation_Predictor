@@ -96,5 +96,24 @@ else:
     st.pyplot(plt)
 
 # **Footer**
-st.markdown("---")
-st.markdown("Developed with ❤️ by Arshia Singh using Streamlit")
+st.markdown{
+    """
+    <style>
+    footer{
+        position=fixed;
+        bottom=0;
+        width=100%;
+        text-align=center;
+        font-size=12px;
+        color=gray;
+        padding=10px;
+        background=#f1f1f1;
+    }
+    </style>
+    <div class="footer">
+        Developed with ❤️ by Arshia Singh using Streamlit"
+    </div>
+    """,
+    unsafe_allow_html=True
+
+}
