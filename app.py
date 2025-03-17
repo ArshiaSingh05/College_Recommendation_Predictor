@@ -63,7 +63,7 @@ with st.sidebar:
 
     # **Prediction Button**
     if st.button("Predict"):
-        input_data = np.array([[average_rating, placement_fee_ratio, ug_fee_scaled, pg_fee_scaled]])
+        input_data = np.array([[average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]])
         prediction = model.predict(input_data)[0]
         st.success(f"The predicted college category is: **{prediction}**")
 
