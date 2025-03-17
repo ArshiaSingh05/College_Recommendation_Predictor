@@ -92,13 +92,15 @@ else:
     st.pyplot(plt)
 
     # **Placement vs Fee Ratio**
-    st.write("### Placement vs Fee Ratio")
-    plt.figure(figsize=(12, 6))
-    sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
+    plt.figure(figsize=(14, 6))
     sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
-    plt.xticks(rotation=45, ha='right')
+    plt.xticks(rotation=60, ha='right', fontsize=9)
+    # Only show every 5th label
+    ticks = plt.gca().get_xticks()
+    plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name")
     plt.ylabel("Placement vs Fee Ratio")
+    plt.tight_layout()
     st.pyplot(plt)
 
     # **UG Fee Distribution**
