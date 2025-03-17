@@ -112,7 +112,8 @@ else:
     # **UG Fee (Scaled)**
     st.write("### UG Fee (Scaled)")
     plt.figure(figsize=(12, 6))
-    sorted_data = filtered_data.sort_values(by='UG fee (scaled)', ascending=False)
+    filtered_data_ug = filtered_data[filtered_data['UG fee (scaled)'] <= 5.0]  # Ensure values are within slider range
+    sorted_data = filtered_data_ug.sort_values(by='UG fee (scaled)', ascending=False)
     sns.barplot(x='College Name', y='UG fee (scaled)', data=sorted_data)
     plt.xticks(rotation=45, ha='right')
     plt.xlabel("College Name")
@@ -122,7 +123,8 @@ else:
     # **PG Fee (Scaled)**
     st.write("### PG Fee (Scaled)")
     plt.figure(figsize=(12, 6))
-    sorted_data = filtered_data.sort_values(by='PG fee (scaled)', ascending=False)
+    filtered_data_pg = filtered_data[filtered_data['PG fee (scaled)'] <= 5.0]  # Ensure values are within slider range
+    sorted_data = filtered_data_pg.sort_values(by='PG fee (scaled)', ascending=False)
     sns.barplot(x='College Name', y='PG fee (scaled)', data=sorted_data)
     plt.xticks(rotation=45, ha='right')
     plt.xlabel("College Name")
