@@ -26,6 +26,7 @@ if mode == "GitHub Mode":
         <style>
             .stApp { background-color: black; color: white; }
             section[data-testid="stSidebar"] { background-color: #1c1c1c; }
+            h1, h2, h3, h4, h5, h6, p, label { color: white; }
             input, textarea { background-color: #333; color: white; }
             select { background-color: #222; color: white; }
             button { background-color: #333; color: white; border: 1px solid white; }
