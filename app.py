@@ -14,9 +14,10 @@ with open('training_model.pkl', 'rb') as file:
 data = pd.read_csv('cleaned_data.csv')
 
 ## PAGE SETUP ##
-light_mode_page=st.Page(
-    title="Light mode Site"
-)
+# light_mode_page=st.Page(
+#     page=
+#     title="Light mode Site"
+# )
 
 # App Mode Selection
 mode = st.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
