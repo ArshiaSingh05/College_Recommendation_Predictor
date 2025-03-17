@@ -63,8 +63,9 @@ with st.sidebar:
 
     # **Prediction Button**
     if st.button("Predict"):
-        input_data = np.array([[average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]])
-        prediction = model.predict(input_data)[0]
+        feature_names = ['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)']
+        input_df = pd.DataFrame(input_data, columns=feature_names)
+        prediction = model.predict(input_df)[0] 
         st.success(f"The predicted college category is: **{prediction}**")
 
 # ✅ Display Selected Values
@@ -91,7 +92,7 @@ else:
     plt.gca().set_xticks(ticks[::5])  # Show every 5th label
     plt.xlabel("College Name")
     plt.ylabel("Average Rating")
-    plt.tight_layout()
+    plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
     st.pyplot(plt)
 
     # **Placement vs Fee Ratio**
@@ -104,7 +105,7 @@ else:
     plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name")
     plt.ylabel("Placement vs Fee Ratio")
-    plt.tight_layout()
+    plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
     st.pyplot(plt)
 
     # **UG Fee Distribution**
@@ -126,7 +127,7 @@ else:
     plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name")
     plt.ylabel("UG Fee (Scaled)")
-    plt.tight_layout()
+    plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
     st.pyplot(plt)
 
     # **PG Fee (Scaled)**
@@ -138,9 +139,9 @@ else:
     plt.xticks(rotation=60, ha='right', fontsize=9)
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])
-    plt.xlabel("College Name")
-    plt.ylabel("PG Fee (Scaled)")
-    plt.tight_layout()
+    plt.xlabel("College Name",fontsize=12,labelpad=15)
+    plt.ylabel("PG Fee (Scaled)",fontsize=12,labelpad=15)
+    plt.subplots_adjust(bottom=0.3)  # ✅ Adds space for labels
     st.pyplot(plt)
 
 # **Footer**
