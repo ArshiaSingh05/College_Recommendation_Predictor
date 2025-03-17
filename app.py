@@ -4,6 +4,7 @@ import numpy as np
 import pickle  # For loading the trained model
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pathlib
 
 # Load the trained model
 with open('training_model.pkl', 'rb') as file:
@@ -96,7 +97,7 @@ else:
     st.pyplot(plt)
 
 # **Footer**
-st.markdown{
+st.markdown(
     """
     <style>
     footer{
@@ -114,6 +115,5 @@ st.markdown{
         Developed with ❤️ by Arshia Singh using Streamlit"
     </div>
     """,
-    unsafe_allow_html==True
-
-}
+    unsafe_allow_html=True
+)
