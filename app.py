@@ -87,7 +87,8 @@ else:
     st.write(f"### Colleges in {selected_area}")
 
 # Adjust based on your dataset
-def adjust_x_labels(num_colleges):
+num_colleges = len(filtered_data)
+def adjust_x_labels():
     """Dynamically adjust x-axis labels based on the number of colleges."""
     if num_colleges <= 10:
         plt.xticks(rotation=30, ha='right', fontsize=12)
@@ -105,8 +106,7 @@ def adjust_x_labels(num_colleges):
     sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
     plt.figure(figsize=(14, 6))  # Increase figure size
     sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
-    num_colleges = len(filtered_data)
-    adjust_x_labels(num_colleges)
+    adjust_x_labels()
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])  # Show every 5th label
     plt.xlabel("College Name", fontsize=14, labelpad=15)
@@ -120,8 +120,7 @@ def adjust_x_labels(num_colleges):
     plt.figure(figsize=(14, 6))
     sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
     sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
-    num_colleges = len(filtered_data)
-    adjust_x_labels(num_colleges)
+    plt.xticks(rotation=60, ha='right', fontsize=9)
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name",fontsize=14,labelpad=15)
@@ -142,8 +141,8 @@ def adjust_x_labels(num_colleges):
     plt.figure(figsize=(14, 6))
     sorted_data = filtered_data.sort_values(by='UG fee (scaled)', ascending=False)
     sns.barplot(x='College Name', y='UG fee (scaled)', data=sorted_data)
-    num_colleges = len(filtered_data)
-    adjust_x_labels(num_colleges)
+
+    plt.xticks(rotation=60, ha='right', fontsize=9)
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name",fontsize=14,labelpad=15)
@@ -156,8 +155,8 @@ def adjust_x_labels(num_colleges):
     plt.figure(figsize=(14, 6))
     sorted_data = filtered_data.sort_values(by='PG fee (scaled)', ascending=False)
     sns.barplot(x='College Name', y='PG fee (scaled)', data=sorted_data)
-    num_colleges = len(filtered_data)
-    adjust_x_labels(num_colleges)
+
+    plt.xticks(rotation=60, ha='right', fontsize=9)
     ticks = plt.gca().get_xticks()
     plt.gca().set_xticks(ticks[::5])
     plt.xlabel("College Name",fontsize=14,labelpad=15)
