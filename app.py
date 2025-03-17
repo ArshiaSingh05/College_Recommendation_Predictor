@@ -5,11 +5,8 @@ import pickle  # For loading the trained model
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pathlib
-st.set_page_config(
-    page_title="Your App",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
+# ✅ Set page config first
+st.set_page_config(page_title="Your App", layout="wide")
 
 # Load the trained model
 with open('training_model.pkl', 'rb') as file:
@@ -28,13 +25,42 @@ data = pd.read_csv('cleaned_data.csv')
 mode = st.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
 # Apply color theme based on mode
 if mode == "GitHub Mode":
-    st.markdown("""
-<style>
-body {
-    background-color: #00ff00;
-}
-</style>
-""", unsafe_allow_html=True)
+    st.markdown(
+        """
+        <style>
+            /* Change whole app background */
+            .stApp {
+                background-color: black !important;
+                color: white !important;
+            }
+
+            /* Change sidebar background */
+            section[data-testid="stSidebar"] {
+                background-color: #1c1c1c !important;
+            }
+
+            /* Change text input fields */
+            input, textarea {
+                background-color: #333 !important;
+                color: white !important;
+            }
+
+            /* Change dropdown menu */
+            select {
+                background-color: #222 !important;
+                color: white !important;
+            }
+
+            /* Change button */
+            button {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid white;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     plt.style.use("dark_background")  # Dark mode for GitHub theme
     sns.set_palette("Greens")  # Green color theme
 else:
