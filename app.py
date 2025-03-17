@@ -15,7 +15,7 @@ data = pd.read_csv('cleaned_data.csv')
 
 ## PAGE SETUP ##
 light_mode_page=st.Page(
-    title=""
+    title="Light mode Site"
 )
 
 # App Mode Selection
