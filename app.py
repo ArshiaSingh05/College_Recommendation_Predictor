@@ -172,7 +172,7 @@ footer = """
         color: #6c757d;
         font-size:14px;
         padding:15px;
-        text-align:center;
+        text-align:right;
     }
     .footer a{
         color:black;
