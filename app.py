@@ -117,6 +117,7 @@ else:
     with col2:
         st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
         # Select only the top 10 colleges from the sorted data
+        sorted_data = filtered_rating_data.sort_values(by='Average Rating', ascending=False)
         top_10_colleges = sorted_data.head(10)
         # Create pie chart using the top 10 colleges
         plt.figure(figsize=(8, 8))
