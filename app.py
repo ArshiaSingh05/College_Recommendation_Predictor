@@ -102,17 +102,17 @@ else:
     with col1:
         st.markdown("### 📊 Average Rating - Bar Chart")
         # Filter data based on selected Average Rating
-        selected_rating = st.slider("Select Average Rating", min_value=float(filtered_data["Average Rating"].min()),
-                                    max_value=float(filtered_data["Average Rating"].max()), value=float(filtered_data["Average Rating"].min()))
-
-        filtered_rating_data = filtered_data[filtered_data["Average Rating"] == selected_rating]
+        filtered_rating_data = filtered_data[filtered_data["Average Rating"] == average_rating]
         # Bar chart with all matching colleges
-        plt.figure(figsize=(10, 5))
-        sns.barplot(x="Average Rating", y="College Name", data=filtered_rating_data)
-        plt.xlabel("Average Rating")
-        plt.ylabel("College Name")
-        plt.title("Average Rating - Bar Chart")
-        st.pyplot(plt)
+        if filtered_rating_data.empty:
+            st.warning("No colleges found with this Average Rating.")
+        else:
+            plt.figure(figsize=(10, 5))
+            sns.barplot(x="College Name ", y="Average Rating", data=filtered_rating_data)
+            plt.xlabel("Average Rating")
+            plt.ylabel("College Name")
+            plt.title("Average Rating - Bar Chart")
+            st.pyplot(plt)
 
     with col2:
         st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
