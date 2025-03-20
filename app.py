@@ -121,19 +121,11 @@ else:
         st.pyplot(plt)
 
     with col2:
-        st.write("### 📊 Average Rating - Pie Chart")
-        plt.figure(figsize=(5, 5))
-        filtered_data.groupby('College Name')['Average Rating'].mean().plot.pie(autopct='%1.1f%%')
-        num_colleges = len(sorted_data)
-        if num_colleges <= 30:  
-            plt.xticks(rotation=30, ha='right', fontsize=12)  # Less rotation for small lists
-            plt.gca().set_xticks(range(num_colleges))  # Show all labels
-            #plt.gca().set_xticklabels([college_name for college_name in sorted_data.index])  # Ensure all names appear
-        else:
-            plt.xticks(rotation=60, ha='right', fontsize=9)  # More rotation for large lists
-            ticks = range(0, num_colleges, 5)  # Every 3rd label
-            plt.gca().set_xticks(ticks)
-            #plt.gca().set_xticklabels([sorted_data.index[i] for i in ticks])  # Assign correct labels
+        plt.figure(figsize=(10, 10))  # Increase size for better visibility
+        rating_counts = filtered_data['Average Rating'].value_counts()
+        plt.pie(rating_counts, labels=rating_counts.index, autopct='%1.1f%%', startangle=140,
+                wedgeprops={'linewidth': 1, 'edgecolor': 'black'})
+        plt.title("Average Rating Distribution")
         st.pyplot(plt)
 
     # Create columns for Placement vs Fee Ratio
