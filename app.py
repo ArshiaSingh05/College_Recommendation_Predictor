@@ -122,11 +122,13 @@ else:
 
     with col2:
         st.markdown("### 🥧 Average Rating Distribution")
-        plt.figure(figsize=(10, 10))
-        # Use college names as labels instead of rating counts
-        plt.pie(filtered_data['Average Rating'], labels=filtered_data['College Name'], 
-                autopct='%1.1f%%', startangle=140, 
-                wedgeprops={'linewidth': 1, 'edgecolor': 'black'},
+        # Group by 'Average Rating' and count occurrences
+        rating_counts = filtered_data['Average Rating'].value_counts().sort_index()
+        # Increase figure size for better visibility
+        plt.figure(figsize=(8, 8))
+        # Create pie chart with grouped ratings
+        plt.pie(rating_counts, labels=rating_counts.index, autopct='%1.1f%%', 
+                startangle=140, wedgeprops={'linewidth': 1, 'edgecolor': 'black'},
                 textprops={'fontsize': 12})  # Adjust font size for readability
         plt.title("Average Rating Distribution", fontsize=14)
         st.pyplot(plt)
