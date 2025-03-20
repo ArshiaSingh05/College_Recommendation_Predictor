@@ -106,7 +106,7 @@ else:
     sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
     # Adjust x-axis labels dynamically
     num_colleges = len(sorted_data)
-    if num_colleges <= 10:  
+    if num_colleges <= 30:  
         plt.xticks(rotation=30, ha='right', fontsize=12)  # Less rotation for small lists
         plt.gca().set_xticks(range(num_colleges))  # Show all labels
         #plt.gca().set_xticklabels([college_name for college_name in sorted_data.index])  # Ensure all names appear
@@ -130,7 +130,7 @@ else:
     # Plot
     sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
     num_colleges = len(sorted_data)
-    if num_colleges <= 10:  
+    if num_colleges <= 30:  
         plt.xticks(rotation=30, ha='right', fontsize=12)  # Less rotation for small lists
         plt.gca().set_xticks(range(num_colleges))  # Show all labels
         #plt.gca().set_xticklabels([college_name for college_name in sorted_data.index])  # Ensure all names appear
