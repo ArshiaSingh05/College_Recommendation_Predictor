@@ -112,7 +112,7 @@ else:
         #plt.gca().set_xticklabels([college_name for college_name in sorted_data.index])  # Ensure all names appear
     else:
         plt.xticks(rotation=60, ha='right', fontsize=9)  # More rotation for large lists
-        ticks = range(0, num_colleges, 3)  # Every 3rd label
+        ticks = range(0, num_colleges, 5)  # Every 3rd label
         plt.gca().set_xticks(ticks)
         #plt.gca().set_xticklabels([sorted_data.index[i] for i in ticks])  # Assign correct labels
     plt.xlabel("College Name", fontsize=14, labelpad=15)
