@@ -96,19 +96,8 @@ else:
     # **Graphs for Selected Area**
     st.write(f"### Colleges in {selected_area}")
 
-    # **Graph: Average Rating Comparison**
-    st.write("### 📊 Average Rating Comparison")
-    filtered_data = filtered_data[filtered_data['Average Rating'] >= average_rating]
-    sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
-
-    plt.figure(figsize=(14, 6))
-    sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
-    plt.xticks(rotation=60, ha='right', fontsize=9)
-    plt.subplots_adjust(bottom=0.3)
-    st.pyplot(plt)
-
     # **Average Rating Comparison**
-    st.write("### Average Rating Comparison")
+    st.write("### 📊 Average Rating Comparison")
     # Filter colleges based on slider input
     filtered_data = filtered_data[filtered_data['Average Rating'] >= average_rating]
     # Sort the updated dataset
@@ -130,7 +119,7 @@ else:
 
 
     # **Placement vs Fee Ratio**
-    st.write("### Placement vs Fee Ratio")
+    st.write("### 📈 Placement vs Fee Ratio")
     plt.figure(figsize=(14, 6))
     sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
     sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
@@ -143,7 +132,7 @@ else:
     st.pyplot(plt)
 
     # **UG Fee Distribution**
-    st.write("### UG Fee Distribution")
+    st.write("### 💰 UG Fee Distribution")
     plt.figure(figsize=(12, 6))
     sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True, bins=15)
     plt.xlabel("UG Fee (Tuition Fee)",fontsize=14,labelpad=15)
@@ -151,7 +140,7 @@ else:
     st.pyplot(plt)
 
     # **UG Fee (Scaled)**
-    st.write("### UG Fee (Scaled)")
+    st.write("### 📏 UG Fee (Scaled)")
     plt.figure(figsize=(14, 6))
     sorted_data = filtered_data.sort_values(by='UG fee (scaled)', ascending=False)
     sns.barplot(x='College Name', y='UG fee (scaled)', data=sorted_data)
@@ -165,7 +154,7 @@ else:
     st.pyplot(plt)
 
     # **PG Fee (Scaled)**
-    st.write("### PG Fee (Scaled)")
+    st.write("### 🏛️ PG Fee (Scaled)")
     plt.figure(figsize=(14, 6))
     sorted_data = filtered_data.sort_values(by='PG fee (scaled)', ascending=False)
     sns.barplot(x='College Name', y='PG fee (scaled)', data=sorted_data)
