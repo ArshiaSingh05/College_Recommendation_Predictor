@@ -96,90 +96,83 @@ else:
     # **Graphs for Selected Area**
     st.write(f"### Colleges in {selected_area}")
 
-    # **Average Rating Comparison**
-    st.write("### 📊 Average Rating Comparison")
-    # Filter colleges based on slider input
-    filtered_data = filtered_data[filtered_data['Average Rating'] >= average_rating]
-    # Sort the updated dataset
-    sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
-    plt.figure(figsize=(14, 6))  # Increase figure size
-    sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
-    # Adjust x-axis labels dynamically
-    num_colleges = len(sorted_data)
-    if num_colleges <= 30:  
-        plt.xticks(rotation=30, ha='right', fontsize=12)  # Less rotation for small lists
-        plt.gca().set_xticks(range(num_colleges))  # Show all labels
-        #plt.gca().set_xticklabels([college_name for college_name in sorted_data.index])  # Ensure all names appear
-    else:
-        plt.xticks(rotation=60, ha='right', fontsize=9)  # More rotation for large lists
-        ticks = range(0, num_colleges, 5)  # Every 3rd label
-        plt.gca().set_xticks(ticks)
-        #plt.gca().set_xticklabels([sorted_data.index[i] for i in ticks])  # Assign correct labels
-    plt.xlabel("College Name", fontsize=14, labelpad=15)
-    plt.ylabel("Average Rating", fontsize=14, labelpad=15)
-    plt.subplots_adjust(bottom=0.3)  # Adds space for labels
-    st.pyplot(plt)
+    # Create columns for Average Rating Comparison
+    col1, col2 = st.columns(2)
 
+    with col1:
+        st.write("### 📊 Average Rating - Bar Chart")
+        sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
+        plt.figure(figsize=(8, 5))
+        sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
+        plt.xticks(rotation=60, ha='right', fontsize=9)
+        plt.xlabel("College Name")
+        plt.ylabel("Average Rating")
+        st.pyplot(plt)
 
-    # **Placement vs Fee Ratio**
-    st.write("### 📈 Placement vs Fee Ratio")
-    filtered_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
-    # Sort data
-    sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
-    plt.figure(figsize=(14, 6))
-    # Plot
-    sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
-    num_colleges = len(sorted_data)
-    if num_colleges <= 30:  
-        plt.xticks(rotation=30, ha='right', fontsize=12)  # Less rotation for small lists
-        plt.gca().set_xticks(range(num_colleges))  # Show all labels
-        #plt.gca().set_xticklabels([college_name for college_name in sorted_data.index])  # Ensure all names appear
-    else:
-        plt.xticks(rotation=60, ha='right', fontsize=9)  # More rotation for large lists
-        ticks = range(0, num_colleges, 5)  # Every 3rd label
-        plt.gca().set_xticks(ticks)
-        #plt.gca().set_xticklabels([sorted_data.index[i] for i in ticks])  # Assign correct labels
-    plt.xlabel("College Name", fontsize=14, labelpad=15)
-    plt.ylabel("Placement vs Fee Ratio", fontsize=14, labelpad=15)
-    plt.subplots_adjust(bottom=0.3)  # Adds space for labels
-    st.pyplot(plt)
+    with col2:
+        st.write("### 📊 Average Rating - Pie Chart")
+        plt.figure(figsize=(5, 5))
+        filtered_data.groupby('College Name')['Average Rating'].mean().plot.pie(autopct='%1.1f%%')
+        st.pyplot(plt)
 
+    # Create columns for Placement vs Fee Ratio
+    col3, col4 = st.columns(2)
 
-    # **UG Fee Distribution**
-    st.write("### 💰 UG Fee Distribution")
-    plt.figure(figsize=(12, 6))
-    sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True, bins=15)
-    plt.xlabel("UG Fee (Tuition Fee)",fontsize=14,labelpad=15)
-    plt.ylabel("Frequency",fontsize=14,labelpad=15)
-    st.pyplot(plt)
+    with col3:
+        st.write("### 📈 Placement vs Fee Ratio - Bar Chart")
+        sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
+        plt.figure(figsize=(8, 5))
+        sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
+        plt.xticks(rotation=60, ha='right', fontsize=9)
+        plt.xlabel("College Name")
+        plt.ylabel("Placement vs Fee Ratio")
+        st.pyplot(plt)
 
-    # **UG Fee (Scaled)**
-    st.write("### 📏 UG Fee (Scaled)")
-    plt.figure(figsize=(14, 6))
-    sorted_data = filtered_data.sort_values(by='UG fee (scaled)', ascending=False)
-    sns.barplot(x='College Name', y='UG fee (scaled)', data=sorted_data)
+    with col4:
+        st.write("### 📈 Placement vs Fee Ratio - Line Chart")
+        plt.figure(figsize=(8, 5))
+        plt.plot(sorted_data['College Name'], sorted_data['Placement vs Fee Ratio'], marker='o', linestyle='-')
+        plt.xticks(rotation=60, ha='right', fontsize=9)
+        plt.xlabel("College Name")
+        plt.ylabel("Placement vs Fee Ratio")
+        st.pyplot(plt)
 
-    plt.xticks(rotation=60, ha='right', fontsize=9)
-    ticks = plt.gca().get_xticks()
-    plt.gca().set_xticks(ticks[::5])
-    plt.xlabel("College Name",fontsize=14,labelpad=15)
-    plt.ylabel("UG Fee (Scaled)",fontsize=14,labelpad=15)
-    plt.subplots_adjust(bottom=0.3)  # Adds space for labels
-    st.pyplot(plt)
+    # Create columns for UG Fee
+    col5, col6 = st.columns(2)
 
-    # **PG Fee (Scaled)**
-    st.write("### 🏛️ PG Fee (Scaled)")
-    plt.figure(figsize=(14, 6))
-    sorted_data = filtered_data.sort_values(by='PG fee (scaled)', ascending=False)
-    sns.barplot(x='College Name', y='PG fee (scaled)', data=sorted_data)
+    with col5:
+        st.write("### 💰 UG Fee - Bar Chart")
+        sorted_data = filtered_data.sort_values(by='UG fee (scaled)', ascending=False)
+        plt.figure(figsize=(8, 5))
+        sns.barplot(x='College Name', y='UG fee (scaled)', data=sorted_data)
+        plt.xticks(rotation=60, ha='right', fontsize=9)
+        st.pyplot(plt)
 
-    plt.xticks(rotation=60, ha='right', fontsize=9)
-    ticks = plt.gca().get_xticks()
-    plt.gca().set_xticks(ticks[::5])
-    plt.xlabel("College Name",fontsize=14,labelpad=15)
-    plt.ylabel("PG Fee (Scaled)",fontsize=14,labelpad=15)
-    plt.subplots_adjust(bottom=0.3)  # Adds space for labels
-    st.pyplot(plt)
+    with col6:
+        st.write("### 💰 UG Fee - Histogram")
+        plt.figure(figsize=(8, 5))
+        sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True, bins=15)
+        plt.xlabel("UG Fee")
+        plt.ylabel("Frequency")
+        st.pyplot(plt)
+
+    # Create columns for PG Fee
+    col7, col8 = st.columns(2)
+
+    with col7:
+        st.write("### 🏛️ PG Fee - Bar Chart")
+        sorted_data = filtered_data.sort_values(by='PG fee (scaled)', ascending=False)
+        plt.figure(figsize=(8, 5))
+        sns.barplot(x='College Name', y='PG fee (scaled)', data=sorted_data)
+        plt.xticks(rotation=60, ha='right', fontsize=9)
+        st.pyplot(plt)
+
+    with col8:
+        st.write("### 🏛️ PG Fee - Box Plot")
+        plt.figure(figsize=(8, 5))
+        sns.boxplot(y=filtered_data['PG fee (scaled)'])
+        plt.ylabel("PG Fee")
+        st.pyplot(plt)
 
 # **Footer**
 footer = """
