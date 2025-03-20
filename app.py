@@ -121,11 +121,14 @@ else:
         st.pyplot(plt)
 
     with col2:
-        plt.figure(figsize=(10, 10))  # Increase size for better visibility
-        rating_counts = filtered_data['Average Rating'].value_counts()
-        plt.pie(rating_counts, labels=rating_counts.index, autopct='%1.1f%%', startangle=140,
-                wedgeprops={'linewidth': 1, 'edgecolor': 'black'})
-        plt.title("Average Rating Distribution")
+        st.markdown("### 🥧 Average Rating Distribution")
+        plt.figure(figsize=(10, 10))
+        # Use college names as labels instead of rating counts
+        plt.pie(filtered_data['Average Rating'], labels=filtered_data['College Name'], 
+                autopct='%1.1f%%', startangle=140, 
+                wedgeprops={'linewidth': 1, 'edgecolor': 'black'},
+                textprops={'fontsize': 12})  # Adjust font size for readability
+        plt.title("Average Rating Distribution", fontsize=14)
         st.pyplot(plt)
 
     # Create columns for Placement vs Fee Ratio
