@@ -74,6 +74,13 @@ with st.sidebar:
         prediction = model.predict(input_df)[0]  
         st.success(f"The predicted college category is: **{prediction}**")
 
+# **Filtered Data**
+filtered_data = data if selected_area == "All" else data[data['State'] == selected_area]
+
+if filtered_data.empty:
+    st.warning(f"No data available for {selected_area}. Try selecting a different area.")
+else:
+    st.subheader(f"📍 Colleges in {selected_area}")
 
 # Display Selected Values
 st.subheader("Explore Colleges by Area")
@@ -88,6 +95,17 @@ if filtered_data.empty:
 else:
     # **Graphs for Selected Area**
     st.write(f"### Colleges in {selected_area}")
+
+    # **Graph: Average Rating Comparison**
+    st.write("### 📊 Average Rating Comparison")
+    filtered_data = filtered_data[filtered_data['Average Rating'] >= average_rating]
+    sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
+
+    plt.figure(figsize=(14, 6))
+    sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
+    plt.xticks(rotation=60, ha='right', fontsize=9)
+    plt.subplots_adjust(bottom=0.3)
+    st.pyplot(plt)
 
     # **Average Rating Comparison**
     st.write("### Average Rating Comparison")
