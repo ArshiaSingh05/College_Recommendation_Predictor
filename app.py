@@ -124,15 +124,21 @@ else:
     # **Placement vs Fee Ratio**
     st.write("### 📈 Placement vs Fee Ratio")
     plt.figure(figsize=(14, 6))
+    # Sort data
     sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
-    sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
+    # Plot
+    sns.barplot(x=sorted_data['College Name'], y=sorted_data['Placement vs Fee Ratio'])
+    # Adjust x-axis labels
     plt.xticks(rotation=60, ha='right', fontsize=9)
-    ticks = plt.gca().get_xticks()
-    plt.gca().set_xticks(ticks[::5])
-    plt.xlabel("College Name",fontsize=14,labelpad=15)
-    plt.ylabel("Placement vs Fee Ratio",fontsize=14,labelpad=15)
+    # Limit displayed labels dynamically (every 5th label for large datasets)
+    if len(sorted_data) > 15:
+        plt.gca().set_xticklabels(sorted_data['College Name'][::5])
+    # Improve spacing
+    plt.xlabel("College Name", fontsize=14, labelpad=15)
+    plt.ylabel("Placement vs Fee Ratio", fontsize=14, labelpad=15)
     plt.subplots_adjust(bottom=0.3)  # Adds space for labels
     st.pyplot(plt)
+
 
     # **UG Fee Distribution**
     st.write("### 💰 UG Fee Distribution")
