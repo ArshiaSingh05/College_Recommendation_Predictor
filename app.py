@@ -108,10 +108,11 @@ else:
     num_colleges = len(sorted_data)
     if num_colleges <= 10:  
         plt.xticks(rotation=30, ha='right', fontsize=12)  # Less rotation for small lists
+        plt.gca().set_xticks(plt.gca().get_xticks())  # Show all labels
     else:
         plt.xticks(rotation=60, ha='right', fontsize=9)  # More rotation for large lists
-    ticks = plt.gca().get_xticks()
-    plt.gca().set_xticks(ticks[::5])  # Show every 5th label
+        ticks = plt.gca().get_xticks()
+        plt.gca().set_xticks(ticks[::3])  # Show every 3rd label
     plt.xlabel("College Name", fontsize=14, labelpad=15)
     plt.ylabel("Average Rating", fontsize=14, labelpad=15)
     plt.subplots_adjust(bottom=0.3)  # Adds space for labels
