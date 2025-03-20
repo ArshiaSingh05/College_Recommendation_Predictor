@@ -101,37 +101,28 @@ else:
 
     with col1:
         st.write("### 📊 Average Rating - Bar Chart")
+        # Sort colleges by Average Rating
         sorted_data = filtered_data.sort_values(by='Average Rating', ascending=False)
+        # Bar Chart
         plt.figure(figsize=(8, 5))
-        sns.barplot(x='College Name', y='Average Rating', data=sorted_data)
-        plt.xticks(rotation=60, ha='right', fontsize=9)
+        sns.barplot(x="College Name", y="Average Rating", data=sorted_data)
+        plt.xticks(rotation=60, ha='right', fontsize=9)  # Rotate for readability
         plt.xlabel("College Name")
         plt.ylabel("Average Rating")
-        # Adjust x-axis labels dynamically
-        num_colleges = len(sorted_data)
-        if num_colleges <= 30:  
-            plt.xticks(rotation=30, ha='right', fontsize=12)  # Less rotation for small lists
-            plt.gca().set_xticks(range(num_colleges))  # Show all labels
-            #plt.gca().set_xticklabels([college_name for college_name in sorted_data.index])  # Ensure all names appear
-        else:
-            plt.xticks(rotation=60, ha='right', fontsize=9)  # More rotation for large lists
-            ticks = range(0, num_colleges, 5)  # Every 3rd label
-            plt.gca().set_xticks(ticks)
-            #plt.gca().set_xticklabels([sorted_data.index[i] for i in ticks])  # Assign correct labels
         st.pyplot(plt)
 
     with col2:
-        st.markdown("### 🥧 Average Rating Distribution")
-        # Group by 'Average Rating' and count occurrences
-        rating_counts = filtered_data['Average Rating'].value_counts().sort_index()
-        # Increase figure size for better visibility
+        st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
+        # Select only the top 10 colleges from the sorted data
+        top_10_colleges = sorted_data.head(10)
+        # Create pie chart using the top 10 colleges
         plt.figure(figsize=(8, 8))
-        # Create pie chart with grouped ratings
-        plt.pie(rating_counts, labels=rating_counts.index, autopct='%1.1f%%', 
+        plt.pie(top_10_colleges["Average Rating"], labels=top_10_colleges["College Name"], autopct='%1.1f%%', 
                 startangle=140, wedgeprops={'linewidth': 1, 'edgecolor': 'black'},
-                textprops={'fontsize': 12})  # Adjust font size for readability
-        plt.title("Average Rating Distribution", fontsize=14)
+                textprops={'fontsize': 10})  # Adjust font size for readability
+        plt.title("Top 10 Colleges - Pie Chart", fontsize=14)
         st.pyplot(plt)
+
 
     # Create columns for Placement vs Fee Ratio
     col3, col4 = st.columns(2)
