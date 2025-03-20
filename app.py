@@ -123,17 +123,22 @@ else:
 
     # **Placement vs Fee Ratio**
     st.write("### 📈 Placement vs Fee Ratio")
-    plt.figure(figsize=(14, 6))
+    filtered_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
     # Sort data
     sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
+    plt.figure(figsize=(14, 6))
     # Plot
-    sns.barplot(x=sorted_data['College Name'], y=sorted_data['Placement vs Fee Ratio'])
-    # Adjust x-axis labels
-    plt.xticks(rotation=60, ha='right', fontsize=9)
-    # Limit displayed labels dynamically (every 5th label for large datasets)
-    if len(sorted_data) > 15:
-        plt.gca().set_xticklabels(sorted_data['College Name'][::5])
-    # Improve spacing
+    sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
+    num_colleges = len(sorted_data)
+    if num_colleges <= 10:  
+        plt.xticks(rotation=30, ha='right', fontsize=12)  # Less rotation for small lists
+        plt.gca().set_xticks(range(num_colleges))  # Show all labels
+        #plt.gca().set_xticklabels([college_name for college_name in sorted_data.index])  # Ensure all names appear
+    else:
+        plt.xticks(rotation=60, ha='right', fontsize=9)  # More rotation for large lists
+        ticks = range(0, num_colleges, 5)  # Every 3rd label
+        plt.gca().set_xticks(ticks)
+        #plt.gca().set_xticklabels([sorted_data.index[i] for i in ticks])  # Assign correct labels
     plt.xlabel("College Name", fontsize=14, labelpad=15)
     plt.ylabel("Placement vs Fee Ratio", fontsize=14, labelpad=15)
     plt.subplots_adjust(bottom=0.3)  # Adds space for labels
