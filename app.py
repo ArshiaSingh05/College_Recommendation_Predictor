@@ -107,6 +107,17 @@ else:
         plt.xticks(rotation=60, ha='right', fontsize=9)
         plt.xlabel("College Name")
         plt.ylabel("Average Rating")
+        # Adjust x-axis labels dynamically
+        num_colleges = len(sorted_data)
+        if num_colleges <= 30:  
+            plt.xticks(rotation=30, ha='right', fontsize=12)  # Less rotation for small lists
+            plt.gca().set_xticks(range(num_colleges))  # Show all labels
+            #plt.gca().set_xticklabels([college_name for college_name in sorted_data.index])  # Ensure all names appear
+        else:
+            plt.xticks(rotation=60, ha='right', fontsize=9)  # More rotation for large lists
+            ticks = range(0, num_colleges, 5)  # Every 3rd label
+            plt.gca().set_xticks(ticks)
+            #plt.gca().set_xticklabels([sorted_data.index[i] for i in ticks])  # Assign correct labels
         st.pyplot(plt)
 
     with col2:
