@@ -107,6 +107,11 @@ else:
         plt.figure(figsize=(8, 5))
         sns.barplot(x="College Name", y="Average Rating", data=sorted_data)
         plt.xticks(rotation=60, ha='right', fontsize=9)  # Rotate for readability
+        if num_colleges > 30:
+            ticks = range(0, num_colleges, 3)  # Show every 3rd label
+            plt.xticks(ticks, sorted_data["College Name"].iloc[ticks], rotation=60, ha='right', fontsize=9)
+        else:
+            plt.xticks(rotation=30, ha='right', fontsize=10)  # Show all labels
         plt.xlabel("College Name")
         plt.ylabel("Average Rating")
         st.pyplot(plt)
