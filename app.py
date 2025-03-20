@@ -108,7 +108,7 @@ else:
             st.warning("No colleges found with this Average Rating.")
         else:
             plt.figure(figsize=(10, 5))
-            sns.barplot(x="College Name ", y="Average Rating", data=filtered_rating_data)
+            sns.barplot(x="College Name", y="Average Rating", data=filtered_rating_data)
             plt.xlabel("Average Rating")
             plt.ylabel("College Name")
             plt.title("Average Rating - Bar Chart")
