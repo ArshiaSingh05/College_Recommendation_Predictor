@@ -158,7 +158,7 @@ else:
         # Filter data based on the selected Placement vs Fee Ratio
         filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
         # Check if slider is at its default position
-        if placement_vs_fee_ratio == default_slider_value:  # Ensure you set `default_slider_value`
+        if placement_vs_fee_ratio == 0:  # Ensure you set `default_slider_value`
             filtered_ratio_data = top_10_colleges  # Show top 10 colleges initially
         else:
             filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
