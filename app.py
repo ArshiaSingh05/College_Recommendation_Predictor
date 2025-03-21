@@ -133,23 +133,28 @@ else:
 
     with col3:
         st.write("### 📈 Placement vs Fee Ratio - Bar Chart")
-        # Sort data in descending order
-        sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
-        # Dynamic figure size based on slider value
-        fig_width = 8 + (placement_vs_fee_ratio * 10)  # Adjust width dynamically
-        fig_height = 4 + (placement_vs_fee_ratio * 5)  # Adjust height dynamically
-        plt.figure(figsize=(fig_width, fig_height))
-        # Plot bar chart
-        ax = sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data, color="steelblue")
-        # Rotate and align labels properly
-        ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
-        # Set labels
-        plt.xlabel("College Name")
-        plt.ylabel("Placement vs Fee Ratio")
-        # Adjust layout to prevent label cutoff
-        plt.tight_layout()
-        # Display in Streamlit
-        st.pyplot(plt)
+        # Filter data based on the selected Placement vs Fee Ratio
+        filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
+
+        if filtered_ratio_data.empty:
+            st.warning("No colleges match the selected Placement vs Fee Ratio.")
+        else:
+            # Sort data in descending order
+            sorted_data = filtered_ratio_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
+            # Dynamically adjust figure size based on the number of colleges displayed
+            fig_width = max(12, len(sorted_data) * 0.4)  # Ensuring minimum width of 12
+            plt.figure(figsize=(fig_width, 6))
+            # Plot bar chart
+            ax = sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data, color="steelblue")
+            # Rotate and align labels properly
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
+            # Set labels
+            plt.xlabel("College Name")
+            plt.ylabel("Placement vs Fee Ratio")
+            # Adjust layout to prevent label cutoff
+            plt.tight_layout()
+            # Display in Streamlit
+            st.pyplot(plt)
 
 
     with col4:
