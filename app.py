@@ -118,8 +118,9 @@ else:
             sns.barplot(x="College Name", y="Average Rating", data=filtered_rating_data, ax=ax)
 
             # Rotate x-axis labels for readability
-            ax.set_xticks(range(len(filtered_rating_data)))  # Set tick positions explicitly
-            ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=9)  # Apply labels
+            if len(filtered_rating_data) > 10:  
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
+            #ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=9)
             plt.xlabel("Average Rating")
             plt.ylabel("College Name")
             plt.title("Average Rating - Bar Chart")
