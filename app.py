@@ -147,7 +147,8 @@ else:
             # Plot bar chart
             ax = sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data, color="steelblue")
             # Rotate and align labels properly
-            ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
+            ax.set_xticks(range(len(sorted_data)))
+            ax.set_xticklabels(sorted_data['College Name'], rotation=60, ha='right', fontsize=9)
             # Set labels
             plt.xlabel("College Name")
             plt.ylabel("Placement vs Fee Ratio")
