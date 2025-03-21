@@ -103,7 +103,7 @@ else:
     with col1:
         st.markdown("### 📊 Average Rating - Bar Chart")
         # Filter data based on selected Average Rating
-        filtered_rating_data = filtered_data[filtered_data["Average Rating"] == average_rating]
+        filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating]
         # Bar chart with all matching colleges
         if filtered_rating_data.empty:
             st.warning("No colleges found with this Average Rating.")
