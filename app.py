@@ -133,6 +133,7 @@ else:
 
     with col3:
         st.write("### 📈 Placement vs Fee Ratio - Bar Chart")
+
         # Filter data based on the selected Placement vs Fee Ratio
         filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
 
@@ -141,21 +142,34 @@ else:
         else:
             # Sort data in descending order
             sorted_data = filtered_ratio_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
+
             # Dynamically adjust figure size based on the number of colleges displayed
-            fig_width = max(12, len(sorted_data) * 0.4)  # Ensuring minimum width of 12
-            plt.figure(figsize=(fig_width, 6))
+            num_colleges = len(sorted_data)
+            fig_width = max(12, min(25, num_colleges * 0.4))  # Ensure reasonable width
+            fig_height = 6 if num_colleges <= 20 else 8  # Increase height for better visibility
+
+            # Create figure and axis
+            fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+
             # Plot bar chart
-            ax = sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data, color="steelblue")
-            # Rotate and align labels properly
-            ax.set_xticks(range(len(sorted_data)))
+            sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data, color="steelblue", ax=ax)
+
+            # Set x-ticks properly
+            ax.set_xticks(np.arange(len(sorted_data)))
             ax.set_xticklabels(sorted_data['College Name'], rotation=60, ha='right', fontsize=9)
+
+            # Ensure correct tick positioning
+            ax.xaxis.set_major_locator(FixedLocator(np.arange(len(sorted_data))))
+
             # Set labels
             plt.xlabel("College Name")
             plt.ylabel("Placement vs Fee Ratio")
+
             # Adjust layout to prevent label cutoff
             plt.tight_layout()
+
             # Display in Streamlit
-            st.pyplot(plt)
+            st.pyplot(fig)
 
 
     with col4:
