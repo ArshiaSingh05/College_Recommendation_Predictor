@@ -157,11 +157,6 @@ else:
         st.markdown("### 📈 Placement vs Fee Ratio - Bar Chart")
         # Filter data based on the selected Placement vs Fee Ratio
         filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
-        # Check if slider is at its default position
-        if placement_vs_fee_ratio == 0.00:  # Ensure you set `default_slider_value`
-            filtered_ratio_data = top_10_colleges.copy()  # Show top 10 colleges initially
-        else:
-            filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
         if filtered_ratio_data.empty:
             st.warning("No colleges match the selected Placement vs Fee Ratio.")
         else:
