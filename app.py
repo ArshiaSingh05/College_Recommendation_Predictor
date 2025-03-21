@@ -195,7 +195,7 @@ else:
     with col5:
         st.markdown("### 💰 UG Fee - Bar Chart")
         # Filter data based on UG fee (scaled)
-        filtered_fee_data = filtered_data[filtered_data["UG fee (scaled)"] >= ug_fee_slider]
+        filtered_fee_data = filtered_data[filtered_data["UG fee (scaled)"] >= ug_fee_scaled]
         # Check if data is available
         if filtered_fee_data.empty:
             st.warning("⚠ No colleges found with this UG Fee.")
