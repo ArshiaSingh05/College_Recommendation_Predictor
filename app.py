@@ -196,7 +196,6 @@ else:
         st.markdown("### 💰 UG Fee - Bar Chart")
         # Filter data based on UG fee (scaled)
         filtered_fee_data = filtered_data[filtered_data["UG fee (scaled)"] >= ug_fee_scaled]
-        st.write(filtered_data[["College Name", "UG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
         # Check if data is available
         if filtered_fee_data.empty:
             st.warning("⚠ No colleges found with this UG Fee.")
@@ -216,6 +215,7 @@ else:
             plt.title("UG Fee - Bar Chart")
             # Display the plot in Streamlit
             st.pyplot(fig)
+        st.write(filtered_data[["College Name", "UG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
 
 
 
