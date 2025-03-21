@@ -121,8 +121,8 @@ else:
             if len(filtered_rating_data) > 10:  
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
             #ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=9)
-            plt.xlabel("Average Rating")
-            plt.ylabel("College Name")
+            plt.xlabel("College Name")
+            plt.ylabel("Average Rating")
             plt.title("Average Rating - Bar Chart")
             st.pyplot(plt)
 
@@ -154,44 +154,30 @@ else:
     col3, col4 = st.columns(2)
 
     with col3:
-        st.write("### 📈 Placement vs Fee Ratio - Bar Chart")
-
+        st.markdown("### 📈 Placement vs Fee Ratio - Bar Chart")
         # Filter data based on the selected Placement vs Fee Ratio
         filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
-
         if filtered_ratio_data.empty:
             st.warning("No colleges match the selected Placement vs Fee Ratio.")
         else:
-            # Sort data in descending order
-            sorted_data = filtered_ratio_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
-
-            # Dynamically adjust figure size based on the number of colleges displayed
-            num_colleges = len(sorted_data)
-            fig_width = max(12, min(25, num_colleges * 0.4))  # Ensure reasonable width
-            fig_height = 6 if num_colleges <= 20 else 8  # Increase height for better visibility
-
-            # Create figure and axis
+            # Dynamically adjust figure size based on the number of colleges
+            num_colleges = len(filtered_ratio_data)
+            fig_width = max(12, min(25, num_colleges * 0.4))  # Dynamic width adjustment
+            fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
+            # Create figure
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-
             # Plot bar chart
-            sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data, color="steelblue", ax=ax)
-
-            # Set x-ticks properly
-            ax.set_xticks(np.arange(len(sorted_data)))
-            ax.set_xticklabels(sorted_data['College Name'], rotation=60, ha='right', fontsize=9)
-
-            # Ensure correct tick positioning
-            ax.xaxis.set_major_locator(FixedLocator(np.arange(len(sorted_data))))
-
-            # Set labels
+            sns.barplot(x="College Name", y="Placement vs Fee Ratio", data=filtered_ratio_data, ax=ax, color="steelblue")
+            # Rotate x-axis labels for readability
+            if num_colleges > 10:
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
+            # Set labels and title
             plt.xlabel("College Name")
             plt.ylabel("Placement vs Fee Ratio")
-
-            # Adjust layout to prevent label cutoff
-            plt.tight_layout()
-
+            plt.title("Placement vs Fee Ratio - Bar Chart")
             # Display in Streamlit
             st.pyplot(fig)
+
 
 
     with col4:
