@@ -194,11 +194,25 @@ else:
 
     with col5:
         st.write("### 💰 UG Fee - Bar Chart")
-        sorted_data = filtered_data.sort_values(by='UG fee (scaled)', ascending=False)
-        plt.figure(figsize=(8, 5))
-        sns.barplot(x='College Name', y='UG fee (scaled)', data=sorted_data)
-        plt.xticks(rotation=60, ha='right', fontsize=9)
-        st.pyplot(plt)
+        # Check if data is available
+        if filtered_data.empty:
+            st.warning("⚠ No data available for UG Fee Bar Chart!")
+            st.stop()
+        # Sort data by UG fee (scaled)
+        sorted_data = filtered_data.sort_values(by="UG fee (scaled)", ascending=False)
+        if sorted_data.empty:
+            st.warning("⚠ Not enough data to display UG Fee Bar Chart.")
+            st.stop()
+        # Debugging: Show data in Streamlit
+        st.write("📊 Debug: UG Fee Data")
+        st.dataframe(sorted_data)
+        # Create bar chart
+        fig, ax = plt.subplots(figsize=(8, 5))
+        sns.barplot(x="College Name", y="UG fee (scaled)", data=sorted_data, ax=ax, color="steelblue")
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
+        # Show the plot in Streamlit
+        st.pyplot(fig)
+
 
     with col6:
         st.write("### 💰 UG Fee - Histogram")
