@@ -128,16 +128,26 @@ else:
 
     with col2:
         st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
-        # Select only the top 10 colleges from the sorted data
-        sorted_data = filtered_rating_data.sort_values(by='Average Rating', ascending=False)
-        top_10_colleges = sorted_data.head(10)
-        # Create pie chart using the top 10 colleges
-        plt.figure(figsize=(8, 8))
-        plt.pie(top_10_colleges["Average Rating"], labels=top_10_colleges["College Name"], autopct='%1.1f%%', 
-                startangle=140, wedgeprops={'linewidth': 1, 'edgecolor': 'black'},
-                textprops={'fontsize': 10})  # Adjust font size for readability
+        # Group by College Name and take the highest Average Rating per college
+        unique_colleges = (
+            filtered_rating_data.groupby("College Name")["Average Rating"]
+            .max()  # Take the highest rating for each college
+            .reset_index()
+        )
+        # Sort and select top 10 unique colleges
+        top_10_colleges = unique_colleges.sort_values(by="Average Rating", ascending=False).head(10)
+        # Create pie chart
+        fig, ax = plt.subplots(figsize=(8, 8))
+        ax.pie(
+            top_10_colleges["Average Rating"],
+            labels=top_10_colleges["College Name"],
+            autopct="%1.1f%%",
+            startangle=140,
+            wedgeprops={"linewidth": 1, "edgecolor": "black"},
+            textprops={"fontsize": 10},
+        )
         plt.title("Top 10 Colleges - Pie Chart", fontsize=14)
-        st.pyplot(plt)
+        st.pyplot(fig)
 
 
     # Create columns for Placement vs Fee Ratio
