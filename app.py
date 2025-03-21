@@ -193,25 +193,29 @@ else:
     col5, col6 = st.columns(2)
 
     with col5:
-        st.write("### 💰 UG Fee - Bar Chart")
+        st.markdown("### 💰 UG Fee - Bar Chart")
+        # Filter data based on UG fee (scaled)
+        filtered_fee_data = filtered_data[filtered_data["UG fee (scaled)"] >= ug_fee_slider]
         # Check if data is available
-        if filtered_data.empty:
-            st.warning("⚠ No data available for UG Fee Bar Chart!")
-            st.stop()
-        # Sort data by UG fee (scaled)
-        sorted_data = filtered_data.sort_values(by="UG fee (scaled)", ascending=False)
-        if sorted_data.empty:
-            st.warning("⚠ Not enough data to display UG Fee Bar Chart.")
-            st.stop()
-        # Debugging: Show data in Streamlit
-        st.write("📊 Debug: UG Fee Data")
-        st.dataframe(sorted_data)
-        # Create bar chart
-        fig, ax = plt.subplots(figsize=(8, 5))
-        sns.barplot(x="College Name", y="UG fee (scaled)", data=sorted_data, ax=ax, color="steelblue")
-        ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
-        # Show the plot in Streamlit
-        st.pyplot(fig)
+        if filtered_fee_data.empty:
+            st.warning("⚠ No colleges found with this UG Fee.")
+        else:
+            # Dynamically adjust figure size based on the number of colleges
+            num_colleges = len(filtered_fee_data)
+            fig_width = max(12, min(25, num_colleges * 0.4))  # Adjusts dynamically based on data
+            fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
+            # Create bar chart
+            fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+            sns.barplot(x="College Name", y="UG fee (scaled)", data=filtered_fee_data, ax=ax, color="steelblue")
+            # Rotate x-axis labels for readability
+            if num_colleges > 10:
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
+            plt.xlabel("College Name")
+            plt.ylabel("UG Fee (Scaled)")
+            plt.title("UG Fee - Bar Chart")
+            # Display the plot in Streamlit
+            st.pyplot(fig)
+
 
 
     with col6:
