@@ -4,6 +4,7 @@ import numpy as np
 import pickle  # For loading the trained model
 import seaborn as sns
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FixedLocator
 import pathlib
 
 # Set page config first
