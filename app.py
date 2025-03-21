@@ -208,24 +208,24 @@ else:
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             sns.barplot(x="College Name", y="UG fee (scaled)", data=filtered_fee_data, ax=ax, color="steelblue")
             # Rotate x-axis labels for readability
+            ax.set_xlabel("College Name", fontsize=12)
+            ax.set_ylabel("UG Fee (Scaled)", fontsize=12)
+            ax.set_title("UG Fee - Bar Chart", fontsize=16)
             if num_colleges > 10:
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
-            plt.xlabel("College Name")
-            plt.ylabel("UG Fee (Scaled)")
-            plt.title("UG Fee - Bar Chart")
             # Display the plot in Streamlit
             st.pyplot(fig)
-        st.write(filtered_data[["College Name", "UG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
-
-
 
     with col6:
-        st.write("### 💰 UG Fee - Histogram")
-        plt.figure(figsize=(8, 5))
-        sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True, bins=15)
-        plt.xlabel("UG Fee")
-        plt.ylabel("Frequency")
-        st.pyplot(plt)
+        st.markdown("### 💰 UG Fee - Histogram")
+        fig, ax = plt.subplots(figsize=(8, 5))
+        sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True, bins=15, ax=ax)
+        ax.set_xlabel("UG Fee", fontsize=12)
+        ax.set_ylabel("Frequency", fontsize=12)
+        ax.set_title("UG Fee - Histogram", fontsize=16)
+
+    st.markdown("### 📊 UG Fee Data Table")
+    st.write(filtered_data[["College Name", "UG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
 
     # Create columns for PG Fee
     col7, col8 = st.columns(2)
