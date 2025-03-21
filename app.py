@@ -108,8 +108,17 @@ else:
         if filtered_rating_data.empty:
             st.warning("No colleges found with this Average Rating.")
         else:
-            plt.figure(figsize=(10, 5))
-            sns.barplot(x="College Name", y="Average Rating", data=filtered_rating_data)
+            # Dynamically adjust figure size based on the number of colleges
+            num_colleges = len(filtered_rating_data)
+            fig_width = max(12, min(25, num_colleges * 0.4))  # Ensures it doesn't get too large
+            fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
+
+            # Create figure
+            fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+            sns.barplot(x="College Name", y="Average Rating", data=filtered_rating_data, ax=ax)
+
+            # Rotate x-axis labels for readability
+            ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=9)
             plt.xlabel("Average Rating")
             plt.ylabel("College Name")
             plt.title("Average Rating - Bar Chart")
