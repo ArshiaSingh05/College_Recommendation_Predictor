@@ -223,6 +223,7 @@ else:
         ax.set_xlabel("UG Fee", fontsize=12)
         ax.set_ylabel("Frequency", fontsize=12)
         ax.set_title("UG Fee - Histogram", fontsize=16)
+        st.pyplot(fig)
 
     st.markdown("### 📊 UG Fee Data Table")
     st.write(filtered_data[["College Name", "UG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
