@@ -133,12 +133,20 @@ else:
 
     with col3:
         st.write("### 📈 Placement vs Fee Ratio - Bar Chart")
+        # Sort data in descending order
         sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
-        plt.figure(figsize=(8, 5))
-        sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data)
-        plt.xticks(rotation=60, ha='right', fontsize=9)
+        # Increase figure size for better readability
+        plt.figure(figsize=(12, 6))
+        # Plot bar chart
+        ax = sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data, color="steelblue")
+        # Rotate and align labels properly
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
+        # Set labels
         plt.xlabel("College Name")
         plt.ylabel("Placement vs Fee Ratio")
+        # Adjust layout to prevent label cutoff
+        plt.tight_layout()
+        # Display in Streamlit
         st.pyplot(plt)
 
     with col4:
