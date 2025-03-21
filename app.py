@@ -135,8 +135,10 @@ else:
         st.write("### 📈 Placement vs Fee Ratio - Bar Chart")
         # Sort data in descending order
         sorted_data = filtered_data.sort_values(by='Placement vs Fee Ratio', ascending=False)
-        # Increase figure size for better readability
-        plt.figure(figsize=(12, 6))
+        # Dynamic figure size based on slider value
+        fig_width = 8 + (placement_vs_fee_ratio * 10)  # Adjust width dynamically
+        fig_height = 4 + (placement_vs_fee_ratio * 5)  # Adjust height dynamically
+        plt.figure(figsize=(fig_width, fig_height))
         # Plot bar chart
         ax = sns.barplot(x='College Name', y='Placement vs Fee Ratio', data=sorted_data, color="steelblue")
         # Rotate and align labels properly
@@ -148,6 +150,7 @@ else:
         plt.tight_layout()
         # Display in Streamlit
         st.pyplot(plt)
+
 
     with col4:
         st.write("### 📈 Placement vs Fee Ratio - Line Chart")
