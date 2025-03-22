@@ -248,7 +248,6 @@ else:
     col7, col8 = st.columns(2)
 
     with col7:
-        st.write("Columns in filtered_data:", filtered_data.columns)
         st.write("### 🏛️ PG Fee - Bar Chart")
         filtered_pg_data=filtered_data[filtered_data['PG fee (scaled)']>=pg_fee_scaled]
         filtered_pg_data = filtered_pg_data.nlargest(40, "PG fee (scaled)")
@@ -279,8 +278,12 @@ else:
         st.pyplot(plt)
 
     st.markdown("### 📊 Fee Data Table")
-    st.write(filtered_data[["College Name", "UG fee (scaled)", "PG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
-    st.write(filtered_data["Average Rating"].describe())
+    col9, col10=st.columns(2)
+    with col9:
+        st.write(filtered_data[["College Name", "UG fee (scaled)", "PG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
+    
+    with col10:
+        st.write(filtered_data["Average Rating"].describe())
 # **Footer**
 footer = """
     <style>
