@@ -179,7 +179,7 @@ else:
 
 
     with col4:
-        st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
+        st.markdown("### 🥧 Top 10 Colleges - Doughnut Chart")
         # Group by College Name and take the highest Average Rating per college
         unique_colleges = (
             filtered_ratio_data.groupby("College Name", as_index=False)  # Keep College Name
