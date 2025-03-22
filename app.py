@@ -11,7 +11,7 @@ import pathlib
 st.set_page_config(page_title="College Recommendation", layout="wide", initial_sidebar_state="collapsed")
 
 st.title("🎓 College Recommendation Project")
-st.markdown("<div style='text-align: center", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
 
 # Load the trained model
 with open('training_model.pkl', 'rb') as file:
@@ -74,17 +74,17 @@ with st.sidebar:
     pg_fee_scaled = st.slider("PG Fee (Scaled)", min_value=0.0, max_value=5.0, value=0.0, step=0.1)
 
     # **Graph & Area Selection**
-    selected_area = st.selectbox("Select Area", sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
+    selected_area = st.selectbox("Select Area", ['All']+sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
 
     # **Prediction Button**
     if st.button("Predict"):
-        feature_names = ['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)']
-        input_data = [[average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]]  
-        input_df = pd.DataFrame(input_data, columns=feature_names)  # No more NameError
-        
-        # Model Prediction
-        prediction = model.predict(input_df)[0]  
-        st.success(f"The predicted college category is: **{prediction}**")
+        if all(val >= 0 for val in [average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]):
+            input_data = [[average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]]
+            prediction = model.predict(pd.DataFrame(input_data, columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)']))[0]
+            st.success(f"The predicted college category is: **{prediction}**")
+        else:
+            st.warning("Please adjust the sliders to provide valid input values.")
+
 
 
 # **Filtered Data**
@@ -263,7 +263,7 @@ else:
         st.write("### 🏛️ PG Fee - Bar Chart")
         filtered_pg_data=filtered_data[filtered_data['PG fee (scaled)']>=pg_fee_scaled]
         filtered_pg_data = filtered_pg_data.nlargest(40, "PG fee (scaled)")
-        if filtered_fee_data.empty:
+        if filtered_pg_data.empty:
             st.warning("⚠ No colleges found with this UG Fee.")
         else:
             # Dynamically adjust figure size based on the number of colleges
