@@ -238,11 +238,25 @@ else:
 
     with col7:
         st.write("### 🏛️ PG Fee - Bar Chart")
-        sorted_data = filtered_data.sort_values(by='PG fee (scaled)', ascending=False)
-        plt.figure(figsize=(8, 5))
-        sns.barplot(x='College Name', y='PG fee (scaled)', data=sorted_data)
-        plt.xticks(rotation=60, ha='right', fontsize=9)
-        st.pyplot(plt)
+        filtered_pg_data=filtered_data[filtered_data['PG Fee (Scaled)']>=pg_fee_scaled]
+        if filtered_fee_data.empty:
+            st.warning("⚠ No colleges found with this UG Fee.")
+        else:
+            # Dynamically adjust figure size based on the number of colleges
+            num_colleges = len(filtered_fee_data)
+            fig_width = max(12, min(25, num_colleges * 0.4))  # Adjusts dynamically based on data
+            fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
+            # Create bar chart
+            fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+            sns.barplot(x="College Name", y="PG fee (scaled)", data=filtered_pg_data, ax=ax, color="steelblue")
+            # Rotate x-axis labels for readability
+            ax.set_xlabel("College Name", fontsize=12)
+            ax.set_ylabel("PG Fee (Scaled)", fontsize=12)
+            ax.set_title("PG Fee - Bar Chart", fontsize=16)
+            if num_colleges > 10:
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
+            # Display the plot in Streamlit
+            st.pyplot(fig)
 
     with col8:
         st.write("### 🏛️ PG Fee - Box Plot")
