@@ -180,7 +180,7 @@ else:
 
 
 
-    # with col4:
+    with col4:
         st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
         # Group by College Name and take the highest Average Rating per college
         unique_colleges = (
