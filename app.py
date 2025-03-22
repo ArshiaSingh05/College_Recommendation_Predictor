@@ -102,7 +102,6 @@ else:
 
     with col1:
         st.markdown("### 📊 Average Rating - Bar Chart")
-        st.write(filtered_data["Average Rating"].describe())
         # Filter data based on selected Average Rating
         filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating]
         # Bar chart with all matching colleges
@@ -281,6 +280,7 @@ else:
 
     st.markdown("### 📊 Fee Data Table")
     st.write(filtered_data[["College Name", "UG fee (scaled)", "PG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
+    st.write(filtered_data["Average Rating"].describe())
 # **Footer**
 footer = """
     <style>
