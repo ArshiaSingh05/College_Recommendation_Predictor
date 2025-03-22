@@ -87,7 +87,7 @@ with st.sidebar:
 
 
 if filtered_data.empty:
-    st.warning(f"No data available for {selected_area}. Try selecting a different area.")
+    st.warning(f"No data available for {selected_area}. Try selecting a different area from the side bar.")
 else:
     st.subheader(f"📍 Colleges in {selected_area}")
 
