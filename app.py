@@ -86,10 +86,6 @@ with st.sidebar:
             st.warning("Please adjust the sliders to provide valid input values.")
 
 
-
-# **Filtered Data**
-filtered_data = data if selected_area == "All" else data[data['State'] == selected_area]
-
 if filtered_data.empty:
     st.warning(f"No data available for {selected_area}. Try selecting a different area.")
 else:
