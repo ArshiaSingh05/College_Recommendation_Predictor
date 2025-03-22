@@ -111,6 +111,7 @@ else:
     with col1:
         st.markdown("### 📊 Average Rating - Bar Chart")
         # Filter data based on selected Average Rating
+        st.write("Filtered Rating Data Preview:", filtered_rating_data)
         filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating]
         # Bar chart with all matching colleges
         if filtered_rating_data.empty:
