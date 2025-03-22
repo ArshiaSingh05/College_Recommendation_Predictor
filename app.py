@@ -218,12 +218,17 @@ else:
 
     with col6:
         st.markdown("### 💰 UG Fee - Histogram")
-        fig, ax = plt.subplots(figsize=(8, 5))
-        sns.histplot(filtered_data['UG fee (tuition fee)'], kde=True, bins=15, ax=ax)
-        ax.set_xlabel("UG Fee", fontsize=12)
-        ax.set_ylabel("Frequency", fontsize=12)
-        ax.set_title("UG Fee - Histogram", fontsize=16)
-        st.pyplot(fig)
+        # Check if UG Fee column exists and is not empty
+        if "UG fee (tuition fee)" not in filtered_data.columns or filtered_data["UG fee (tuition fee)"].isna().all():
+            st.warning("⚠ No valid UG Fee data available.")
+        else:
+            # Use fig, ax to ensure Streamlit renders it properly
+            fig, ax = plt.subplots(figsize=(8, 5))
+            sns.histplot(filtered_data["UG fee (tuition fee)"].dropna(), kde=True, bins=15, ax=ax)
+            ax.set_xlabel("UG Fee", fontsize=12)
+            ax.set_ylabel("Frequency", fontsize=12)
+            ax.set_title("UG Fee - Histogram", fontsize=16)
+        st.pyplot(fig)  # Use fig here
 
     st.markdown("### 📊 UG Fee Data Table")
     st.write(filtered_data[["College Name", "UG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
