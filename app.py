@@ -8,7 +8,7 @@ from matplotlib.ticker import FixedLocator
 import pathlib
 
 # Set page config first
-st.set_page_config(page_title="Your App", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="College Recommendation", layout="wide", initial_sidebar_state="collapsed")
 
 st.title("🎓 College Recommendation Project")
 st.markdown("<div style='text-align: center", unsafe_allow_html=True)
@@ -53,14 +53,24 @@ else:
 
 # Collapsible Sidebar for User Input
 with st.sidebar:
+    with st.expander("⚙️ Filters", expanded=True):  # Corrected indentation
+        # Dropdown for selecting the stream of college
+        selected_stream = st.selectbox(
+            "Select Stream", 
+            ["All", "Engineering", "Medical", "Management", "Law", "Arts", "Science"]
+        )
+
+        # Filter data based on selected stream (assuming 'Stream' column exists)
+        if selected_stream != "All":
+            filtered_data = filtered_data[filtered_data["Stream"] == selected_stream]
+
     # Sidebar UI with Sliders instead of Buttons
-    st.sidebar.header("Adjust Parameters")
+    st.header("Adjust Parameters")
 
-    average_rating = st.sidebar.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
-    placement_vs_fee_ratio = st.sidebar.slider("Placement vs Fee Ratio", min_value=0.0, max_value=1.0, value=0.0, step=0.01)
-    ug_fee_scaled = st.sidebar.slider("UG Fee (Scaled)", min_value=0.0, max_value=5.0, value=0.0, step=0.1)
-    pg_fee_scaled = st.sidebar.slider("PG Fee (Scaled)", min_value=0.0, max_value=5.0, value=0.0, step=0.1)
-
+    average_rating = st.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
+    placement_vs_fee_ratio = st.slider("Placement vs Fee Ratio", min_value=0.0, max_value=1.0, value=0.0, step=0.01)
+    ug_fee_scaled = st.slider("UG Fee (Scaled)", min_value=0.0, max_value=5.0, value=0.0, step=0.1)
+    pg_fee_scaled = st.slider("PG Fee (Scaled)", min_value=0.0, max_value=5.0, value=0.0, step=0.1)
 
     # **Graph & Area Selection**
     selected_area = st.selectbox("Select Area", sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
@@ -68,12 +78,13 @@ with st.sidebar:
     # **Prediction Button**
     if st.button("Predict"):
         feature_names = ['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)']
-        # Define input_data properly
         input_data = [[average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]]  
         input_df = pd.DataFrame(input_data, columns=feature_names)  # No more NameError
+        
         # Model Prediction
         prediction = model.predict(input_df)[0]  
         st.success(f"The predicted college category is: **{prediction}**")
+
 
 # **Filtered Data**
 filtered_data = data if selected_area == "All" else data[data['State'] == selected_area]
