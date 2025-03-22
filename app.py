@@ -278,10 +278,10 @@ else:
         st.pyplot(plt)
 
     st.markdown("### 📊 Fee Data Table")
+    st.write(filtered_data[["College Name", "UG fee (scaled)", "PG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
     col9, col10=st.columns(2)
     with col9:
-        st.write(filtered_data[["College Name", "UG fee (scaled)", "PG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
-    
+        st.write("Columns in filtered_data:", filtered_data.columns)
     with col10:
         st.write(filtered_data["Average Rating"].describe())
 # **Footer**
