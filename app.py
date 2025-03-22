@@ -245,7 +245,7 @@ else:
         else:
             # Dynamically adjust figure size based on the number of colleges
             num_colleges = len(filtered_fee_data)
-            fig_width = max(12, min(25, num_colleges * 0.4))  # Adjusts dynamically based on data
+            fig_width = max(12, min(25, num_colleges * 0.5))  # Adjusts dynamically based on data
             fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
             # Create bar chart
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
@@ -255,7 +255,7 @@ else:
             ax.set_ylabel("PG Fee (Scaled)", fontsize=12)
             ax.set_title("PG Fee - Bar Chart", fontsize=16)
             if num_colleges > 10:
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=80, ha="center", fontsize=9)
             # Display the plot in Streamlit
             st.pyplot(fig)
 
