@@ -113,14 +113,12 @@ else:
             num_colleges = len(filtered_rating_data)
             fig_width = max(12, min(25, num_colleges * 0.4))  # Ensures it doesn't get too large
             fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
-
             # Create figure
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             sns.barplot(x="College Name", y="Average Rating", data=filtered_rating_data, ax=ax)
-
             # Rotate x-axis labels for readability
             if len(filtered_rating_data) > 30:  
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=9)
             #ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=9)
             plt.xlabel("College Name")
             plt.ylabel("Average Rating")
