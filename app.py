@@ -181,14 +181,6 @@ else:
 
 
     # with col4:
-        # st.write("### 📈 Placement vs Fee Ratio - Line Chart")
-        # plt.figure(figsize=(8, 5))
-        # plt.plot(sorted_data['College Name'], sorted_data['Placement vs Fee Ratio'], marker='o', linestyle='-')
-        # plt.xticks(rotation=60, ha='right', fontsize=9)
-        # plt.xlabel("College Name")
-        # plt.ylabel("Placement vs Fee Ratio")
-        # st.pyplot(plt)
-
         st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
         # Group by College Name and take the highest Average Rating per college
         unique_colleges = (
