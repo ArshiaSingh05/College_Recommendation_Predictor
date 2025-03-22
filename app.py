@@ -189,6 +189,30 @@ else:
         # plt.ylabel("Placement vs Fee Ratio")
         # st.pyplot(plt)
 
+        st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
+        # Group by College Name and take the highest Average Rating per college
+        unique_colleges = (
+            filtered_ratio_data.groupby("College Name", as_index=False)  # Keep College Name
+            .agg({"Placement vs Fee Ratio": "max", "Average Rating": "max"})  # Get max rating per college
+        )
+        # Sort and select top 10 unique colleges
+        top10_colleges = unique_colleges.sort_values(by="Placement vs Fee Ratio", ascending=False).head(10)
+        # Create doughnut chart
+        fig, ax = plt.subplots(figsize=(8, 8))
+        wedges, texts, autotexts = ax.pie(
+            top10_colleges["Average Rating"],
+            labels=top10_colleges["College Name"],
+            autopct="%1.1f%%",
+            startangle=140,
+            wedgeprops={"linewidth": 1, "edgecolor": "black"},
+            textprops={"fontsize": 10},
+        )
+        # Add a white circle at the center to create a doughnut effect
+        centre_circle = plt.Circle((0, 0), 0.70, fc="white")
+        fig.gca().add_artist(centre_circle)
+        plt.title("Top 10 Colleges - Doughnut Chart", fontsize=14)
+        st.pyplot(fig)
+
     # Create columns for UG Fee
     col5, col6 = st.columns(2)
 
@@ -230,9 +254,6 @@ else:
             ax.set_title("UG Fee - Histogram", fontsize=16)
         st.pyplot(fig)  # Use fig here
 
-    st.markdown("### 📊 UG Fee Data Table")
-    st.write(filtered_data[["College Name", "UG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
-
     # Create columns for PG Fee
     col7, col8 = st.columns(2)
 
@@ -240,7 +261,7 @@ else:
         st.write("Columns in filtered_data:", filtered_data.columns)
         st.write("### 🏛️ PG Fee - Bar Chart")
         filtered_pg_data=filtered_data[filtered_data['PG fee (scaled)']>=pg_fee_scaled]
-        filtered_pg_data = filtered_pg_data.nlargest(20, "PG fee (scaled)")
+        filtered_pg_data = filtered_pg_data.nlargest(40, "PG fee (scaled)")
         if filtered_fee_data.empty:
             st.warning("⚠ No colleges found with this UG Fee.")
         else:
@@ -256,7 +277,7 @@ else:
             ax.set_ylabel("PG Fee (Scaled)", fontsize=12)
             ax.set_title("PG Fee - Bar Chart", fontsize=16)
             if num_colleges > 10:
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=80, ha="center", fontsize=9)
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha="center", fontsize=9)
             # Display the plot in Streamlit
             st.pyplot(fig)
 
@@ -267,6 +288,8 @@ else:
         plt.ylabel("PG Fee")
         st.pyplot(plt)
 
+    st.markdown("### 📊 Fee Data Table")
+    st.write(filtered_data[["College Name", "UG fee (scaled)", "PG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
 # **Footer**
 footer = """
     <style>
