@@ -238,7 +238,7 @@ else:
 
     with col7:
         st.write("### 🏛️ PG Fee - Bar Chart")
-        filtered_pg_data=filtered_data[filtered_data['PG Fee (Scaled)']>=pg_fee_scaled]
+        filtered_pg_data=filtered_data[filtered_data['PG Fee (scaled)']>=pg_fee_scaled]
         if filtered_fee_data.empty:
             st.warning("⚠ No colleges found with this UG Fee.")
         else:
