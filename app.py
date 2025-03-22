@@ -19,6 +19,7 @@ with open('training_model.pkl', 'rb') as file:
 
 # Load Data
 data = pd.read_csv('cleaned_data.csv')
+filtered_data = data.copy() 
 
 # App Mode Selection
 mode = st.sidebar.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
