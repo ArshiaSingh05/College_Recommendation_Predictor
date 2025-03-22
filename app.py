@@ -237,6 +237,7 @@ else:
     col7, col8 = st.columns(2)
 
     with col7:
+        st.write("Columns in filtered_data:", filtered_data.columns)
         st.write("### 🏛️ PG Fee - Bar Chart")
         filtered_pg_data=filtered_data[filtered_data['PG Fee (scaled)']>=pg_fee_scaled]
         if filtered_fee_data.empty:
