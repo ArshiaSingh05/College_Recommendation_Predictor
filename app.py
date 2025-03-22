@@ -102,6 +102,7 @@ else:
 
     with col1:
         st.markdown("### 📊 Average Rating - Bar Chart")
+        st.write(filtered_data["Average Rating"].describe())
         # Filter data based on selected Average Rating
         filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating]
         # Bar chart with all matching colleges
@@ -118,7 +119,7 @@ else:
             sns.barplot(x="College Name", y="Average Rating", data=filtered_rating_data, ax=ax)
 
             # Rotate x-axis labels for readability
-            if len(filtered_rating_data) > 10:  
+            if len(filtered_rating_data) > 30:  
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
             #ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=9)
             plt.xlabel("College Name")
