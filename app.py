@@ -52,17 +52,6 @@ else:
     )
     plt.style.use("default")
 
-with st.expander("⚙️ Filters", expanded=True):  # Corrected indentation
-        # Dropdown for selecting the stream of college
-        selected_stream = st.selectbox(
-            "Select Stream", 
-            ["All", "Engineering", "Management", "Science", "Commerce", "Hotel-management", "Agriculture","Medical","Pharmacy","Law"]
-        )
-
-        # Filter data based on selected stream (assuming 'Stream' column exists)
-        if selected_stream != "All":
-            filtered_data = filtered_data[filtered_data["Stream"] == selected_stream]
-
 # Collapsible Sidebar for User Input
 with st.sidebar:
     # Sidebar UI with Sliders instead of Buttons
