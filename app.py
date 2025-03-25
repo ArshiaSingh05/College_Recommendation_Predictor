@@ -75,7 +75,7 @@ with st.sidebar:
 
     # **Graph & Area Selection**
     selected_area = st.selectbox("Select Area", ['All']+sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
-
+    selected_stream = st.selectbox("Select Stream", ['All']+sorted(data['Stream'].str.strip().str.title().fillna('Unknown').unique().tolist()))
     # **Prediction Button**
     if st.button("Predict"):
         if all(val >= 0 for val in [average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]):
