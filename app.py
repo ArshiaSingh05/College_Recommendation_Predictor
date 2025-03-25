@@ -110,51 +110,46 @@ else:
 
     with col1:
         st.markdown("### 📊 Average Rating - Bar Chart")
-        # Filter data based on selected Average Rating
-        filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating]
-        st.write("Filtered Rating Data Preview:", filtered_rating_data)
-        # Bar chart with all matching colleges
+        filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating].copy()
+        filtered_rating_data = filtered_rating_data.dropna(subset=["Average Rating", "College Name"])
+        st.write(f"🔍 Number of colleges after filtering: {len(filtered_rating_data)}")
+        st.write("Filtered Data Preview:", filtered_rating_data)
         if filtered_rating_data.empty:
-            st.warning("No colleges found with this Average Rating.")
+            st.warning("⚠️ No colleges found with this Average Rating.")
         else:
-            # Dynamically adjust figure size based on the number of colleges
             num_colleges = len(filtered_rating_data)
-            fig_width = max(12, min(25, num_colleges * 0.4))  # Ensures it doesn't get too large
-            fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
-            # Create figure
+            fig_width = max(12, min(25, num_colleges * 0.4))
+            fig_height = 6 if num_colleges <= 20 else 8
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             sns.barplot(x="College Name", y="Average Rating", data=filtered_rating_data, ax=ax)
-            # Rotate x-axis labels for readability
-            if len(filtered_rating_data) > 10:  
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
-            #ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=9)
-            plt.xlabel("College Name")
-            plt.ylabel("Average Rating")
-            plt.title("Average Rating - Bar Chart")
-            st.pyplot(plt)
+            ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=9)
+            ax.set_xlabel("College Name")
+            ax.set_ylabel("Average Rating")
+            ax.set_title("Average Rating - Bar Chart")
+            st.pyplot(fig)
 
-    with col2:
-        st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
-        # Group by College Name and take the highest Average Rating per college
-        unique_colleges = (
-            filtered_rating_data.groupby("College Name")["Average Rating"]
-            .max()  # Take the highest rating for each college
-            .reset_index()
-        )
-        # Sort and select top 10 unique colleges
-        top_10_colleges = unique_colleges.sort_values(by="Average Rating", ascending=False).head(10)
-        # Create pie chart
-        fig, ax = plt.subplots(figsize=(8, 8))
-        ax.pie(
-            top_10_colleges["Average Rating"],
-            labels=top_10_colleges["College Name"],
-            autopct="%1.1f%%",
-            startangle=140,
-            wedgeprops={"linewidth": 1, "edgecolor": "black"},
-            textprops={"fontsize": 10},
-        )
-        plt.title("Top 10 Colleges - Pie Chart", fontsize=14)
-        st.pyplot(fig)
+        with col2:
+            st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
+            # Group by College Name and take the highest Average Rating per college
+            unique_colleges = (
+                filtered_rating_data.groupby("College Name")["Average Rating"]
+                .max()  # Take the highest rating for each college
+                .reset_index()
+            )
+            # Sort and select top 10 unique colleges
+            top_10_colleges = unique_colleges.sort_values(by="Average Rating", ascending=False).head(10)
+            # Create pie chart
+            fig, ax = plt.subplots(figsize=(8, 8))
+            ax.pie(
+                top_10_colleges["Average Rating"],
+                labels=top_10_colleges["College Name"],
+                autopct="%1.1f%%",
+                startangle=140,
+                wedgeprops={"linewidth": 1, "edgecolor": "black"},
+                textprops={"fontsize": 10},
+            )
+            plt.title("Top 10 Colleges - Pie Chart", fontsize=14)
+            st.pyplot(fig)
 
 
     # Create columns for Placement vs Fee Ratio
