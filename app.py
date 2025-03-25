@@ -85,8 +85,11 @@ st.subheader("Explore Colleges by Area and Desired Stream")
 st.write(f"Selected Area: {selected_area}")
 st.write(f"Selected Stream: {selected_stream}")
 
-# **Filter Data by Selected Area**
-filtered_data =data[(data['State'] == selected_area)&(data['Stream'] == selected_stream)]
+# **Filter Data by Selected Area and Stream**
+if selected_stream == "All":
+    filtered_data = data[data['State'] == selected_area] 
+else:
+    filtered_data = data[(data['State'] == selected_area) & (data['Stream'] == selected_stream)] 
 
 # **Check if filtered_data is empty**
 if filtered_data.empty:
