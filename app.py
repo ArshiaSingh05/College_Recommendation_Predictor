@@ -92,11 +92,13 @@ else:
     st.subheader(f"📍 Colleges in {selected_area}")
 
 # Display Selected Values
-st.subheader("Explore Colleges by Area")
+st.subheader("Explore Colleges by Area and Desired Stream")
 st.write(f"Selected Area: {selected_area}")
+st.write(f"Selected Stream: {selected_stream}")
 
 # **Filter Data by Selected Area**
 filtered_data = data[data['State'] == selected_area]
+filtered_data = data[data['Stream'] == selected_stream]
 
 # **Check if filtered_data is empty**
 if filtered_data.empty:
