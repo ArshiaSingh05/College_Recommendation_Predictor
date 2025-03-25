@@ -97,7 +97,7 @@ st.write(f"Selected Area: {selected_area}")
 st.write(f"Selected Stream: {selected_stream}")
 
 # **Filter Data by Selected Area**
-filtered_data = (data[data['State'] == selected_area])&(data[data['Stream'] == selected_stream])
+filtered_data =data[(data['State'] == selected_area)&(data['Stream'] == selected_stream)]
 
 # **Check if filtered_data is empty**
 if filtered_data.empty:
