@@ -263,7 +263,7 @@ else:
             ax.set_ylabel("PG Fee (Scaled)", fontsize=12)
             ax.set_title("PG Fee - Bar Chart", fontsize=16)
             if num_colleges > 10:
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha="center", fontsize=9)
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right", fontsize=9, wrap=True)
             # Display the plot in Streamlit
             st.pyplot(fig)
 
