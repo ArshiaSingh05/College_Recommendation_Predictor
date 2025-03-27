@@ -109,7 +109,7 @@ else:
         filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating].copy()
         filtered_rating_data = filtered_rating_data.dropna(subset=["Average Rating", "College Name"])
         st.write(f"🔍 Number of colleges after filtering: {len(filtered_rating_data)}")
-        st.write("Filtered Data Preview:", filtered_rating_data)
+        st.write("Filtered Data Preview:", filtered_data)
         if filtered_rating_data.empty:
             st.warning("⚠️ No colleges found with this Average Rating.")
         else:
@@ -226,7 +226,7 @@ else:
             sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax, color="steelblue")
             # Rotate x-axis labels for readability
             ax.set_xlabel("College Name", fontsize=12)
-            ax.set_ylabel("UG Fee (Scaled)", fontsize=12)
+            ax.set_ylabel("UG Fee", fontsize=12)
             ax.set_title("UG Fee - Bar Chart", fontsize=16)
             if num_colleges > 10:
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right", fontsize=9)
