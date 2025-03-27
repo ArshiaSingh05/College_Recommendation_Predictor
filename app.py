@@ -70,9 +70,9 @@ with st.sidebar:
     selected_stream = st.selectbox("Select Stream", ['All']+sorted(data['Stream'].str.strip().str.title().fillna('Unknown').unique().tolist()))
     # **Prediction Button**
     if st.button("Predict"):
-        if all(val >= 0 for val in [average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]):
-            input_data = [[average_rating, placement_vs_fee_ratio, ug_fee_scaled, pg_fee_scaled]]
-            prediction = model.predict(pd.DataFrame(input_data, columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)']))[0]
+        if all(val >= 0 for val in [average_rating, placement_vs_fee_ratio, ug_fee_range, pg_fee_range]):
+            input_data = [[average_rating, placement_vs_fee_ratio, ug_fee_range, pg_fee_range]]
+            prediction = model.predict(pd.DataFrame(input_data, columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee']))[0]
             st.success(f"The predicted college category is: **{prediction}**")
         else:
             st.warning("Please adjust the sliders to provide valid input values.")
