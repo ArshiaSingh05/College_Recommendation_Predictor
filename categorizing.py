@@ -32,10 +32,6 @@ data['Average Rating'] = data[rating_cols].mean(axis=1)
 data['Placement vs Fee Ratio'] = data['Placement (Rating)'] / (data['UG fee (tuition fee)'] + 1)
 
 # Normalizing UG and PG fees
-scaler = MinMaxScaler()
-data[['UG fee (scaled)', 'PG fee (scaled)']] = scaler.fit_transform(data[['UG fee (tuition fee)', 'PG fee']])
-
-print(data[['Average Rating', 'Placement vs Fee Ratio', 'UG fee (scaled)', 'PG fee (scaled)']].head())
 
 data.to_csv('cleaned_data.csv', index=False)
 

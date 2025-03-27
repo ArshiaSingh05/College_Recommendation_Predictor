@@ -59,8 +59,10 @@ with st.sidebar:
 
     average_rating = st.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
     placement_vs_fee_ratio = st.slider("Placement vs Fee Ratio", min_value=0.0, max_value=1.0, value=0.0, step=0.01)
-    ug_fee_scaled = st.slider("UG Fee (Scaled)", min_value=0.0, max_value=5.0, value=0.0, step=0.1)
-    pg_fee_scaled = st.slider("PG Fee (Scaled)", min_value=0.0, max_value=5.0, value=0.0, step=0.1)
+    ug_fee_min, ug_fee_max = int(data["UG fee (tuition fee)"].min()), int(data["UG fee (tuition fee)"].max())
+    pg_fee_min, pg_fee_max = int(data["PG fee"].min()), int(data["PG fee"].max())
+    ug_fee_selected = st.slider("UG Fee Range", min_value=ug_fee_min, max_value=ug_fee_max, value=(ug_fee_min, ug_fee_max))
+    pg_fee_selected = st.slider("PG Fee Range", min_value=pg_fee_min, max_value=pg_fee_max, value=(pg_fee_min, pg_fee_max))
 
     # **Graph & Area Selection**
     selected_area = st.selectbox("Select Area", ['All']+sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
@@ -206,7 +208,12 @@ else:
     with col5:
         st.markdown("### 💰 UG Fee - Bar Chart")
         # Filter data based on UG fee (scaled)
-        filtered_fee_data = filtered_data[filtered_data["UG fee (scaled)"] >= ug_fee_scaled]
+        filtered_data = filtered_data[
+            (filtered_data["UG fee (tuition fee)"] >= ug_fee_selected[0]) & 
+            (filtered_data["UG fee (tuition fee)"] <= ug_fee_selected[1]) &
+            (filtered_data["PG fee"] >= pg_fee_selected[0]) & 
+            (filtered_data["PG fee"] <= pg_fee_selected[1])
+        ]
         # Check if data is available
         if filtered_fee_data.empty:
             st.warning("⚠ No colleges found with this UG Fee.")
