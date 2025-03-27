@@ -210,9 +210,7 @@ else:
         # Filter data based on UG fee (scaled)
         filtered_fee_data = filtered_data[
             (filtered_data["UG fee (tuition fee)"] >= ug_fee_selected[0]) & 
-            (filtered_data["UG fee (tuition fee)"] <= ug_fee_selected[1]) &
-            (filtered_data["PG fee"] >= pg_fee_selected[0]) & 
-            (filtered_data["PG fee"] <= pg_fee_selected[1])
+            (filtered_data["UG fee (tuition fee)"] <= ug_fee_selected[1])
         ]
         # Check if data is available
         if filtered_fee_data.empty:
@@ -253,7 +251,10 @@ else:
 
     with col7:
         st.write("### 🏛️ PG Fee - Bar Chart")
-        filtered_pg_data=filtered_data[filtered_data['PG fee (scaled)']>=pg_fee_scaled]
+        filtered_pg_data=filtered_data[
+            (filtered_data["PG fee"] >= pg_fee_selected[0]) & 
+            (filtered_data["PG fee"] <= pg_fee_selected[1])
+        ]
         filtered_pg_data = filtered_pg_data.nlargest(40, "PG fee (scaled)")
         if filtered_pg_data.empty:
             st.warning("⚠ No colleges found with this UG Fee.")
