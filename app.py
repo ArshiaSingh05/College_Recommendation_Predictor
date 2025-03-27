@@ -263,7 +263,7 @@ else:
             # Dynamically adjust figure size based on the number of colleges
             num_colleges = len(filtered_fee_data)
             fig_width = max(12, min(25, num_colleges * 0.5))  # Adjusts dynamically based on data
-            fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
+            fig_height = 9 if num_colleges <= 20 else 8  # Adjust height if too many labels
             # Create bar chart
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             sns.barplot(x="College Name", y="PG fee", data=filtered_pg_data, ax=ax, color="steelblue")
