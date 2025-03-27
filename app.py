@@ -261,23 +261,24 @@ else:
             (filtered_data["PG fee"] <= pg_fee_range[1])
         ]
         filtered_pg_data = filtered_pg_data.nlargest(40, "PG fee")
-        if filtered_pg_data.empty:
-            st.warning("⚠ No colleges found with this PG Fee.")
+        if filtered_ratio_data.empty:
+            st.warning("⚠ No colleges found for this Placement vs Fee Ratio.")
         else:
-            num_colleges = len(filtered_pg_data)
-            fig_width = min(20, max(12, num_colleges * 0.5)) 
-            fig_height = 8 
+            num_colleges = len(filtered_ratio_data)
+            fig_width = min(20, max(12, num_colleges * 0.5))  # Dynamic width
+            fig_height = 8  # Fixed height
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-            sns.barplot(x="College Name", y="PG fee", data=filtered_pg_data, ax=ax, color="steelblue")
+            sns.barplot(x="College Name", y="Placement vs Fee Ratio", data=filtered_ratio_data, ax=ax, color="steelblue")
+            # Dynamically adjust x-labels for better readability
             ax.set_xticklabels(
                 [textwrap.fill(label.get_text(), width=15) for label in ax.get_xticklabels()],
-                rotation=45 if num_colleges > 10 else 0, 
+                rotation=30 if num_colleges > 10 else 0, 
                 ha="right" if num_colleges > 10 else "center", 
                 fontsize=9
             )
             ax.set_xlabel("College Name", fontsize=12)
-            ax.set_ylabel("PG Fee", fontsize=12)
-            ax.set_title("PG Fee - Bar Chart", fontsize=16)
+            ax.set_ylabel("Placement vs Fee Ratio", fontsize=12)
+            ax.set_title("Placement vs Fee Ratio - Bar Chart", fontsize=16)
             st.pyplot(fig)
 
     st.markdown("### 📊 Fee Data Table")
