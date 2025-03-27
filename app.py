@@ -224,7 +224,7 @@ else:
             fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
             # Create bar chart
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-            sns.barplot(x="College Name", y="UG fee (scaled)", data=filtered_fee_data, ax=ax, color="steelblue")
+            sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax, color="steelblue")
             # Rotate x-axis labels for readability
             ax.set_xlabel("College Name", fontsize=12)
             ax.set_ylabel("UG Fee (Scaled)", fontsize=12)
@@ -277,12 +277,12 @@ else:
     with col8:
         st.write("### 🏛️ PG Fee - Box Plot")
         plt.figure(figsize=(8, 5))
-        sns.boxplot(y=filtered_data['PG fee (scaled)'])
+        sns.boxplot(y=filtered_fee_data['PG fee'])
         plt.ylabel("PG Fee")
         st.pyplot(plt)
 
     st.markdown("### 📊 Fee Data Table")
-    st.write(filtered_data[["College Name", "UG fee (scaled)", "PG fee (scaled)", "Average Rating", "Placement vs Fee Ratio"]].head(20))
+    st.write(filtered_data[["College Name", "UG fee (tuition fee)", "PG fee", "Average Rating", "Placement vs Fee Ratio"]].head(20))
     col9, col10=st.columns(2)
     with col9:
         st.write("Columns in filtered_data:", filtered_data.columns)
