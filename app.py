@@ -208,7 +208,7 @@ else:
     with col5:
         st.markdown("### 💰 UG Fee - Bar Chart")
         # Filter data based on UG fee (scaled)
-        filtered_data = filtered_data[
+        filtered_fee_data = filtered_data[
             (filtered_data["UG fee (tuition fee)"] >= ug_fee_selected[0]) & 
             (filtered_data["UG fee (tuition fee)"] <= ug_fee_selected[1]) &
             (filtered_data["PG fee"] >= pg_fee_selected[0]) & 
