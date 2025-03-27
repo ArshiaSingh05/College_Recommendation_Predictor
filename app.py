@@ -59,10 +59,11 @@ with st.sidebar:
 
     average_rating = st.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
     placement_vs_fee_ratio = st.slider("Placement vs Fee Ratio", min_value=0.0, max_value=1.0, value=0.0, step=0.01)
-    ug_fee_min, ug_fee_max = int(data["UG fee (tuition fee)"].min()), int(data["UG fee (tuition fee)"].max())
-    pg_fee_min, pg_fee_max = int(data["PG fee"].min()), int(data["PG fee"].max())
-    ug_fee_selected = st.slider("UG Fee Range", min_value=ug_fee_min, max_value=ug_fee_max, value=(ug_fee_min, ug_fee_max))
-    pg_fee_selected = st.slider("PG Fee Range", min_value=pg_fee_min, max_value=pg_fee_max, value=(pg_fee_min, pg_fee_max))
+    min_ug_fee, max_ug_fee = data['UG fee (tuition fee)'].min(), data['UG fee (tuition fee)'].max()
+    min_pg_fee, max_pg_fee = data['PG fee'].min(), data['PG fee'].max()
+    ug_fee_range = st.slider("UG Fee Range", min_ug_fee, max_ug_fee, (min_ug_fee, max_ug_fee))
+    pg_fee_range = st.slider("PG Fee Range", min_pg_fee, max_pg_fee, (min_pg_fee, max_pg_fee))
+
 
     # **Graph & Area Selection**
     selected_area = st.selectbox("Select Area", ['All']+sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
@@ -209,8 +210,8 @@ else:
         st.markdown("### 💰 UG Fee - Bar Chart")
         # Filter data based on UG fee (scaled)
         filtered_fee_data = filtered_data[
-            (filtered_data["UG fee (tuition fee)"] >= ug_fee_selected[0]) & 
-            (filtered_data["UG fee (tuition fee)"] <= ug_fee_selected[1])
+            (filtered_data["UG fee (tuition fee)"] >= ug_fee_range[0]) & 
+            (filtered_data["UG fee (tuition fee)"] <= ug_fee_range[1])
         ]
         # Check if data is available
         if filtered_fee_data.empty:
@@ -228,7 +229,7 @@ else:
             ax.set_ylabel("UG Fee (Scaled)", fontsize=12)
             ax.set_title("UG Fee - Bar Chart", fontsize=16)
             if num_colleges > 10:
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right", fontsize=9)
             # Display the plot in Streamlit
             st.pyplot(fig)
 
@@ -252,10 +253,10 @@ else:
     with col7:
         st.write("### 🏛️ PG Fee - Bar Chart")
         filtered_pg_data=filtered_data[
-            (filtered_data["PG fee"] >= pg_fee_selected[0]) & 
-            (filtered_data["PG fee"] <= pg_fee_selected[1])
+            (filtered_data["PG fee"] >= pg_fee_range[0]) & 
+            (filtered_data["PG fee"] <= pg_fee_range[1])
         ]
-        filtered_pg_data = filtered_pg_data.nlargest(40, "PG fee (scaled)")
+        filtered_pg_data = filtered_pg_data.nlargest(40, "PG fee")
         if filtered_pg_data.empty:
             st.warning("⚠ No colleges found with this UG Fee.")
         else:
@@ -265,10 +266,10 @@ else:
             fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
             # Create bar chart
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-            sns.barplot(x="College Name", y="PG fee (scaled)", data=filtered_pg_data, ax=ax, color="steelblue")
+            sns.barplot(x="College Name", y="PG fee", data=filtered_pg_data, ax=ax, color="steelblue")
             # Rotate x-axis labels for readability
             ax.set_xlabel("College Name", fontsize=12)
-            ax.set_ylabel("PG Fee (Scaled)", fontsize=12)
+            ax.set_ylabel("PG Fee", fontsize=12)
             ax.set_title("PG Fee - Bar Chart", fontsize=16)
             if num_colleges > 10:
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right", fontsize=9, wrap=True)
