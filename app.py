@@ -6,6 +6,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FixedLocator
 import pathlib
+import textwrap
 
 # Set page config first
 st.set_page_config(page_title="College Recommendation", layout="wide", initial_sidebar_state="collapsed")
@@ -208,29 +209,24 @@ else:
 
     with col5:
         st.markdown("### 💰 UG Fee - Bar Chart")
-        # Filter data based on UG fee (scaled)
         filtered_fee_data = filtered_data[
             (filtered_data["UG fee (tuition fee)"] >= ug_fee_range[0]) & 
             (filtered_data["UG fee (tuition fee)"] <= ug_fee_range[1])
         ]
-        # Check if data is available
         if filtered_fee_data.empty:
             st.warning("⚠ No colleges found with this UG Fee.")
         else:
-            # Dynamically adjust figure size based on the number of colleges
             num_colleges = len(filtered_fee_data)
-            fig_width = max(12, min(25, num_colleges * 0.4))  # Adjusts dynamically based on data
-            fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
-            # Create bar chart
+            fig_width = min(20, max(12, num_colleges * 0.5))  # Keeps within reasonable limits
+            fig_height = 8  # Fixed height
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax, color="steelblue")
-            # Rotate x-axis labels for readability
+            # Wrap labels dynamically
+            ax.set_xticklabels([textwrap.fill(label.get_text(), width=15) for label in ax.get_xticklabels()], 
+                            rotation=45 if num_colleges > 10 else 0, ha="right" if num_colleges > 10 else "center", fontsize=9)
             ax.set_xlabel("College Name", fontsize=12)
             ax.set_ylabel("UG Fee", fontsize=12)
             ax.set_title("UG Fee - Bar Chart", fontsize=16)
-            if num_colleges > 10:
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right", fontsize=9)
-            # Display the plot in Streamlit
             st.pyplot(fig)
 
     with col6:
