@@ -256,36 +256,29 @@ else:
 
     with col7:
         st.write("### 🏛️ PG Fee - Bar Chart")
-        filtered_pg_data=filtered_data[
+        filtered_pg_data = filtered_data[
             (filtered_data["PG fee"] >= pg_fee_range[0]) & 
             (filtered_data["PG fee"] <= pg_fee_range[1])
         ]
         filtered_pg_data = filtered_pg_data.nlargest(40, "PG fee")
         if filtered_pg_data.empty:
-            st.warning("⚠ No colleges found with this UG Fee.")
+            st.warning("⚠ No colleges found with this PG Fee.")
         else:
-            # Dynamically adjust figure size based on the number of colleges
-            num_colleges = len(filtered_fee_data)
-            fig_width = max(12, min(25, num_colleges * 0.5))  # Adjusts dynamically based on data
-            fig_height = 9 if num_colleges <= 20 else 8  # Adjust height if too many labels
-            # Create bar chart
+            num_colleges = len(filtered_pg_data)
+            fig_width = min(20, max(12, num_colleges * 0.5)) 
+            fig_height = 8 
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             sns.barplot(x="College Name", y="PG fee", data=filtered_pg_data, ax=ax, color="steelblue")
-            # Rotate x-axis labels for readability
+            ax.set_xticklabels(
+                [textwrap.fill(label.get_text(), width=15) for label in ax.get_xticklabels()],
+                rotation=45 if num_colleges > 10 else 0, 
+                ha="right" if num_colleges > 10 else "center", 
+                fontsize=9
+            )
             ax.set_xlabel("College Name", fontsize=12)
             ax.set_ylabel("PG Fee", fontsize=12)
             ax.set_title("PG Fee - Bar Chart", fontsize=16)
-            if num_colleges > 10:
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right", fontsize=9, wrap=True)
-            # Display the plot in Streamlit
             st.pyplot(fig)
-
-    with col8:
-        st.write("### 🏛️ PG Fee - Box Plot")
-        plt.figure(figsize=(8, 5))
-        sns.boxplot(y=filtered_fee_data['PG fee'])
-        plt.ylabel("PG Fee")
-        st.pyplot(plt)
 
     st.markdown("### 📊 Fee Data Table")
     st.write(filtered_data[["College Name", "UG fee (tuition fee)", "PG fee", "Average Rating", "Placement vs Fee Ratio"]].head(20))
