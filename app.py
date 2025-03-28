@@ -242,31 +242,23 @@ st.sidebar.markdown(
     """, unsafe_allow_html=True
 )
 
-
 if filtered_data.empty:
     st.warning(f"No data available for {selected_area}. Try selecting a different area from the side bar.")
 else:
     st.subheader(f"📍 Colleges in {selected_area}")
 
-# Display Selected Values
 st.subheader("Explore Colleges by Area and Desired Stream")
 st.write(f"Selected Area: {selected_area}")
 st.write(f"Selected Stream: {selected_stream}")
 
-# **Filter Data by Selected Area and Stream**
 if selected_stream == "All":
     filtered_data = data[data['State'] == selected_area] 
 else:
     filtered_data = data[(data['State'] == selected_area) & (data['Stream'] == selected_stream)] 
-
-# **Check if filtered_data is empty**
 if filtered_data.empty:
     st.warning(f"No data available for {selected_area}. Try selecting a different area.")
 else:
-    # **Graphs for Selected Area**
     st.write(f"### Colleges in {selected_area}")
-
-    # Create columns for Average Rating Comparison
     col1, col2 = st.columns(2)
 
     with col1:
@@ -388,9 +380,9 @@ else:
             sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax, color="steelblue")
             if num_colleges > 10:
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
-            ax.set_xlabel("College Name")
-            ax.set_ylabel("UG Fee")
-            ax.set_title("UG Fee - Bar Chart")
+            plt.xlabel("College Name")
+            plt.ylabel("UG Fee")
+            plt.title("UG Fee - Bar Chart")
             st.pyplot(fig)
 
     with col6:
