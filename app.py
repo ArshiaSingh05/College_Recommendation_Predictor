@@ -14,7 +14,7 @@ st.title("🎓 College Recommendation Project")
 st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
 
 # Loading trained model
-with open('training_model.pkl', 'rb') as file:
+with open('trained_model.pkl', 'rb') as file:
     model = pickle.load(file)
 
 # Loading Data
@@ -191,12 +191,16 @@ with st.sidebar:
                 (ug_fee_range[0] + ug_fee_range[1]) / 2, 
                 (pg_fee_range[0] + pg_fee_range[1]) / 2
             ]]
+            category_mapping = {0: "Poor", 1: "Average", 2: "Good", 3: "Excellent"}
             prediction = model.predict(pd.DataFrame(
                 input_data, 
                 columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee']
             ))[0]
-            st.write(prediction)
-            st.success(f"The predicted college category is: **{prediction}**")
+            if 'category_mapping' in locals():
+                predicted_category = category_mapping.get(prediction, "Unknown")
+                st.success(f"📢 The predicted college category is: **{predicted_category}**")
+            else:
+                st.success(f"📢 The predicted college category is: **{prediction}**")
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
 
