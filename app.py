@@ -96,31 +96,39 @@ st.markdown(
     <style>
         .custom-box {
             padding: 15px;
-            border-radius: 10px;
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), inset 2px 2px 5px rgba(255, 255, 255, 0.2);
             margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
         .about-box {
-            background: linear-gradient(135deg, #f0f8ff, #dceeff);
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         .handles-box {
-            background: linear-gradient(135deg, #fff5cc, #ffe599);
+            background: linear-gradient(135deg, #ff9a9e, #ff6a88);
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         .projects-box {
-            background: linear-gradient(135deg, #e6ffe6, #ccffcc);
+            background: linear-gradient(135deg, #96c93d, #00b09b);
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         h3 {
             margin-bottom: 10px;
-            color: #333;
             font-size: 18px;
         }
         a {
             text-decoration: none;
             font-weight: bold;
-            color: #0073e6;
+            color: white;
         }
         a:hover {
             text-decoration: underline;
+            color: #ffd700;
         }
     </style>
     """, unsafe_allow_html=True
@@ -158,6 +166,7 @@ st.sidebar.markdown(
     </div>
     """, unsafe_allow_html=True
 )
+
 
 if filtered_data.empty:
     st.warning(f"No data available for {selected_area}. Try selecting a different area from the side bar.")
