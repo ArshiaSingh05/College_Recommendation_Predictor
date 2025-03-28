@@ -118,17 +118,17 @@ else:
         }
         .about-box {
             background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
-            color: white;
+            color: black;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         .handles-box {
             background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
-            color: white;
+            color: black;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         .projects-box {
             background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
-            color: white;
+            color: black;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         h3 {
