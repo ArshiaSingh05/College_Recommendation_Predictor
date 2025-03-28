@@ -226,7 +226,8 @@ with st.sidebar:
                 max_college_rating = max_rating_college['Average Rating']
                 max_college_state = max_rating_college['State']
                 max_college_stream = max_rating_college['Stream']
-                st.info(f"🏆 **Best College Available in {selected_area} ({selected_stream}):** {max_college_name} ({max_college_state}) with {max_college_rating} Rating")
+                st.warning(f"No colleges found with an Average Rating of {selected_rating} in {selected_area}.\n")
+                st.info(f"🏆 **But Best College Available in {selected_area} ({selected_stream}):** {max_college_name} ({max_college_state}) with {max_college_rating} Rating")
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
 
