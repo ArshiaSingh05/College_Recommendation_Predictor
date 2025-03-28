@@ -52,19 +52,27 @@ if mode == "GitHub Mode":
             .custom-box {
                 background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
                 color: white;
-                border: 1px solid #3a3a3a;
+                padding: 15px;
+                border-radius: 12px;
+                box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), inset 2px 2px 5px rgba(255, 255, 255, 0.2);
+                margin-bottom: 15px;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(10px);
             }
             .about-box {
                 background: linear-gradient(135deg, #0f5726, #1e7e34);
                 color: white;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             }
             .handles-box {
                 background: linear-gradient(135deg, #7b1e1e, #9c2626);
                 color: white;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             }
             .projects-box {
                 background: linear-gradient(135deg, #0e3a63, #1f5b93);
                 color: white;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             }
                                                  /* FOOTER */
             .footer {
