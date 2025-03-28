@@ -35,7 +35,21 @@ if mode == "GitHub Mode":
             h1, h2, h3, h4, h5, h6, p, label { color: white; }
             input, textarea { background-color: #333; color: white; }
             select { background-color: #222; color: white; }
-            button { background-color: #333; color: white; border: 1px solid white;h1, h2, h3, h4, h5, h6, p, label { color: black; } }
+            button { background-color: #333; color: white; border: 1px solid white; }
+            .custom-box {
+                background: linear-gradient(135deg, #0a0a0a, #1e1e1e);
+                color: white;
+                border: 1px solid #3a3a3a;
+            }
+            .about-box {
+                background: linear-gradient(135deg, #2e7d32, #388e3c);
+            }
+            .handles-box {
+                background: linear-gradient(135deg, #d32f2f, #c62828);
+            }
+            .projects-box {
+                background: linear-gradient(135deg, #1565c0, #1e88e5);
+            }
         </style>
         """,
         unsafe_allow_html=True
