@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle  # For loading the trained model
+import pickle
 import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FixedLocator
@@ -195,11 +195,10 @@ with st.sidebar:
                 input_data, 
                 columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee']
             ))[0]
+            st.write(prediction)
             st.success(f"The predicted college category is: **{prediction}**")
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
-            
-st.write(prediction)
 
 st.sidebar.title("👤 My Profile")
 # About Me
