@@ -206,10 +206,7 @@ with st.sidebar:
             st.success(f"📢 The predicted college category is: **{predicted_category}**")
             # Get the exact selected average rating
             selected_rating = input_data[0][0]
-            if selected_area != 'All':
-                filtered_by_area = filtered_data[filtered_data['State'].str.lower().str.strip() == selected_area.lower().strip()]
-            else:
-                filtered_by_area = filtered_data
+            filtered_by_area = filtered_data[filtered_data['State'].str.lower().str.strip() == selected_area.lower().strip()]
             matching_colleges = filtered_data[filtered_data['Average Rating'] == selected_rating]
             if not matching_colleges.empty:
                 best_college = matching_colleges.loc[matching_colleges['Placement vs Fee Ratio'].idxmax()]
