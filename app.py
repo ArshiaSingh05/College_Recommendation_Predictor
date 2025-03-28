@@ -194,7 +194,7 @@ with st.sidebar:
                 (pg_fee_range[0] + pg_fee_range[1]) / 2
             ]]
             input_df = pd.DataFrame(input_data, columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee'])
-            prediction = model.predict(input_df)
+            prediction = model.prediction(input_df)
             prediction = int(round(prediction)) 
             predicted_category = category_mapping.get(prediction, "Unknown")
             st.success(f"📢 The predicted college category is: **{predicted_category}**")
