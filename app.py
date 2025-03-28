@@ -259,8 +259,8 @@ else:
             fig_width = max(12, min(25, num_colleges * 0.4))  
             fig_height = 6 if num_colleges <= 20 else 8  
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-            filtered_pg_fee_data = filtered_pg_fee_data.sort_values("PG fee (tuition fee)", ascending=False)
-            sns.barplot(x="College Name", y="PG fee (tuition fee)", data=filtered_pg_fee_data, ax=ax, color="steelblue")
+            filtered_pg_fee_data = filtered_pg_fee_data.sort_values("PG fee", ascending=False)
+            sns.barplot(x="College Name", y="PG fee", data=filtered_pg_fee_data, ax=ax, color="steelblue")
             if num_colleges > 10:
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
             ax.set_xlabel("College Name")
