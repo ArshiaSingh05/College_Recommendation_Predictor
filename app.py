@@ -179,7 +179,7 @@ with st.sidebar:
     pg_fee_range = st.slider("PG Fee Range", min_pg_fee, max_pg_fee, (min_pg_fee, max_pg_fee))
     selected_area = st.selectbox("Select Area", ['All'] + sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
     selected_stream = st.selectbox("Select Stream", ['All'] + sorted(data['Stream'].str.strip().str.title().fillna('Unknown').unique().tolist()))
-    
+
     # Predict button
     if st.button("Predict"):
         if all(isinstance(val, (int, float)) and val >= 0 for val in [
@@ -194,7 +194,7 @@ with st.sidebar:
                 (pg_fee_range[0] + pg_fee_range[1]) / 2
             ]]
             input_df = pd.DataFrame(input_data, columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee'])
-            prediction = model.predict(input_df)[0]  
+            prediction = model.predict(input_df)
             prediction = int(round(prediction)) 
             predicted_category = category_mapping.get(prediction, "Unknown")
             st.success(f"📢 The predicted college category is: **{predicted_category}**")
