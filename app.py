@@ -210,6 +210,10 @@ with st.sidebar:
                 filtered_by_area = filtered_data[filtered_data['State'].str.strip().str.lower() == selected_area.strip().lower()]
             else:
                 filtered_by_area = filtered_data
+            if selected_stream != 'All':
+                filtered_by_area = filtered_by_area[filtered_by_area['Stream'].str.strip().str.lower() == selected_stream.strip().lower()]
+            else:
+                filtered_by_area=filtered_data
             matching_colleges = filtered_by_area[filtered_by_area['Average Rating'] == selected_rating]
             if not matching_colleges.empty:
                 # Find the best college in selected area based on Placement vs Fee Ratio
