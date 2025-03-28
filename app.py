@@ -249,8 +249,8 @@ else:
     with col7:
         st.markdown("### 🏛 PG Fee - Bar Chart")
         filtered_pg_fee_data = filtered_data[
-            (filtered_data["PG fee (tuition fee)"] >= pg_fee_range[0]) & 
-            (filtered_data["PG fee (tuition fee)"] <= pg_fee_range[1])
+            (filtered_data["PG fee"] >= pg_fee_range[0]) & 
+            (filtered_data["PG fee"] <= pg_fee_range[1])
         ]
         if filtered_pg_fee_data.empty:
             st.warning("⚠ No colleges found with this PG Fee.")
