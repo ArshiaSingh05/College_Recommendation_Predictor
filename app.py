@@ -103,7 +103,7 @@ st.markdown(
             backdrop-filter: blur(10px);
         }
         .about-box {
-            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
             color: white;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
