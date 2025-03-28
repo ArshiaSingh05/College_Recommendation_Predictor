@@ -150,7 +150,7 @@ else:
             left: 0;
             bottom: 0;
             width: 100%;
-            background: linear-gradient(to right, white, #90EE90);
+            background: linear-gradient(to right, white, #7EC8E3);
             color: #6c757d;
             font-size: 14px;
             padding: 15px;
