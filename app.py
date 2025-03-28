@@ -66,7 +66,7 @@ if mode == "GitHub Mode":
                 background: linear-gradient(135deg, #0e3a63, #1f5b93);
                 color: white;
             }
-                                                 // FOOTER //
+                                                 /* FOOTER */
             .footer {
                 position: fixed;
                 left: 0;
@@ -78,6 +78,7 @@ if mode == "GitHub Mode":
                 padding: 15px;
                 text-align: right;
                 box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
             }
             .footer a {
                 color: white;
@@ -98,7 +99,7 @@ else:
         """
         <style>
         .stApp { background-color: white; color: black; }
-                                            // ABOUT ME CUSTOMIZATION //
+                                            /* ABOUT ME CUSTOMIZATION */
         .custom-box {
             padding: 15px;
             border-radius: 12px;
@@ -135,7 +136,7 @@ else:
             text-decoration: underline;
             color: #ffd700;
         }
-                                           // FOOTER //
+                                           /* FOOTER */
         .footer {
             position: fixed;
             left: 0;
@@ -145,8 +146,9 @@ else:
             color: #6c757d;
             font-size: 14px;
             padding: 15px;
-            text-align: right;
-            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+               text-align: right;
+                box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
         }
         .footer a {
             color: black;
