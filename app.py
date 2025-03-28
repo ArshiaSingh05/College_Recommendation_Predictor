@@ -213,7 +213,7 @@ with st.sidebar:
             if selected_stream != 'All':
                 filtered_by_area = filtered_by_area[filtered_by_area['Stream'].str.strip().str.lower() == selected_stream.strip().lower()]
             else:
-                filtered_by_area=filtered_data
+                filtered_by_area = filtered_data[filtered_data['State'].str.strip().str.lower() == selected_area.strip().lower()]
             matching_colleges = filtered_by_area[filtered_by_area['Average Rating'] == selected_rating]
             if not matching_colleges.empty:
                 # Find the best college in selected area based on Placement vs Fee Ratio
@@ -264,21 +264,20 @@ st.sidebar.markdown(
     """, unsafe_allow_html=True
 )
 
-if filtered_data.empty:
-    st.warning(f"No data available for {selected_area}. Try selecting a different area from the side bar.")
-else:
-    st.subheader(f"📍 Colleges in {selected_area}")
+st.subheader(f"📍 Colleges in {selected_area}")
 
 st.subheader("Explore Colleges by Area and Desired Stream")
 st.write(f"Selected Area: {selected_area}")
 st.write(f"Selected Stream: {selected_stream}")
-
 if selected_stream == "All":
     filtered_data = data[data['State'] == selected_area] 
 else:
     filtered_data = data[(data['State'] == selected_area) & (data['Stream'] == selected_stream)] 
 if filtered_data.empty:
-    st.warning(f"No data available for {selected_area}. Try selecting a different area.")
+    if selected_stream=="All":
+        st.warning(f"No data available for {selected_area}. Try selecting a different area.")
+    else:
+        st.warning(f"No data available for the selected stream ({selected_stream}). Kindly change the stream.")
 else:
     st.write(f"### Colleges in {selected_area}")
     col1, col2 = st.columns(2)
