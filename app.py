@@ -205,7 +205,7 @@ with st.sidebar:
             predicted_category = category_mapping.get(int(final_prediction[0]), "Unknown")
             st.success(f"📢 The predicted college category is: **{predicted_category}**")
             # Get the exact selected average rating
-            selected_rating = input_data[0]
+            selected_rating = input_data[0][0]
             matching_colleges = filtered_data[filtered_data['Average Rating'] == selected_rating]
             if not matching_colleges.empty:
                 best_college = matching_colleges.loc[matching_colleges['Placement vs Fee Ratio'].idxmax()]
