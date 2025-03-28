@@ -16,6 +16,7 @@ st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
 # Loading trained model
 with open('trained_model.pkl', 'rb') as file:
     model = pickle.load(file)
+print(type(model))
 
 # Loading Data
 data = pd.read_csv('cleaned_data.csv')
@@ -176,9 +177,10 @@ with st.sidebar:
     min_pg_fee, max_pg_fee = data['PG fee'].min(), data['PG fee'].max()
     ug_fee_range = st.slider("UG Fee Range", min_ug_fee, max_ug_fee, (min_ug_fee, max_ug_fee))
     pg_fee_range = st.slider("PG Fee Range", min_pg_fee, max_pg_fee, (min_pg_fee, max_pg_fee))
-    selected_area = st.selectbox("Select Area", ['All']+sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
-    selected_stream = st.selectbox("Select Stream", ['All']+sorted(data['Stream'].str.strip().str.title().fillna('Unknown').unique().tolist()))
-
+    selected_area = st.selectbox("Select Area", ['All'] + sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
+    selected_stream = st.selectbox("Select Stream", ['All'] + sorted(data['Stream'].str.strip().str.title().fillna('Unknown').unique().tolist()))
+    
+    # Predict button
     if st.button("Predict"):
         if all(isinstance(val, (int, float)) and val >= 0 for val in [
             average_rating, placement_vs_fee_ratio, 
@@ -188,19 +190,14 @@ with st.sidebar:
             input_data = [[
                 average_rating, 
                 placement_vs_fee_ratio, 
-                (ug_fee_range[0] + ug_fee_range[1]) / 2, 
+                (ug_fee_range[0] + ug_fee_range[1]) / 2,  
                 (pg_fee_range[0] + pg_fee_range[1]) / 2
             ]]
-            category_mapping = {0: "Poor", 1: "Average", 2: "Good", 3: "Excellent"}
-            prediction = model.predict(pd.DataFrame(
-                input_data, 
-                columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee']
-            ))[0]
-            if 'category_mapping' in locals():
-                predicted_category = category_mapping.get(prediction, "Unknown")
-                st.success(f"📢 The predicted college category is: **{predicted_category}**")
-            else:
-                st.success(f"📢 The predicted college category is: **{prediction}**")
+            input_df = pd.DataFrame(input_data, columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee'])
+            prediction = model.predict(input_df)[0]  
+            prediction = int(round(prediction)) 
+            predicted_category = category_mapping.get(prediction, "Unknown")
+            st.success(f"📢 The predicted college category is: **{predicted_category}**")
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
 
