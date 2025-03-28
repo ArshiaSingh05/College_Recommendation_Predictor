@@ -217,24 +217,24 @@ else:
             st.warning("⚠ No colleges found with this UG Fee.")
         else:
             num_colleges = len(filtered_fee_data)
-            fig_width = min(18, max(10, num_colleges * 0.3))  
-            fig_height = 6 if num_colleges <= 20 else 8  
+            fig_width = min(20, max(12, num_colleges * 0.5))  # Dynamic width
+            fig_height = 8  # Fixed height
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             # Sort colleges by UG Fee for better visualization
             filtered_fee_data = filtered_fee_data.sort_values("UG fee (tuition fee)", ascending=False)
-            # Plot bar chart
-            sns.barplot(y="College Name", x="UG fee (tuition fee)", data=filtered_fee_data, ax=ax, color="steelblue")
-            # Set labels correctly
-            ax.set_xlabel("UG Fee", fontsize=12)
-            ax.set_ylabel("College Name", fontsize=12)
+            # Plot bar chart with vertical bars
+            sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax, color="steelblue")
+            # Adjust x-labels dynamically for better readability
+            ax.set_xticklabels(
+                [textwrap.fill(label.get_text(), width=15) for label in ax.get_xticklabels()],
+                rotation=30 if num_colleges > 10 else 0, 
+                ha="right" if num_colleges > 10 else "center", 
+                fontsize=9
+            )
+            ax.set_xlabel("College Name", fontsize=12)
+            ax.set_ylabel("UG Fee", fontsize=12)
             ax.set_title("UG Fee - Bar Chart", fontsize=16)
-            # Adjust labels dynamically for better readability
-            if num_colleges > 10:
-                ax.set_yticklabels([textwrap.fill(label.get_text(), width=15) for label in ax.get_yticklabels()], 
-                                fontsize=9)
-            else:
-                ax.set_yticklabels(ax.get_yticklabels(), fontsize=10)
-            # Display the plot in Streamlit
+
             st.pyplot(fig)
 
     with col6:
