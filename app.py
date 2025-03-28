@@ -204,6 +204,16 @@ with st.sidebar:
             final_prediction = meta_model.predict(stacked_input)
             predicted_category = category_mapping.get(int(final_prediction[0]), "Unknown")
             st.success(f"📢 The predicted college category is: **{predicted_category}**")
+            # Get the exact selected average rating
+            selected_rating = input_data[0]
+            matching_colleges = filtered_data[filtered_data['Average Rating'] == selected_rating]
+            if not matching_colleges.empty:
+                best_college = matching_colleges.loc[matching_colleges['Placement vs Fee Ratio'].idxmax()]
+                state_wise_best = matching_colleges.groupby('State').apply(lambda x: x.loc[x['Placement vs Fee Ratio'].idxmax()])
+                best_college_name = best_college['College Name']
+                st.info(f"🏆 **Best College with {selected_rating} Rating:** {best_college_name}")
+            else:
+                st.warning(f"No colleges found with an Average Rating of {selected_rating}.")
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
 
