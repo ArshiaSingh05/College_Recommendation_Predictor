@@ -198,7 +198,8 @@ with st.sidebar:
             st.success(f"The predicted college category is: **{prediction}**")
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
-
+            
+st.write(prediction)
 
 st.sidebar.title("👤 My Profile")
 # About Me
