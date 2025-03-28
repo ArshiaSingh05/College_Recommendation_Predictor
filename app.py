@@ -14,9 +14,12 @@ st.title("🎓 College Recommendation Project")
 st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
 
 # Loading trained model
-with open('trained_model.pkl', 'rb') as file:
-    model = pickle.load(file)
-print(type(model))
+with open('random_forest.pkl', 'rb') as file:
+    rf_model = joblib.load(file)
+with open('gradient_boosting.pkl', 'rb') as file:
+    gb_model = joblib.load(file)
+with open('meta_model.pkl', 'rb') as file:
+    meta_model = joblib.load(file)
 
 # Loading Data
 data = pd.read_csv('cleaned_data.csv')
@@ -194,9 +197,11 @@ with st.sidebar:
                 (pg_fee_range[0] + pg_fee_range[1]) / 2
             ]]
             input_df = pd.DataFrame(input_data, columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee'])
-            prediction = model.prediction(input_df)
-            prediction = int(round(prediction)) 
-            predicted_category = category_mapping.get(prediction, "Unknown")
+            rf_pred = rf_model.predict(input_df)
+            gb_pred = gb_model.predict(input_df)
+            stacked_input = pd.DataFrame({"RF_Pred": rf_pred, "GB_Pred": gb_pred})
+            final_prediction = meta_model.predict(stacked_input)
+            predicted_category = category_mapping.get(int(final_prediction[0]), "Unknown")
             st.success(f"📢 The predicted college category is: **{predicted_category}**")
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
