@@ -65,12 +65,12 @@ if mode == "GitHub Mode":
                 text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             }
             .handles-box {
-                background: linear-gradient(135deg, #7b1e1e, #9c2626);
+                background: linear-gradient(135deg, #0f5726, #1e7e34);
                 color: white;
                 text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             }
             .projects-box {
-                background: linear-gradient(135deg, #0e3a63, #1f5b93);
+                background: linear-gradient(135deg, #0f5726, #1e7e34);
                 color: white;
                 text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             }
@@ -122,12 +122,12 @@ else:
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         .handles-box {
-            background: linear-gradient(135deg, #ff9a9e, #ff6a88);
+            background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
             color: white;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         .projects-box {
-            background: linear-gradient(135deg, #96c93d, #00b09b);
+            background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
             color: white;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
@@ -215,7 +215,7 @@ st.sidebar.markdown(
     """
     <div class="custom-box about-box">
         <h3>ABOUT ME</h3>
-        <p><strong>Name:</strong> Your Name</p>
+        <p><strong>Name:</strong> Arshia Singh</p>
         <p><strong>University:</strong> Lovely Professional University</p>
         <p><strong>Field:</strong> Machine Learning & Data Science</p>
         <p>Passionate about solving real-world problems with data and AI! 🚀</p>
@@ -227,9 +227,8 @@ st.sidebar.markdown(
     """
     <div class="custom-box handles-box">
         <h3>MY HANDLES</h3>
-        <p>🔗 <a href="https://github.com/yourgithub" target="_blank">GitHub</a></p>
-        <p>💼 <a href="https://www.linkedin.com/in/yourlinkedin/" target="_blank">LinkedIn</a></p>
-        <p>📊 <a href="https://www.kaggle.com/yourkaggle" target="_blank">Kaggle</a></p>
+        <p>🔗 <a href="https://github.com/ArshiaSingh05" target="_blank">GitHub</a></p>
+        <p>💼 <a href="https://www.linkedin.com/in/arshia05/" target="_blank">LinkedIn</a></p>
     </div>
     """, unsafe_allow_html=True
 )
@@ -238,8 +237,7 @@ st.sidebar.markdown(
     """
     <div class="custom-box projects-box">
         <h3>MY PROJECTS</h3>
-        <p>📌 <a href="https://github.com/yourgithub/project1" target="_blank">Real-Time Process Monitoring</a></p>
-        <p>📌 <a href="https://github.com/yourgithub/project2" target="_blank">College Prediction ML Model</a></p>
+        <p>📌 <a href="https://github.com/ArshiaSingh05/College_Recommendation_Predictor" target="_blank">College Prediction</a></p>
     </div>
     """, unsafe_allow_html=True
 )
