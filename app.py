@@ -35,20 +35,39 @@ if mode == "GitHub Mode":
             h1, h2, h3, h4, h5, h6, p, label { color: white; }
             input, textarea { background-color: #333; color: white; }
             select { background-color: #222; color: white; }
-            button { background-color: #333; color: white; border: 1px solid white; }
+
+            /* Gradient button from black to dark green */
+            button {
+                background: linear-gradient(135deg, black, #006400);
+                color: white;
+                border: 1px solid #008000;
+                padding: 8px 15px;
+                font-weight: bold;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background 0.3s ease-in-out;
+            }
+            button:hover {
+                background: linear-gradient(135deg, #003300, #008000);
+            }
+
+            /* Dark mode custom boxes */
             .custom-box {
-                background: linear-gradient(135deg, #0a0a0a, #1e1e1e);
+                background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
                 color: white;
                 border: 1px solid #3a3a3a;
             }
             .about-box {
-                background: linear-gradient(135deg, #2e7d32, #388e3c);
+                background: linear-gradient(135deg, #0f5726, #1e7e34);
+                color: white;
             }
             .handles-box {
-                background: linear-gradient(135deg, #d32f2f, #c62828);
+                background: linear-gradient(135deg, #7b1e1e, #9c2626);
+                color: white;
             }
             .projects-box {
-                background: linear-gradient(135deg, #1565c0, #1e88e5);
+                background: linear-gradient(135deg, #0e3a63, #1f5b93);
+                color: white;
             }
         </style>
         """,
@@ -61,6 +80,42 @@ else:
         """
         <style>
         .stApp { background-color: white; color: black; }
+        .custom-box {
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), inset 2px 2px 5px rgba(255, 255, 255, 0.2);
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        .about-box {
+            background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .handles-box {
+            background: linear-gradient(135deg, #ff9a9e, #ff6a88);
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .projects-box {
+            background: linear-gradient(135deg, #96c93d, #00b09b);
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #ffd700;
+        }
         </style>
         """,
         unsafe_allow_html=True
@@ -105,48 +160,6 @@ with st.sidebar:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
 
 st.sidebar.title("👤 My Profile")
-st.markdown(
-    """
-    <style>
-        .custom-box {
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), inset 2px 2px 5px rgba(255, 255, 255, 0.2);
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-        .about-box {
-            background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        .handles-box {
-            background: linear-gradient(135deg, #ff9a9e, #ff6a88);
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        .projects-box {
-            background: linear-gradient(135deg, #96c93d, #00b09b);
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        h3 {
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-        a {
-            text-decoration: none;
-            font-weight: bold;
-            color: white;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #ffd700;
-        }
-    </style>
-    """, unsafe_allow_html=True
-)
 # About Me Section
 st.sidebar.markdown(
     """
