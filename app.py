@@ -299,7 +299,7 @@ else:
             st.warning("No colleges match the selected Placement vs Fee Ratio.")
         else:
             num_colleges = len(filtered_ratio_data)
-            fig_width = max(12, min(25, num_colleges * 0.4))
+            fig_width = max(12, min(30, num_colleges * 0.5))
             fig_height = 6 if num_colleges <= 20 else 8 
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             sns.barplot(x="College Name", y="Placement vs Fee Ratio", data=filtered_ratio_data, ax=ax)
@@ -342,7 +342,7 @@ else:
             st.warning("⚠ No colleges found with this UG Fee.")
         else:
             num_colleges = len(filtered_fee_data)
-            fig_width = max(12, min(25, num_colleges * 0.4))
+            fig_width = max(12, min(30, num_colleges * 0.5))
             fig_height = 6 if num_colleges <= 20 else 8  
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             filtered_fee_data = filtered_fee_data.sort_values("UG fee (tuition fee)", ascending=False)
