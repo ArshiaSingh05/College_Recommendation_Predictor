@@ -90,6 +90,40 @@ with st.sidebar:
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
 
+st.sidebar.title("👤 My Profile")
+# About Me Section
+st.sidebar.markdown(
+    """
+    <div style="background-color: #f0f8ff; padding: 10px; border-radius: 10px;">
+        <h3 style="color: #333;">ABOUT ME</h3>
+        <p><strong>Name:</strong> Your Name</p>
+        <p><strong>University:</strong> Lovely Professional University</p>
+        <p><strong>Field:</strong> Machine Learning & Data Science</p>
+        <p>Passionate about solving real-world problems with data and AI! 🚀</p>
+    </div>
+    """, unsafe_allow_html=True
+)
+# My Handles Section
+st.sidebar.markdown(
+    """
+    <div style="background-color: #f5f5dc; padding: 10px; border-radius: 10px;">
+        <h3 style="color: #333;">MY HANDLES</h3>
+        <p>🔗 <a href="https://github.com/yourgithub" target="_blank">GitHub</a></p>
+        <p>💼 <a href="https://www.linkedin.com/in/yourlinkedin/" target="_blank">LinkedIn</a></p>
+        <p>📊 <a href="https://www.kaggle.com/yourkaggle" target="_blank">Kaggle</a></p>
+    </div>
+    """, unsafe_allow_html=True
+)
+# My Projects Section
+st.sidebar.markdown(
+    """
+    <div style="background-color: #e6ffe6; padding: 10px; border-radius: 10px;">
+        <h3 style="color: #333;">MY PROJECTS</h3>
+        <p>📌 <a href="https://github.com/yourgithub/project1" target="_blank">Real-Time Process Monitoring Dashboard</a></p>
+        <p>📌 <a href="https://github.com/yourgithub/project2" target="_blank">College Prediction ML Model</a></p>
+    </div>
+    """, unsafe_allow_html=True
+)
 
 
 if filtered_data.empty:
