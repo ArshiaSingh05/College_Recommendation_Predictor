@@ -8,24 +8,20 @@ from matplotlib.ticker import FixedLocator
 import pathlib
 import textwrap
 
-# Set page config first
 st.set_page_config(page_title="College Recommendation", layout="wide", initial_sidebar_state="collapsed")
 
 st.title("🎓 College Recommendation Project")
 st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
 
-# Load the trained model
+# Loading trained model
 with open('training_model.pkl', 'rb') as file:
     model = pickle.load(file)
 
-# Load Data
+# Loading Data
 data = pd.read_csv('cleaned_data.csv')
 filtered_data = data.copy() 
 
-# App Mode Selection
 mode = st.sidebar.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
-
-# Apply color theme based on mode
 if mode == "GitHub Mode":
     st.markdown(
         """
@@ -172,23 +168,17 @@ else:
     )
     plt.style.use("default")
 
-# Collapsible Sidebar for User Input
-with st.sidebar:
-    # Sidebar UI with Sliders instead of Buttons
+with st.sidebars:
     st.header("Adjust Parameters")
-
     average_rating = st.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
     placement_vs_fee_ratio = st.slider("Placement vs Fee Ratio", min_value=0.0, max_value=1.0, value=0.0, step=0.01)
     min_ug_fee, max_ug_fee = data['UG fee (tuition fee)'].min(), data['UG fee (tuition fee)'].max()
     min_pg_fee, max_pg_fee = data['PG fee'].min(), data['PG fee'].max()
     ug_fee_range = st.slider("UG Fee Range", min_ug_fee, max_ug_fee, (min_ug_fee, max_ug_fee))
     pg_fee_range = st.slider("PG Fee Range", min_pg_fee, max_pg_fee, (min_pg_fee, max_pg_fee))
-
-
-    # **Graph & Area Selection**
     selected_area = st.selectbox("Select Area", ['All']+sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
     selected_stream = st.selectbox("Select Stream", ['All']+sorted(data['Stream'].str.strip().str.title().fillna('Unknown').unique().tolist()))
-    # **Prediction Button**
+
     if st.button("Predict"):
         if all(isinstance(val, (int, float)) and val >= 0 for val in [
             average_rating, placement_vs_fee_ratio, 
@@ -209,8 +199,9 @@ with st.sidebar:
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
 
+
 st.sidebar.title("👤 My Profile")
-# About Me Section
+# About Me
 st.sidebar.markdown(
     """
     <div class="custom-box about-box">
@@ -222,7 +213,7 @@ st.sidebar.markdown(
     </div>
     """, unsafe_allow_html=True
 )
-# My Handles Section
+# My Handles
 st.sidebar.markdown(
     """
     <div class="custom-box handles-box">
@@ -232,7 +223,7 @@ st.sidebar.markdown(
     </div>
     """, unsafe_allow_html=True
 )
-# My Projects Section
+# My Projects
 st.sidebar.markdown(
     """
     <div class="custom-box projects-box">
@@ -260,7 +251,6 @@ if filtered_data.empty:
 else:
     st.write(f"### Colleges in {selected_area}")
     col1, col2 = st.columns(2)
-
     with col1:
         st.markdown("### 📊 Average Rating - Bar Chart")
         filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating].copy()
@@ -281,70 +271,52 @@ else:
             ax.set_title("Average Rating - Bar Chart")
             st.pyplot(fig)
 
-        with col2:
-            st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
-            # Group by College Name and take the highest Average Rating per college
-            unique_colleges = (
-                filtered_rating_data.groupby("College Name")["Average Rating"]
-                .max()  # Take the highest rating for each college
-                .reset_index()
-            )
-            # Sort and select top 10 unique colleges
-            top_10_colleges = unique_colleges.sort_values(by="Average Rating", ascending=False).head(10)
-            # Create pie chart
-            fig, ax = plt.subplots(figsize=(8, 8))
-            ax.pie(
-                top_10_colleges["Average Rating"],
-                labels=top_10_colleges["College Name"],
-                autopct="%1.1f%%",
-                startangle=140,
-                wedgeprops={"linewidth": 1, "edgecolor": "black"},
-                textprops={"fontsize": 10},
-            )
-            plt.title("Top 10 Colleges - Pie Chart", fontsize=14)
-            st.pyplot(fig)
+    with col2:
+        st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
+        unique_colleges = (
+            filtered_rating_data.groupby("College Name")["Average Rating"]
+            .max()
+            .reset_index()
+        )
+        top_10_colleges = unique_colleges.sort_values(by="Average Rating", ascending=False).head(10)
+        fig, ax = plt.subplots(figsize=(8, 8))
+        ax.pie(
+            top_10_colleges["Average Rating"],
+            labels=top_10_colleges["College Name"],
+            autopct="%1.1f%%",
+            startangle=140,
+            wedgeprops={"linewidth": 1, "edgecolor": "black"},
+            textprops={"fontsize": 10},
+        )
+        plt.title("Top 10 Colleges - Pie Chart", fontsize=14)
+        st.pyplot(fig)
 
-
-    # Create columns for Placement vs Fee Ratio
     col3, col4 = st.columns(2)
-
     with col3:
         st.markdown("### 📈 Placement vs Fee Ratio - Bar Chart")
-        # Filter data based on the selected Placement vs Fee Ratio
         filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
         if filtered_ratio_data.empty:
             st.warning("No colleges match the selected Placement vs Fee Ratio.")
         else:
-            # Dynamically adjust figure size based on the number of colleges
             num_colleges = len(filtered_ratio_data)
-            fig_width = max(12, min(25, num_colleges * 0.4))  # Dynamic width adjustment
-            fig_height = 6 if num_colleges <= 20 else 8  # Adjust height if too many labels
-            # Create figure
+            fig_width = max(12, min(25, num_colleges * 0.4))
+            fig_height = 6 if num_colleges <= 20 else 8 
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-            # Plot bar chart
-            sns.barplot(x="College Name", y="Placement vs Fee Ratio", data=filtered_ratio_data, ax=ax, color="steelblue")
-            # Rotate x-axis labels for readability
+            sns.barplot(x="College Name", y="Placement vs Fee Ratio", data=filtered_ratio_data, ax=ax)
             if num_colleges > 10:
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
-            # Set labels and title
             plt.xlabel("College Name")
             plt.ylabel("Placement vs Fee Ratio")
             plt.title("Placement vs Fee Ratio - Bar Chart")
-            # Display in Streamlit
             st.pyplot(fig)
-
-
 
     with col4:
         st.markdown("### 🥧 Top 10 Colleges - Doughnut Chart")
-        # Group by College Name and take the highest Average Rating per college
         unique_colleges = (
-            filtered_ratio_data.groupby("College Name", as_index=False)  # Keep College Name
-            .agg({"Placement vs Fee Ratio": "max", "Average Rating": "max"})  # Get max rating per college
+            filtered_ratio_data.groupby("College Name", as_index=False)
+            .agg({"Placement vs Fee Ratio": "max", "Average Rating": "max"})
         )
-        # Sort and select top 10 unique colleges
         top10_colleges = unique_colleges.sort_values(by="Placement vs Fee Ratio", ascending=False).head(10)
-        # Create doughnut chart
         fig, ax = plt.subplots(figsize=(8, 8))
         wedges, texts, autotexts = ax.pie(
             top10_colleges["Average Rating"],
@@ -354,15 +326,12 @@ else:
             wedgeprops={"linewidth": 1, "edgecolor": "black"},
             textprops={"fontsize": 10},
         )
-        # Add a white circle at the center to create a doughnut effect
         centre_circle = plt.Circle((0, 0), 0.70, fc="white")
         fig.gca().add_artist(centre_circle)
         plt.title("Top 10 Colleges - Doughnut Chart", fontsize=14)
         st.pyplot(fig)
 
-    # Create columns for UG Fee
     col5, col6 = st.columns(2)
-
     with col5:
         st.markdown("### 💰 UG Fee - Bar Chart")
         filtered_fee_data = filtered_data[
@@ -373,11 +342,11 @@ else:
             st.warning("⚠ No colleges found with this UG Fee.")
         else:
             num_colleges = len(filtered_fee_data)
-            fig_width = max(12, min(25, num_colleges * 0.4))  # Same as working graphs
+            fig_width = max(12, min(25, num_colleges * 0.4))
             fig_height = 6 if num_colleges <= 20 else 8  
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             filtered_fee_data = filtered_fee_data.sort_values("UG fee (tuition fee)", ascending=False)
-            sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax, color="steelblue")
+            sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax)
             if num_colleges > 10:
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
             plt.xlabel("College Name")
@@ -387,21 +356,17 @@ else:
 
     with col6:
         st.markdown("### 💰 UG Fee - Histogram")
-        # Check if UG Fee column exists and is not empty
         if "UG fee (tuition fee)" not in filtered_data.columns or filtered_data["UG fee (tuition fee)"].isna().all():
             st.warning("⚠ No valid UG Fee data available.")
         else:
-            # Use fig, ax to ensure Streamlit renders it properly
             fig, ax = plt.subplots(figsize=(8, 5))
             sns.histplot(filtered_data["UG fee (tuition fee)"].dropna(), kde=True, bins=15, ax=ax)
             ax.set_xlabel("UG Fee", fontsize=12)
             ax.set_ylabel("Frequency", fontsize=12)
             ax.set_title("UG Fee - Histogram", fontsize=16)
-        st.pyplot(fig)  # Use fig here
+        st.pyplot(fig) 
 
-    # Create columns for PG Fee
     col7, col8 = st.columns(2)
-
     with col7:
         st.markdown("### 🏛 PG Fee - Bar Chart")
         filtered_pg_fee_data = filtered_data[
@@ -416,13 +381,14 @@ else:
             fig_height = 6 if num_colleges <= 20 else 8  
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             filtered_pg_fee_data = filtered_pg_fee_data.sort_values("PG fee", ascending=False)
-            sns.barplot(x="College Name", y="PG fee", data=filtered_pg_fee_data, ax=ax, color="steelblue")
+            sns.barplot(x="College Name", y="PG fee", data=filtered_pg_fee_data, ax=ax)
             if num_colleges > 10:
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
             ax.set_xlabel("College Name")
             ax.set_ylabel("PG Fee")
             ax.set_title("PG Fee - Bar Chart")
             st.pyplot(fig)
+
 
     st.markdown("### 📊 Fee Data Table")
     st.write(filtered_data[["College Name", "UG fee (tuition fee)", "PG fee", "Average Rating", "Placement vs Fee Ratio"]].head(20))
