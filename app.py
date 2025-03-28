@@ -35,8 +35,6 @@ if mode == "GitHub Mode":
             h1, h2, h3, h4, h5, h6, p, label { color: white; }
             input, textarea { background-color: #333; color: white; }
             select { background-color: #222; color: white; }
-
-            /* Gradient button from black to dark green */
             button {
                 background: linear-gradient(135deg, black, #006400);
                 color: white;
@@ -50,8 +48,7 @@ if mode == "GitHub Mode":
             button:hover {
                 background: linear-gradient(135deg, #003300, #008000);
             }
-
-            /* Dark mode custom boxes */
+                                                   /* Dark mode custom boxes */
             .custom-box {
                 background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
                 color: white;
@@ -69,7 +66,28 @@ if mode == "GitHub Mode":
                 background: linear-gradient(135deg, #0e3a63, #1f5b93);
                 color: white;
             }
+                                                 // FOOTER //
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background: linear-gradient(to right, black, darkgreen);
+                color: white;
+                font-size: 14px;
+                padding: 15px;
+                text-align: right;
+                box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+            }
+            .footer a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
         </style>
+        <div class="footer">
+            Developed with ❤️ by Arshia Singh using Streamlit
+        </div>
         """,
         unsafe_allow_html=True
     )
@@ -80,6 +98,7 @@ else:
         """
         <style>
         .stApp { background-color: white; color: black; }
+                                            // ABOUT ME CUSTOMIZATION //
         .custom-box {
             padding: 15px;
             border-radius: 12px;
@@ -116,7 +135,28 @@ else:
             text-decoration: underline;
             color: #ffd700;
         }
+                                           // FOOTER //
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to right, white, #90EE90);
+            color: #6c757d;
+            font-size: 14px;
+            padding: 15px;
+            text-align: right;
+            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .footer a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
         </style>
+        <div class="footer">
+            Developed with ❤️ by Arshia Singh using Streamlit
+        </div>
         """,
         unsafe_allow_html=True
     )
@@ -386,30 +426,3 @@ else:
 
     st.markdown("### 📊 Fee Data Table")
     st.write(filtered_data[["College Name", "UG fee (tuition fee)", "PG fee", "Average Rating", "Placement vs Fee Ratio"]].head(20))
-
-# **Footer**
-footer = """
-    <style>
-    .footer{
-        position:fixed;
-        left:0;
-        bottom:0;
-        width:100%;
-        background-color:#90EE90;
-        color: #6c757d;
-        font-size:14px;
-        padding:15px;
-        text-align:right;
-    }
-    .footer a{
-        color:black;
-        text-decoration:none;
-        font-weight:bold;
-    }
-    </style>
-    <div class="footer">
-        Developed with ❤️ by Arshia Singh using Streamlit
-    </div>
-"""
-
-st.markdown(footer, unsafe_allow_html=True)
