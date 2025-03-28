@@ -75,6 +75,19 @@ if mode == "GitHub Mode":
                 color: white;
                 text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             }
+            h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            }
+            a {
+                text-decoration: none;
+                font-weight: bold;
+                color: white;
+            }
+            a:hover {
+                text-decoration: underline;
+                color: #FFD700;
+            }
                                                  /* FOOTER */
             .footer {
                 position: fixed;
