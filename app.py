@@ -168,7 +168,7 @@ else:
     )
     plt.style.use("default")
 
-with st.sidebars:
+with st.sidebar:
     st.header("Adjust Parameters")
     average_rating = st.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
     placement_vs_fee_ratio = st.slider("Placement vs Fee Ratio", min_value=0.0, max_value=1.0, value=0.0, step=0.01)
