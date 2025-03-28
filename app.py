@@ -217,24 +217,16 @@ else:
             st.warning("⚠ No colleges found with this UG Fee.")
         else:
             num_colleges = len(filtered_fee_data)
-            fig_width = min(20, max(12, num_colleges * 0.5))  # Dynamic width
-            fig_height = 8  # Fixed height
+            fig_width = max(12, min(25, num_colleges * 0.4))  # Same as working graphs
+            fig_height = 6 if num_colleges <= 20 else 8  
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-            # Sort colleges by UG Fee for better visualization
             filtered_fee_data = filtered_fee_data.sort_values("UG fee (tuition fee)", ascending=False)
-            # Plot bar chart with vertical bars
             sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax, color="steelblue")
-            # Adjust x-labels dynamically for better readability
-            ax.set_xticklabels(
-                [textwrap.fill(label.get_text(), width=15) for label in ax.get_xticklabels()],
-                rotation=30 if num_colleges > 10 else 0, 
-                ha="right" if num_colleges > 10 else "center", 
-                fontsize=9
-            )
-            ax.set_xlabel("College Name", fontsize=12)
-            ax.set_ylabel("UG Fee", fontsize=12)
-            ax.set_title("UG Fee - Bar Chart", fontsize=16)
-
+            if num_colleges > 10:
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
+            ax.set_xlabel("College Name")
+            ax.set_ylabel("UG Fee")
+            ax.set_title("UG Fee - Bar Chart")
             st.pyplot(fig)
 
     with col6:
@@ -255,30 +247,25 @@ else:
     col7, col8 = st.columns(2)
 
     with col7:
-        st.write("### 🏛️ PG Fee - Bar Chart")
-        filtered_pg_data = filtered_data[
-            (filtered_data["PG fee"] >= pg_fee_range[0]) & 
-            (filtered_data["PG fee"] <= pg_fee_range[1])
+        st.markdown("### 🏛 PG Fee - Bar Chart")
+        filtered_pg_fee_data = filtered_data[
+            (filtered_data["PG fee (tuition fee)"] >= pg_fee_range[0]) & 
+            (filtered_data["PG fee (tuition fee)"] <= pg_fee_range[1])
         ]
-        filtered_pg_data = filtered_pg_data.nlargest(40, "PG fee")
-        if filtered_ratio_data.empty:
-            st.warning("⚠ No colleges found for this Placement vs Fee Ratio.")
+        if filtered_pg_fee_data.empty:
+            st.warning("⚠ No colleges found with this PG Fee.")
         else:
-            num_colleges = len(filtered_ratio_data)
-            fig_width = min(20, max(12, num_colleges * 0.5))  # Dynamic width
-            fig_height = 8  # Fixed height
+            num_colleges = len(filtered_pg_fee_data)
+            fig_width = max(12, min(25, num_colleges * 0.4))  
+            fig_height = 6 if num_colleges <= 20 else 8  
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-            sns.barplot(x="College Name", y="Placement vs Fee Ratio", data=filtered_ratio_data, ax=ax, color="steelblue")
-            # Dynamically adjust x-labels for better readability
-            ax.set_xticklabels(
-                [textwrap.fill(label.get_text(), width=15) for label in ax.get_xticklabels()],
-                rotation=30 if num_colleges > 10 else 0, 
-                ha="right" if num_colleges > 10 else "center", 
-                fontsize=9
-            )
-            ax.set_xlabel("College Name", fontsize=12)
-            ax.set_ylabel("Placement vs Fee Ratio", fontsize=12)
-            ax.set_title("Placement vs Fee Ratio - Bar Chart", fontsize=16)
+            filtered_pg_fee_data = filtered_pg_fee_data.sort_values("PG fee (tuition fee)", ascending=False)
+            sns.barplot(x="College Name", y="PG fee (tuition fee)", data=filtered_pg_fee_data, ax=ax, color="steelblue")
+            if num_colleges > 10:
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
+            ax.set_xlabel("College Name")
+            ax.set_ylabel("PG Fee")
+            ax.set_title("PG Fee - Bar Chart")
             st.pyplot(fig)
 
     st.markdown("### 📊 Fee Data Table")
