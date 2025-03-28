@@ -221,7 +221,12 @@ with st.sidebar:
                 best_college_name = best_college['College Name']
                 st.info(f"🏆 **Best College with {selected_rating} Rating in {selected_area}:** {best_college_name}")
             else:
-                st.warning(f"No colleges found with an Average Rating of {selected_rating} in {selected_area}.")
+                max_rating_college = filtered_by_area.loc[filtered_by_area['Average Rating'].idxmax()]
+                max_college_name = max_rating_college['College Name']
+                max_college_rating = max_rating_college['Average Rating']
+                max_college_state = max_rating_college['State']
+                max_college_stream = max_rating_college['Stream']
+                st.info(f"🏆 **Best College Available in {selected_area} ({selected_stream}):** {max_college_name} ({max_college_state}) with {max_college_rating} Rating")
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
 
