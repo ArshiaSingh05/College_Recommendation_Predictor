@@ -91,6 +91,40 @@ with st.sidebar:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
 
 st.sidebar.title("👤 My Profile")
+st.markdown(
+    """
+    <style>
+        .custom-box {
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .about-box {
+            background: linear-gradient(135deg, #f0f8ff, #dceeff);
+        }
+        .handles-box {
+            background: linear-gradient(135deg, #fff5cc, #ffe599);
+        }
+        .projects-box {
+            background: linear-gradient(135deg, #e6ffe6, #ccffcc);
+        }
+        h3 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 18px;
+        }
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #0073e6;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    """, unsafe_allow_html=True
+)
 # About Me Section
 st.sidebar.markdown(
     """
