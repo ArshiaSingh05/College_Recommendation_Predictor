@@ -183,7 +183,7 @@ with st.sidebar:
     pg_fee_range = st.slider("PG Fee Range", min_pg_fee, max_pg_fee, (min_pg_fee, max_pg_fee))
     selected_area = st.selectbox("Select Area", ['All'] + sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
     selected_stream = st.selectbox("Select Stream", ['All'] + sorted(data['Stream'].str.strip().str.title().fillna('Unknown').unique().tolist()))
-
+    category_mapping = {0: "Poor", 1: "Average", 2: "Good", 3: "Excellent"}
     # Predict button
     if st.button("Predict"):
         if all(isinstance(val, (int, float)) and val >= 0 for val in [
