@@ -210,7 +210,7 @@ with st.sidebar:
                 filtered_by_area = filtered_data[filtered_data['State'].str.strip().str.lower() == selected_area.strip().lower()]
             else:
                 filtered_by_area = filtered_data
-            matching_colleges = filtered_data[filtered_data['Average Rating'] == selected_rating]
+            matching_colleges = filtered_by_area[filtered_by_area['Average Rating'] == selected_rating]
             if not matching_colleges.empty:
                 # Find the best college in selected area based on Placement vs Fee Ratio
                 best_college = matching_colleges.loc[matching_colleges['Placement vs Fee Ratio'].idxmax()]
