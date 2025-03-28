@@ -310,8 +310,7 @@ else:
             fig_height = 6 if num_colleges <= 20 else 8 
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             sns.barplot(x="College Name", y="Placement vs Fee Ratio", data=filtered_ratio_data, ax=ax)
-            if num_colleges > 10:
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha='right', fontsize=8, wrap=True)
+            ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=9)
             plt.xlabel("College Name")
             plt.ylabel("Placement vs Fee Ratio")
             plt.title("Placement vs Fee Ratio - Bar Chart")
