@@ -304,7 +304,7 @@ else:
             fig, ax = plt.subplots(figsize=(fig_width, fig_height))
             sns.barplot(x="College Name", y="Placement vs Fee Ratio", data=filtered_ratio_data, ax=ax)
             if num_colleges > 10:
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha='right', fontsize=8, wrap=True)
             plt.xlabel("College Name")
             plt.ylabel("Placement vs Fee Ratio")
             plt.title("Placement vs Fee Ratio - Bar Chart")
@@ -348,7 +348,7 @@ else:
             filtered_fee_data = filtered_fee_data.sort_values("UG fee (tuition fee)", ascending=False)
             sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax)
             if num_colleges > 10:
-                ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha="right", fontsize=9)
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha='right', fontsize=8, wrap=True)
             plt.xlabel("College Name")
             plt.ylabel("UG Fee")
             plt.title("UG Fee - Bar Chart")
