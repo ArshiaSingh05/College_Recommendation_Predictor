@@ -71,12 +71,25 @@ with st.sidebar:
     selected_stream = st.selectbox("Select Stream", ['All']+sorted(data['Stream'].str.strip().str.title().fillna('Unknown').unique().tolist()))
     # **Prediction Button**
     if st.button("Predict"):
-        if all(val >= 0 for val in [average_rating, placement_vs_fee_ratio, ug_fee_range, pg_fee_range]):
-            input_data = [[average_rating, placement_vs_fee_ratio, ug_fee_range, pg_fee_range]]
-            prediction = model.predict(pd.DataFrame(input_data, columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee']))[0]
+        if all(isinstance(val, (int, float)) and val >= 0 for val in [
+            average_rating, placement_vs_fee_ratio, 
+            ug_fee_range[0], ug_fee_range[1], 
+            pg_fee_range[0], pg_fee_range[1]
+        ]):
+            input_data = [[
+                average_rating, 
+                placement_vs_fee_ratio, 
+                (ug_fee_range[0] + ug_fee_range[1]) / 2, 
+                (pg_fee_range[0] + pg_fee_range[1]) / 2
+            ]]
+            prediction = model.predict(pd.DataFrame(
+                input_data, 
+                columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee']
+            ))[0]
             st.success(f"The predicted college category is: **{prediction}**")
         else:
-            st.warning("Please adjust the sliders to provide valid input values.")
+            st.warning("⚠ Please adjust the sliders to provide valid input values.")
+
 
 
 if filtered_data.empty:
@@ -270,11 +283,7 @@ else:
 
     st.markdown("### 📊 Fee Data Table")
     st.write(filtered_data[["College Name", "UG fee (tuition fee)", "PG fee", "Average Rating", "Placement vs Fee Ratio"]].head(20))
-    col9, col10=st.columns(2)
-    with col9:
-        st.write("Columns in filtered_data:", filtered_data.columns)
-    with col10:
-        st.write(filtered_data["Average Rating"].describe())
+
 # **Footer**
 footer = """
     <style>
