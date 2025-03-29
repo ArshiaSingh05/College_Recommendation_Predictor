@@ -113,7 +113,7 @@ if mode == "GitHub Mode":
                 font-weight: bold;
             }
             .footer img {
-                width: 40px; /* Adjust size as needed */
+                width: 40px;
                 height: 40px;
                 border-radius: 50%;
                 border: 2px solid white;
@@ -138,14 +138,14 @@ if mode == "GitHub Mode":
         </style>
         <div class="footer">
             <a href="https://github.com/ArshiaSingh05/College_Recommendation_Predictor" target="_blank">
-                st.image("self2.jpg", caption="Arshia Singh")
+                <img src="pics/self2.jpg" alt="Arshia Singh" class="profile-pic">
             </a>
             Developed by Arshia Singh |
             <a href="https://github.com/ArshiaSingh05" target="_blank">
-                st.image("github-logo.jpg", caption="Github") GitHub
+                <img src="pics/github-logo.png" alt="GitHub" class="icon"> GitHub
             </a> |
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">
-                st.image("linkedln-logo.jpg", caption="Linkedln")
+                <img src="pics/linkedin-logo.png" alt="LinkedIn" class="icon"> LinkedIn
             </a>
         </div>
         """,
@@ -201,9 +201,9 @@ else:
             left: 0;
             bottom: 0;
             width: 100%;
-            background: linear-gradient(to right, white, #7EC8E3);
-            color: black;
-            font-size: 14px;
+            background: linear-gradient(to right, black, darkgreen);
+            color: white;
+            font-size: 18px;
             font-weight: bold;
             padding: 15px;
             text-align: center;
@@ -213,17 +213,17 @@ else:
             align-items: center;
             justify-content: center;
             gap: 15px;
-            }
+        }
         .footer a {
-            color: black;
+            color: white;
             text-decoration: none;
             font-weight: bold;
         }
         .footer img {
-            width: 40px; /* Adjust size as needed */
+            width: 40px;
             height: 40px;
             border-radius: 50%;
-            border: 2px solid white; /* Optional border */
+            border: 2px solid white;
             transition: transform 0.3s ease-in-out;
         }
         .footer img:hover {
@@ -245,14 +245,14 @@ else:
         </style>
         <div class="footer">
             <a href="https://github.com/ArshiaSingh05/College_Recommendation_Predictor" target="_blank">
-                st.image("self2.jpg", caption="Arshia Singh")
+                <img src="pics/self2.jpg" alt="Arshia Singh" class="profile-pic">
             </a>
             Developed by Arshia Singh |
             <a href="https://github.com/ArshiaSingh05" target="_blank">
-                st.image("github-logo.jpg", caption="Github") GitHub
+                <img src="pics/github-logo.png" alt="GitHub" class="icon"> GitHub
             </a> |
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">
-                st.image("linkedln-logo.jpg", caption="Linkedln")
+                <img src="pics/linkedin-logo.png" alt="LinkedIn" class="icon"> LinkedIn
             </a>
         </div>
         """,
