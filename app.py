@@ -26,9 +26,6 @@ with open('meta_model.pkl', 'rb') as file:
 data = pd.read_csv('cleaned_data.csv')
 filtered_data = data.copy() 
 
-image_path=r"C:\Users\sugan\Desktop\python_project\pics\self2.jpg"
-st.image(image_path,width=50, use_column_width=False)
-
 mode = st.sidebar.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
 if mode == "GitHub Mode":
     st.markdown(
@@ -127,9 +124,14 @@ if mode == "GitHub Mode":
             }
         </style>
         <div class="footer">
+            <img src="C:\\Users\\sugan\\Desktop\\python_project\\pics\\self2.jpg" alt="Arshia Singh" class="profile-pic">
             Developed by Arshia Singh |
-            <a href="https://github.com/ArshiaSingh05" target="_blank">GitHub</a> |
-            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+            <a href="https://github.com/ArshiaSingh05" target="_blank">
+                <img src="github-logo.png" alt="GitHub" class="icon"> GitHub
+            </a> |
+            <a href="https://www.linkedin.com/in/arshia05/" target="_blank">
+                <img src="linkedin-logo.png" alt="LinkedIn" class="icon"> LinkedIn
+            </a>
         </div>
         """,
         unsafe_allow_html=True
@@ -214,9 +216,14 @@ else:
         }
         </style>
         <div class="footer">
+            <img src="C:\\Users\\sugan\\Desktop\\python_project\\pics\\self2.jpg" alt="Arshia Singh" class="profile-pic">
             Developed by Arshia Singh |
-            <a href="https://github.com/ArshiaSingh05" target="_blank">GitHub</a> |
-            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+            <a href="https://github.com/ArshiaSingh05" target="_blank">
+                <img src="github-logo.png" alt="GitHub" class="icon"> GitHub
+            </a> |
+            <a href="https://www.linkedin.com/in/arshia05/" target="_blank">
+                <img src="linkedin-logo.png" alt="LinkedIn" class="icon"> LinkedIn
+            </a>
         </div>
         """,
         unsafe_allow_html=True
