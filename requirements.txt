@@ -2,7 +2,6 @@ streamlit
 pandas
 numpy
 joblib
-pickle
 seaborn
 matplotlib.pyplot
 pathlib
