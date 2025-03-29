@@ -188,7 +188,7 @@ else:
             background: linear-gradient(to right, white, #7EC8E3);
             color: #6c757d;
             font-size: 14px;
-            font-weight=bold;
+            font-weight: bold;
             padding: 15px;
             text-align: right;
             box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
@@ -210,7 +210,6 @@ else:
             border: 2px solid white; /* Optional border */
             transition: transform 0.3s ease-in-out;
         }
-
         .footer img:hover {
             transform: scale(1.1);
         }
