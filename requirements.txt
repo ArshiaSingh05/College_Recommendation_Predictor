@@ -4,3 +4,7 @@ seaborn
 matplotlib
 scikit-learn
 streamlit
+joblib
+pickle
+pathlib
+textwrap
