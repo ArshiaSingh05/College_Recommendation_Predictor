@@ -293,7 +293,6 @@ st.sidebar.markdown(
 )
 
 st.subheader(f"📍 Colleges in {selected_area}")
-
 st.subheader("Explore Colleges by Area and Desired Stream")
 st.write(f"Selected Area: {selected_area}")
 st.write(f"Selected Stream: {selected_stream}")
@@ -314,7 +313,6 @@ else:
         filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating].copy()
         filtered_rating_data = filtered_rating_data.dropna(subset=["Average Rating", "College Name"])
         st.write(f"🔍 Number of colleges after filtering: {len(filtered_rating_data)}")
-        st.write("Filtered Data Preview:", filtered_data)
         if filtered_rating_data.empty:
             st.warning("⚠️ No colleges found with this Average Rating.")
         else:
@@ -444,6 +442,6 @@ else:
             ax.set_title("PG Fee - Bar Chart")
             st.pyplot(fig)
 
-
+    st.write("Filtered Data Preview:", filtered_data)
     st.markdown("### 📊 Fee Data Table")
     st.write(filtered_data[["College Name", "UG fee (tuition fee)", "PG fee", "Average Rating", "Placement vs Fee Ratio"]].head(20))
