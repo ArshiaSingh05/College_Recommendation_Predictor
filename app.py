@@ -122,15 +122,30 @@ if mode == "GitHub Mode":
             .footer img:hover {
                 transform: scale(1.1);
             }
+            .profile-pic {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                vertical-align: middle;
+                margin-right: 10px;
+            }
+            .icon {
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
         </style>
         <div class="footer">
-            <img src="C:\\Users\\sugan\\Desktop\\python_project\\pics\\self2.jpg" alt="Arshia Singh" class="profile-pic">
+            <a href="https://github.com/ArshiaSingh05/College_Recommendation_Predictor" target="_blank">
+                <img src="pics/self2.jpg" alt="Arshia Singh" class="profile-pic">
+            </a>
             Developed by Arshia Singh |
             <a href="https://github.com/ArshiaSingh05" target="_blank">
-                <img src="github-logo.png" alt="GitHub" class="icon"> GitHub
+                <img src="pics/github-logo.png" alt="GitHub" class="icon"> GitHub
             </a> |
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">
-                <img src="linkedin-logo.png" alt="LinkedIn" class="icon"> LinkedIn
+                <img src="pics/linkedin-logo.png" alt="LinkedIn" class="icon"> LinkedIn
             </a>
         </div>
         """,
@@ -214,17 +229,30 @@ else:
         .footer img:hover {
             transform: scale(1.1);
         }
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
         </style>
         <div class="footer">
             <a href="https://github.com/ArshiaSingh05/College_Recommendation_Predictor" target="_blank">
-                <img src="pics/self2.jpg" alt="Arshia Singh">
+                <img src="pics/self2.jpg" alt="Arshia Singh" class="profile-pic">
             </a>
             Developed by Arshia Singh |
             <a href="https://github.com/ArshiaSingh05" target="_blank">
                 <img src="pics/github-logo.png" alt="GitHub" class="icon"> GitHub
             </a> |
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">
-                <img src="pics/linkedln-logo.png" alt="LinkedIn" class="icon"> LinkedIn
+                <img src="pics/linkedin-logo.png" alt="LinkedIn" class="icon"> LinkedIn
             </a>
         </div>
         """,
