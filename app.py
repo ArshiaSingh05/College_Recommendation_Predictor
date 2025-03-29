@@ -115,7 +115,7 @@ if mode == "GitHub Mode":
         </style>
         <div class="footer">
             Developed by Arshia Singh | 
-            <a href="https://github.com/ArshiaSingh05" target="_blank">GitHub</a> | 
+            <a href="https://github.com/ArshiaSingh05" target="_blank"> GitHub</a> | 
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">LinkedIn</a>
         </div>
         """,
@@ -192,7 +192,7 @@ else:
         </style>
         <div class="footer">
             Developed by Arshia Singh | 
-            <a href="https://github.com/ArshiaSingh05" target="_blank">GitHub</a> | 
+            <a href="https://github.com/ArshiaSingh05" target="_blank"> GitHub</a> | 
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">LinkedIn</a>
         </div>
         """,
