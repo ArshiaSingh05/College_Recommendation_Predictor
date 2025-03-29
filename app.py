@@ -216,13 +216,15 @@ else:
         }
         </style>
         <div class="footer">
-            <img src="self2.jpg" alt="Arshia Singh" class="profile-pic">
+            <a href="https://github.com/ArshiaSingh05/College_Recommendation_Predictor" target="_blank">
+                <img src="pics/self2.jpg" alt="Arshia Singh">
+            </a>
             Developed by Arshia Singh |
             <a href="https://github.com/ArshiaSingh05" target="_blank">
-                <img src="github-logo.png" alt="GitHub" class="icon"> GitHub
+                <img src="pics/github-logo.png" alt="GitHub" class="icon"> GitHub
             </a> |
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">
-                <img src="linkedln-logo.png" alt="LinkedIn" class="icon"> LinkedIn
+                <img src="pics/linkedln-logo.png" alt="LinkedIn" class="icon"> LinkedIn
             </a>
         </div>
         """,
