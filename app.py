@@ -96,20 +96,41 @@ if mode == "GitHub Mode":
                 width: 100%;
                 background: linear-gradient(to right, black, darkgreen);
                 color: white;
-                font-size: 14px;
-                padding: 15px;
+                font-size: 18px;
+                font-weight: bold; 
+                padding: 20px;
                 text-align: right;
                 box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
                 z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
             }
             .footer a {
                 color: white;
                 text-decoration: none;
                 font-weight: bold;
             }
+            .footer img {
+                width: 40px; /* Adjust size as needed */
+                height: 40px;
+                border-radius: 50%;
+                border: 2px solid white; /* Optional border */
+                transition: transform 0.3s ease-in-out;
+            }
+            .footer img:hover {
+                transform: scale(1.1);
+            }
         </style>
         <div class="footer">
             Developed by Arshia Singh
+        </div>
+        <div class="footer">
+            <span>Developed by Arshia Singh</span>
+            <a href="https://github.com/yourgithub" target="_blank">
+                <img src="your-photo-url.jpg" alt="GitHub Profile">
+            </a>
         </div>
         """,
         unsafe_allow_html=True
@@ -167,19 +188,41 @@ else:
             background: linear-gradient(to right, white, #7EC8E3);
             color: #6c757d;
             font-size: 14px;
+            font-weight=bold;
             padding: 15px;
-               text-align: right;
-                box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
-                z-index: 1000;
+            text-align: right;
+            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
         .footer a {
             color: black;
             text-decoration: none;
             font-weight: bold;
         }
+        .footer img {
+            width: 40px; /* Adjust size as needed */
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white; /* Optional border */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .footer img:hover {
+            transform: scale(1.1);
+        }
         </style>
         <div class="footer">
             Developed by Arshia Singh
+        </div>
+        <div class="footer">
+            <span>Developed by Arshia Singh</span>
+            <a href="https://github.com/ArshiaSingh05" target="_blank">
+                <img src="python_project\pics\self2.jpg" alt="GitHub Profile">
+            </a>
         </div>
         """,
         unsafe_allow_html=True
