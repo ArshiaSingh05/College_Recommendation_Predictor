@@ -26,7 +26,7 @@ with open('meta_model.pkl', 'rb') as file:
 data = pd.read_csv('cleaned_data.csv')
 filtered_data = data.copy() 
 
-image_path="python_project\pics\self2.jpg"
+image_path=r"C:\Users\sugan\Desktop\python_project\pics\self2.jpg"
 st.image(image_path,width=50, use_column_width=False)
 
 mode = st.sidebar.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
