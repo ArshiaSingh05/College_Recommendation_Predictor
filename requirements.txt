@@ -2,7 +2,9 @@ streamlit
 pandas
 numpy
 joblib
+pickle
 seaborn
-matplotlib
+matplotlib.pyplot
 pathlib
-sklearn
+textwrap
+scikit-learn 
