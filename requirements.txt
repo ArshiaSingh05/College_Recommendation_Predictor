@@ -1,10 +1,7 @@
-numpy
+streamlit
 pandas
+numpy
+joblib
 seaborn
 matplotlib
-scikit-learn
-streamlit
-joblib
-pickle
 pathlib
-textwrap
