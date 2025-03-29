@@ -324,7 +324,6 @@ else:
             ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=9)
             ax.set_xlabel("College Name")
             ax.set_ylabel("Average Rating")
-            ax.set_title("Average Rating - Bar Chart")
             st.pyplot(fig)
 
     with col2:
@@ -344,7 +343,6 @@ else:
             wedgeprops={"linewidth": 1, "edgecolor": "black"},
             textprops={"fontsize": 10},
         )
-        plt.title("Top 10 Colleges - Pie Chart", fontsize=14)
         st.pyplot(fig)
 
     col3, col4 = st.columns(2)
@@ -362,7 +360,6 @@ else:
             ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
             plt.xlabel("College Name")
             plt.ylabel("Placement vs Fee Ratio")
-            plt.title("Placement vs Fee Ratio - Bar Chart")
             st.pyplot(fig)
 
     with col4:
@@ -383,7 +380,6 @@ else:
         )
         centre_circle = plt.Circle((0, 0), 0.70, fc="white")
         fig.gca().add_artist(centre_circle)
-        plt.title("Top 10 Colleges - Doughnut Chart", fontsize=14)
         st.pyplot(fig)
 
     col5, col6 = st.columns(2)
@@ -405,7 +401,6 @@ else:
             ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
             plt.xlabel("College Name")
             plt.ylabel("UG Fee")
-            plt.title("UG Fee - Bar Chart")
             st.pyplot(fig)
 
     with col6:
@@ -417,7 +412,6 @@ else:
             sns.histplot(filtered_data["UG fee (tuition fee)"].dropna(), kde=True, bins=15, ax=ax)
             ax.set_xlabel("UG Fee", fontsize=12)
             ax.set_ylabel("Frequency", fontsize=12)
-            ax.set_title("UG Fee - Histogram", fontsize=16)
         st.pyplot(fig) 
 
     col7, col8 = st.columns(2)
@@ -439,9 +433,7 @@ else:
             ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=9)
             ax.set_xlabel("College Name")
             ax.set_ylabel("PG Fee")
-            ax.set_title("PG Fee - Bar Chart")
             st.pyplot(fig)
 
-    st.write("Filtered Data Preview:", filtered_data)
     st.markdown("### 📊 Fee Data Table")
-    st.write(filtered_data[["College Name", "UG fee (tuition fee)", "PG fee", "Average Rating", "Placement vs Fee Ratio"]].head(20))
+    st.write(filtered_data[["College Name","State","Stream","Average Rating",  "Placement vs Fee Ratio", "UG fee (tuition fee)", "PG fee"]])
