@@ -31,6 +31,14 @@ if mode == "GitHub Mode":
     st.markdown(
         """
         <style>
+            .stSlider > div > div > div {{
+                background: linear-gradient(to right,#2ecc71,#27ae60);
+            }}
+            /* Change the handle (thumb) color */
+            .stSlider > div > div > div > div {{
+                background: #27ae60;
+                border: 2px solid #1e8449;
+            }}
             .stApp { background-color: black; color: white; }
             section[data-testid="stSidebar"] { background-color: #1c1c1c; }
             h1, h2, h3, h4, h5, h6, p, label { color: white; }
@@ -109,7 +117,7 @@ if mode == "GitHub Mode":
             }
         </style>
         <div class="footer">
-            Developed with ❤️ by Arshia Singh using Streamlit
+            Developed by Arshia Singh
         </div>
         """,
         unsafe_allow_html=True
@@ -120,6 +128,14 @@ else:
     st.markdown(
         """
         <style>
+        .stSlider > div > div > div {{
+                background: linear-gradient(to right,#3498db,#2980b9);
+            }}
+            /* Change the handle (thumb) color */
+            .stSlider > div > div > div > div {{
+                background: #2980b9;
+                border: 2px solid #5dade2;
+            }}
         .stApp { background-color: white; color: black; }
                                             /* ABOUT ME CUSTOMIZATION */
         .custom-box {
@@ -179,7 +195,7 @@ else:
         }
         </style>
         <div class="footer">
-            Developed with ❤️ by Arshia Singh using Streamlit
+            Developed by Arshia Singh
         </div>
         """,
         unsafe_allow_html=True
@@ -252,8 +268,7 @@ st.sidebar.markdown(
         <h3>ABOUT ME</h3>
         <p><strong>Name:</strong> Arshia Singh</p>
         <p><strong>University:</strong> Lovely Professional University</p>
-        <p><strong>Field:</strong> Machine Learning & Data Science</p>
-        <p>Passionate about solving real-world problems with data and AI! 🚀</p>
+        <p>Learning Machine Learning and working on projects to apply my knowledge. Always eager to explore more and improve my skills!</p>
     </div>
     """, unsafe_allow_html=True
 )
