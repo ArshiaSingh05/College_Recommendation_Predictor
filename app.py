@@ -216,13 +216,13 @@ else:
         }
         </style>
         <div class="footer">
-            <img src="C:\\Users\\sugan\\Desktop\\python_project\\pics\\self2.jpg" alt="Arshia Singh" class="profile-pic">
+            <img src="self2.jpg" alt="Arshia Singh" class="profile-pic">
             Developed by Arshia Singh |
             <a href="https://github.com/ArshiaSingh05" target="_blank">
                 <img src="github-logo.png" alt="GitHub" class="icon"> GitHub
             </a> |
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">
-                <img src="linkedin-logo.png" alt="LinkedIn" class="icon"> LinkedIn
+                <img src="linkedln-logo.png" alt="LinkedIn" class="icon"> LinkedIn
             </a>
         </div>
         """,
