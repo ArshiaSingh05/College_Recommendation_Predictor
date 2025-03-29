@@ -224,18 +224,19 @@ with st.sidebar:
                 (ug_fee_range[0] + ug_fee_range[1]) / 2,  
                 (pg_fee_range[0] + pg_fee_range[1]) / 2
             ]]
-            input_df = pd.DataFrame(input_data, columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee'])
-            rf_pred = rf_model.predict(input_df)
-            gb_pred = gb_model.predict(input_df)
-            stacked_input = pd.DataFrame({"RF_Pred": rf_pred, "GB_Pred": gb_pred})
-            final_prediction = meta_model.predict(stacked_input)
-            predicted_category = category_mapping.get(int(final_prediction[0]), "Unknown")
-            st.success(f"📢 The predicted college category is: **{predicted_category}**")
             # Get the exact selected average rating
             selected_rating = input_data[0][0]
             if selected_area == 'All' and selected_stream == 'All':
                 st.warning("Kindly select your preferred state and stream")
             else:
+                input_df = pd.DataFrame(input_data, columns=['Average Rating', 'Placement vs Fee Ratio', 'UG fee (tuition fee)', 'PG fee'])
+                rf_pred = rf_model.predict(input_df)
+                gb_pred = gb_model.predict(input_df)
+                stacked_input = pd.DataFrame({"RF_Pred": rf_pred, "GB_Pred": gb_pred})
+                final_prediction = meta_model.predict(stacked_input)
+                predicted_category = category_mapping.get(int(final_prediction[0]), "Unknown")
+                st.success(f"📢 The predicted college category is: **{predicted_category}**")
+                
                 if selected_area != 'All':
                     filtered_by_area = filtered_data[filtered_data['State'].str.strip().str.lower() == selected_area.strip().lower()]
                 else:
