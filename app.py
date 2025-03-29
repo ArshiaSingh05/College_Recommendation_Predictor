@@ -26,6 +26,9 @@ with open('meta_model.pkl', 'rb') as file:
 data = pd.read_csv('cleaned_data.csv')
 filtered_data = data.copy() 
 
+image_path="python_project\pics\self2.jpg"
+st.image(image_path,width=50, use_column_width=False)
+
 mode = st.sidebar.radio("Select App Mode:", ["Light Mode", "GitHub Mode"])
 if mode == "GitHub Mode":
     st.markdown(
@@ -97,9 +100,9 @@ if mode == "GitHub Mode":
                 background: linear-gradient(to right, black, darkgreen);
                 color: white;
                 font-size: 18px;
-                font-weight: bold; 
-                padding: 20px;
-                text-align: right;
+                font-weight: bold;
+                padding: 15px;
+                text-align: center;
                 box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
                 z-index: 1000;
                 display: flex;
@@ -116,7 +119,7 @@ if mode == "GitHub Mode":
                 width: 40px; /* Adjust size as needed */
                 height: 40px;
                 border-radius: 50%;
-                border: 2px solid white; /* Optional border */
+                border: 2px solid white;
                 transition: transform 0.3s ease-in-out;
             }
             .footer img:hover {
@@ -124,13 +127,9 @@ if mode == "GitHub Mode":
             }
         </style>
         <div class="footer">
-            Developed by Arshia Singh
-        </div>
-        <div class="footer">
-            <span>Developed by Arshia Singh</span>
-            <a href="https://github.com/yourgithub" target="_blank">
-                <img src="your-photo-url.jpg" alt="GitHub Profile">
-            </a>
+            Developed by Arshia Singh |
+            <a href="https://github.com/ArshiaSingh05" target="_blank">GitHub</a> |
+            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
         </div>
         """,
         unsafe_allow_html=True
@@ -186,18 +185,18 @@ else:
             bottom: 0;
             width: 100%;
             background: linear-gradient(to right, white, #7EC8E3);
-            color: #6c757d;
+            color: black;
             font-size: 14px;
             font-weight: bold;
             padding: 15px;
-            text-align: right;
+            text-align: center;
             box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
-        }
+            }
         .footer a {
             color: black;
             text-decoration: none;
@@ -215,13 +214,9 @@ else:
         }
         </style>
         <div class="footer">
-            Developed by Arshia Singh
-        </div>
-        <div class="footer">
-            <span>Developed by Arshia Singh</span>
-            <a href="https://github.com/ArshiaSingh05" target="_blank">
-                <img src="python_project\pics\self2.jpg" alt="GitHub Profile">
-            </a>
+            Developed by Arshia Singh |
+            <a href="https://github.com/ArshiaSingh05" target="_blank">GitHub</a> |
+            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
         </div>
         """,
         unsafe_allow_html=True
