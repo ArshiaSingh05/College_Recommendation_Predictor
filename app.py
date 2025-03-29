@@ -233,28 +233,31 @@ with st.sidebar:
             st.success(f"📢 The predicted college category is: **{predicted_category}**")
             # Get the exact selected average rating
             selected_rating = input_data[0][0]
-            if selected_area != 'All':
-                filtered_by_area = filtered_data[filtered_data['State'].str.strip().str.lower() == selected_area.strip().lower()]
+            if selected_area == 'All' and selected_stream == 'All':
+                st.warning("Kindly select your preferred state and stream")
             else:
-                filtered_by_area = filtered_data
-            if selected_stream != 'All':
-                filtered_by_area = filtered_by_area[filtered_by_area['Stream'].str.strip().str.lower() == selected_stream.strip().lower()]
-            else:
-                filtered_by_area = filtered_data[filtered_data['State'].str.strip().str.lower() == selected_area.strip().lower()]
-            matching_colleges = filtered_by_area[filtered_by_area['Average Rating'] == selected_rating]
-            if not matching_colleges.empty:
-                # Find the best college in selected area based on Placement vs Fee Ratio
-                best_college = matching_colleges.loc[matching_colleges['Placement vs Fee Ratio'].idxmax()]
-                best_college_name = best_college['College Name']
-                st.info(f"🏆 **Best College with {selected_rating} Rating in {selected_area}:** {best_college_name}")
-            else:
-                max_rating_college = filtered_by_area.loc[filtered_by_area['Average Rating'].idxmax()]
-                max_college_name = max_rating_college['College Name']
-                max_college_rating = max_rating_college['Average Rating']
-                max_college_state = max_rating_college['State']
-                max_college_stream = max_rating_college['Stream']
-                st.warning(f"No colleges found with an Average Rating of {selected_rating} in {selected_area}.\n")
-                st.info(f"🏆 **But Best College Available in {selected_area} ({selected_stream}):** {max_college_name} ({max_college_state}) with {max_college_rating} Rating")
+                if selected_area != 'All':
+                    filtered_by_area = filtered_data[filtered_data['State'].str.strip().str.lower() == selected_area.strip().lower()]
+                else:
+                    filtered_by_area = filtered_data
+                if selected_stream != 'All':
+                    filtered_by_area = filtered_by_area[filtered_by_area['Stream'].str.strip().str.lower() == selected_stream.strip().lower()]
+                else:
+                    filtered_by_area = filtered_data[filtered_data['State'].str.strip().str.lower() == selected_area.strip().lower()]
+                matching_colleges = filtered_by_area[filtered_by_area['Average Rating'] == selected_rating]
+                if not matching_colleges.empty:
+                    # Find the best college in selected area based on Placement vs Fee Ratio
+                    best_college = matching_colleges.loc[matching_colleges['Placement vs Fee Ratio'].idxmax()]
+                    best_college_name = best_college['College Name']
+                    st.info(f"🏆 **Best College with {selected_rating} Rating in {selected_area}:** {best_college_name}")
+                else:
+                    max_rating_college = filtered_by_area.loc[filtered_by_area['Average Rating'].idxmax()]
+                    max_college_name = max_rating_college['College Name']
+                    max_college_rating = max_rating_college['Average Rating']
+                    max_college_state = max_rating_college['State']
+                    max_college_stream = max_rating_college['Stream']
+                    st.warning(f"No colleges found with an Average Rating of {selected_rating} in {selected_area}.\n")
+                    st.info(f"🏆 **But Best College Available in {selected_area} ({selected_stream}):** {max_college_name} ({max_college_state}) with {max_college_rating} Rating")
         else:
             st.warning("⚠ Please adjust the sliders to provide valid input values.")
 
