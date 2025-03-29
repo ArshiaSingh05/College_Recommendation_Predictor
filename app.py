@@ -138,14 +138,14 @@ if mode == "GitHub Mode":
         </style>
         <div class="footer">
             <a href="https://github.com/ArshiaSingh05/College_Recommendation_Predictor" target="_blank">
-                <img src="pics/self2.jpg" alt="Arshia Singh" class="profile-pic">
+                st.image("self2.jpg", caption="Arshia Singh")
             </a>
             Developed by Arshia Singh |
             <a href="https://github.com/ArshiaSingh05" target="_blank">
-                <img src="pics/github-logo.png" alt="GitHub" class="icon"> GitHub
+                st.image("github-logo.jpg", caption="Github") GitHub
             </a> |
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">
-                <img src="pics/linkedin-logo.png" alt="LinkedIn" class="icon"> LinkedIn
+                st.image("linkedln-logo.jpg", caption="Linkedln")
             </a>
         </div>
         """,
@@ -245,14 +245,14 @@ else:
         </style>
         <div class="footer">
             <a href="https://github.com/ArshiaSingh05/College_Recommendation_Predictor" target="_blank">
-                <img src="pics/self2.jpg" alt="Arshia Singh" class="profile-pic">
+                st.image("self2.jpg", caption="Arshia Singh")
             </a>
             Developed by Arshia Singh |
             <a href="https://github.com/ArshiaSingh05" target="_blank">
-                <img src="pics/github-logo.png" alt="GitHub" class="icon"> GitHub
+                st.image("github-logo.jpg", caption="Github") GitHub
             </a> |
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">
-                <img src="pics/linkedin-logo.png" alt="LinkedIn" class="icon"> LinkedIn
+                st.image("linkedln-logo.jpg", caption="Linkedln")
             </a>
         </div>
         """,
