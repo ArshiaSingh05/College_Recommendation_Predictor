@@ -21,14 +21,6 @@ print(f"Cleaned dataset size:{data_cleaned.shape[0]} rows")
 print(data[['UG fee (tuition fee)', 'PG fee']][
     ~data['UG fee (tuition fee)'].astype(str).map(str.isdigit) | ~data['PG fee'].astype(str).map(str.isdigit)
 ])
-# Replace any non-numeric values with '0'
-data[['UG fee (tuition fee)', 'PG fee']] = data[['UG fee (tuition fee)', 'PG fee']].replace(r'\D', '0', regex=True)
-
-data[['UG fee (tuition fee)', 'PG fee']] = data[['UG fee (tuition fee)', 'PG fee']].fillna('0')
-
-data[['UG fee (tuition fee)', 'PG fee']] = data[['UG fee (tuition fee)', 'PG fee']].replace(r'[^0-9]', '', regex=True)
-
-data[['UG fee (tuition fee)', 'PG fee']] = data[['UG fee (tuition fee)', 'PG fee']].replace('', '0')
 
 # Now safely convert to integers
 data[['UG fee (tuition fee)', 'PG fee']] = data[['UG fee (tuition fee)', 'PG fee']].astype(int)
