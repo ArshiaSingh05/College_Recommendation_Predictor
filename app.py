@@ -309,16 +309,14 @@ if filtered_data.empty:
         st.warning(f"No data available for the selected stream ({selected_stream}). Kindly change the stream.")
 else:
     st.write(f"### Colleges in {selected_area}")
-
-    st.markdown("### 📊 Fee Data Table")
+    filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating].copy()
+    st.write(f"➡️ Number of colleges after filtering: {len(filtered_rating_data)}")
+    st.markdown("### 🔎 Colleges Recommended for you")
     st.write(filtered_data[["College Name","State","Stream","Average Rating",  "Placement vs Fee Ratio", "UG fee (tuition fee)", "PG fee"]])
 
     # 📊 Average Rating - Bar Chart
     st.markdown("### 📊 Average Rating - Bar Chart")
-    filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating].copy()
     filtered_rating_data = filtered_rating_data.dropna(subset=["Average Rating", "College Name"])
-    st.write(f"🔍 Number of colleges after filtering: {len(filtered_rating_data)}")
-
     if filtered_rating_data.empty:
         st.warning("⚠️ No colleges found with this Average Rating.")
     else:
