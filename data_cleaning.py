@@ -21,11 +21,6 @@ print(f"Cleaned dataset size:{data_cleaned.shape[0]} rows")
 print(data[['UG fee (tuition fee)', 'PG fee']][
     ~data['UG fee (tuition fee)'].astype(str).map(str.isdigit) | ~data['PG fee'].astype(str).map(str.isdigit)
 ])
-
-# Now safely convert to integers
-data[['UG fee (tuition fee)', 'PG fee']] = data[['UG fee (tuition fee)', 'PG fee']].astype(int)
-#data[['UG fee (tuition fee)', 'PG fee']] = data[['UG fee (tuition fee)', 'PG fee']].replace(0, 'Not Provided')
-
 print(data[['UG fee (tuition fee)', 'PG fee']].head())
 print(data[['UG fee (tuition fee)', 'PG fee']].dtypes)
 
@@ -42,11 +37,10 @@ data['State'] = data['State'].str.title().str.strip()
 
 #filling the fee as same as ratings
 cols_to_fill=['UG fee (tuition fee)','PG fee']
-data[cols_to_fill] = data[cols_to_fill].apply(pd.to_numeric, errors='coerce')
-for col in cols_to_fill:
-    data[col].fillna(data.groupby('State')[col].transform('median'))
-
-data[cols_to_fill]=data[cols_to_fill].fillna(data[cols_to_fill].median())
+data[['UG fee (tuition fee)', 'PG fee']] = data[['UG fee (tuition fee)', 'PG fee']].apply(pd.to_numeric, errors='coerce')
+for col in ['UG fee (tuition fee)', 'PG fee']:
+    state_medians = data.groupby('State')[col].median()
+    data[col] = data.apply(lambda row: state_medians[row['State']] if row[col] == 0 or pd.isna(row[col]) else row[col], axis=1)
 
 #Checking outliers with boxplot
 
