@@ -201,6 +201,15 @@ else:
     plt.style.use("default")
 
 with st.sidebar:
+    st.markdown(
+        """
+        <div style="position: absolute; top: 10px; left: 10px; font-size: 16px; font-weight: bold; 
+                    background-color: #ffcc00; padding: 5px 10px; border-radius: 5px;">
+            ⬅️ Click here to open the sidebar
+        </div>
+        """, 
+        unsafe_allow_html=True
+    )
     st.header("Adjust Parameters")
     average_rating = st.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
     placement_vs_fee_ratio = st.slider("Placement vs Fee Ratio", min_value=0.0, max_value=1.0, value=0.0, step=0.01)
