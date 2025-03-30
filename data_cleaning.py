@@ -48,6 +48,14 @@ data[cols_to_fill]=data[cols_to_fill].fillna(data[cols_to_fill].median())
 # Uniforming states with first letter as capital
 data['State'] = data['State'].str.title().str.strip()
 
+#filling the fee as same as ratings
+cols_to_fill=['UG fee (tuition fee)','PG fee']
+data[cols_to_fill] = data[cols_to_fill].apply(pd.to_numeric, errors='coerce')
+for col in cols_to_fill:
+    data[col].fillna(data.groupby('State')[col].transform('median'))
+
+data[cols_to_fill]=data[cols_to_fill].fillna(data[cols_to_fill].median())
+
 #Checking outliers with boxplot
 
 plt.figure(figsize=(12, 6))
