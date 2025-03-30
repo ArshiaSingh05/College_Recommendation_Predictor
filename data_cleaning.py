@@ -55,5 +55,5 @@ print("The final checks::")
 print(data.describe().round(2))
 print(data.info())
 # Saving the changes
-data.to_excel("cleaned_data.xlsx",index=False)
+data.to_csv("cleaned_data.csv",index=False)
 print("Successfully saved")

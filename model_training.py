@@ -5,8 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import joblib
 
-
-data = pd.read_csv("cleaned_data.csv")
+data=pd.read_csv('cleaned_data.csv')
 def categorize_rating(rating):
     if rating >= 4.5:
         return "Excellent"
