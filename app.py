@@ -545,7 +545,6 @@ with tabs[1]:
             <p class="summary-text">
                 The highest-rated college in your selected area is <b>{max_college_name}</b> 
                 with a rating of <b>{max_college_rating}</b>.<br><br>
-                The best placement-to-fee ratio is observed in <b>{best_ratio_college}</b>.<br><br>
                 Based on your selection, the average UG fee ranges from <b>{min_ug_fee}</b> to <b>{max_ug_fee}</b>.
             </p>
         </div>
