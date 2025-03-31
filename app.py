@@ -200,8 +200,9 @@ else:
     )
     plt.style.use("default")
 
-# Custom HTML + CSS for positioning
-sidebar_hint_html = """
+# Custom HTML + CSS for positioning the sidebar hint
+st.markdown(
+    """
     <style>
         .sidebar-hint {
             position: fixed;
@@ -219,8 +220,9 @@ sidebar_hint_html = """
     <div class="sidebar-hint">
         ⬅️ Click here to open the sidebar
     </div>
-"""
-components.html(sidebar_hint_html, height=50)
+    """,
+    unsafe_allow_html=True
+)
 with st.sidebar:
     st.header("Adjust Parameters")
     average_rating = st.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
