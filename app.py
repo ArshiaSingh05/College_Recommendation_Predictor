@@ -348,147 +348,161 @@ st.sidebar.markdown(
     """, unsafe_allow_html=True
 )
 
-st.subheader(f"📍 Colleges in {selected_area}")
-st.subheader("Explore Colleges by Area and Desired Stream")
-st.write(f"Selected Area: {selected_area}")
-st.write(f"Selected Stream: {selected_stream}")
-if selected_stream == "All":
-    filtered_data = data[data['State'] == selected_area] 
-else:
-    filtered_data = data[(data['State'] == selected_area) & (data['Stream'] == selected_stream)] 
-if filtered_data.empty:
-    if selected_stream=="All":
-        st.warning(f"No data available for {selected_area}. Try selecting a different area.")
+tabs=st.tabs[('Dashboard','Summary')]
+with tabs[0]:
+    st.subheader(f"📍 Colleges in {selected_area}")
+    st.subheader("Explore Colleges by Area and Desired Stream")
+    st.write(f"Selected Area: {selected_area}")
+    st.write(f"Selected Stream: {selected_stream}")
+    if selected_stream == "All":
+        filtered_data = data[data['State'] == selected_area] 
     else:
-        st.warning(f"No data available for the selected stream ({selected_stream}). Kindly change the stream.")
-else:
-    st.write(f"### Colleges in {selected_area}")
-    filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating].copy()
-    st.write(f"➡️ Number of colleges after filtering: {len(filtered_rating_data)}")
-    st.markdown("### 🔎 Colleges Recommended for you")
-    st.write(filtered_data[["College Name","State","Stream","Average Rating",  "Placement vs Fee Ratio", "UG fee (tuition fee)", "PG fee"]])
+        filtered_data = data[(data['State'] == selected_area) & (data['Stream'] == selected_stream)] 
+    if filtered_data.empty:
+        if selected_stream=="All":
+            st.warning(f"No data available for {selected_area}. Try selecting a different area.")
+        else:
+            st.warning(f"No data available for the selected stream ({selected_stream}). Kindly change the stream.")
+    else:
+        st.write(f"### Colleges in {selected_area}")
+        filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating].copy()
+        st.write(f"➡️ Number of colleges after filtering: {len(filtered_rating_data)}")
+        st.markdown("### 🔎 Colleges Recommended for you")
+        st.write(filtered_data[["College Name","State","Stream","Average Rating",  "Placement vs Fee Ratio", "UG fee (tuition fee)", "PG fee"]])
 
-    # 📊 Average Rating - Bar Chart
-    st.markdown("### 📊 Average Rating - Bar Chart")
-    filtered_rating_data = filtered_rating_data.dropna(subset=["Average Rating", "College Name"])
-    if filtered_rating_data.empty:
-        st.warning("⚠️ No colleges found with this Average Rating.")
-    else:
-        num_colleges = len(filtered_rating_data)
-        fig_width = max(15, min(30, num_colleges * 0.5))  # Adjusted for better width
-        fig_height = 7 if num_colleges <= 20 else 9
-        fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-        sns.barplot(x="College Name", y="Average Rating", data=filtered_rating_data, ax=ax)
-        ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=10)
-        ax.set_xlabel("College Name")
-        ax.set_ylabel("Average Rating")
+        # 📊 Average Rating - Bar Chart
+        st.markdown("### 📊 Average Rating - Bar Chart")
+        filtered_rating_data = filtered_rating_data.dropna(subset=["Average Rating", "College Name"])
+        if filtered_rating_data.empty:
+            st.warning("⚠️ No colleges found with this Average Rating.")
+        else:
+            num_colleges = len(filtered_rating_data)
+            fig_width = max(15, min(30, num_colleges * 0.5))  # Adjusted for better width
+            fig_height = 7 if num_colleges <= 20 else 9
+            fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+            sns.barplot(x="College Name", y="Average Rating", data=filtered_rating_data, ax=ax)
+            ax.set_xticklabels(filtered_rating_data["College Name"], rotation=60, ha='right', fontsize=10)
+            ax.set_xlabel("College Name")
+            ax.set_ylabel("Average Rating")
+            st.pyplot(fig)
+
+        # 🥧 Top 10 Colleges - Pie Chart
+        st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
+        unique_colleges = (
+            filtered_rating_data.groupby("College Name")["Average Rating"]
+            .max()
+            .reset_index()
+        )
+        top_10_colleges = unique_colleges.sort_values(by="Average Rating", ascending=False).head(10)
+        fig, ax = plt.subplots(figsize=(10, 7))  # Slightly wider
+        ax.pie(
+            top_10_colleges["Average Rating"],
+            labels=top_10_colleges["College Name"],
+            autopct="%1.1f%%",
+            startangle=140,
+            wedgeprops={"linewidth": 1, "edgecolor": "black"},
+            textprops={"fontsize": 10},
+        )
         st.pyplot(fig)
 
-    # 🥧 Top 10 Colleges - Pie Chart
-    st.markdown("### 🥧 Top 10 Colleges - Pie Chart")
-    unique_colleges = (
-        filtered_rating_data.groupby("College Name")["Average Rating"]
-        .max()
-        .reset_index()
-    )
-    top_10_colleges = unique_colleges.sort_values(by="Average Rating", ascending=False).head(10)
-    fig, ax = plt.subplots(figsize=(10, 7))  # Slightly wider
-    ax.pie(
-        top_10_colleges["Average Rating"],
-        labels=top_10_colleges["College Name"],
-        autopct="%1.1f%%",
-        startangle=140,
-        wedgeprops={"linewidth": 1, "edgecolor": "black"},
-        textprops={"fontsize": 10},
-    )
-    st.pyplot(fig)
+        # 📈 Placement vs Fee Ratio - Bar Chart
+        st.markdown("### 📈 Placement vs Fee Ratio - Bar Chart")
+        filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
+        best_ratio_college = data.loc[data['Placement vs Fee Ratio'].idxmax(), 'College Name']
+        if filtered_ratio_data.empty:
+            st.warning("No colleges match the selected Placement vs Fee Ratio.")
+        else:
+            num_colleges = len(filtered_ratio_data)
+            fig_width = max(15, min(35, num_colleges * 0.5))  # Wider for clarity
+            fig_height = 7 if num_colleges <= 20 else 9
+            fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+            sns.barplot(x="College Name", y="Placement vs Fee Ratio", data=filtered_ratio_data, ax=ax)
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=10)
+            plt.xlabel("College Name")
+            plt.ylabel("Placement vs Fee Ratio")
+            st.pyplot(fig)
 
-    # 📈 Placement vs Fee Ratio - Bar Chart
-    st.markdown("### 📈 Placement vs Fee Ratio - Bar Chart")
-    filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
-
-    if filtered_ratio_data.empty:
-        st.warning("No colleges match the selected Placement vs Fee Ratio.")
-    else:
-        num_colleges = len(filtered_ratio_data)
-        fig_width = max(15, min(35, num_colleges * 0.5))  # Wider for clarity
-        fig_height = 7 if num_colleges <= 20 else 9
-        fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-        sns.barplot(x="College Name", y="Placement vs Fee Ratio", data=filtered_ratio_data, ax=ax)
-        ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=10)
-        plt.xlabel("College Name")
-        plt.ylabel("Placement vs Fee Ratio")
+        # 🥧 Top 10 Colleges - Doughnut Chart
+        st.markdown("### 🥧 Top 10 Colleges - Doughnut Chart")
+        unique_colleges = (
+            filtered_ratio_data.groupby("College Name", as_index=False)
+            .agg({"Placement vs Fee Ratio": "max", "Average Rating": "max"})
+        )
+        top10_colleges = unique_colleges.sort_values(by="Placement vs Fee Ratio", ascending=False).head(10)
+        fig, ax = plt.subplots(figsize=(10, 7))
+        wedges, texts, autotexts = ax.pie(
+            top10_colleges["Average Rating"],
+            labels=top10_colleges["College Name"],
+            autopct="%1.1f%%",
+            startangle=140,
+            wedgeprops={"linewidth": 1, "edgecolor": "black"},
+            textprops={"fontsize": 10},
+        )
+        centre_circle = plt.Circle((0, 0), 0.70, fc="white")
+        fig.gca().add_artist(centre_circle)
         st.pyplot(fig)
 
-    # 🥧 Top 10 Colleges - Doughnut Chart
-    st.markdown("### 🥧 Top 10 Colleges - Doughnut Chart")
-    unique_colleges = (
-        filtered_ratio_data.groupby("College Name", as_index=False)
-        .agg({"Placement vs Fee Ratio": "max", "Average Rating": "max"})
-    )
-    top10_colleges = unique_colleges.sort_values(by="Placement vs Fee Ratio", ascending=False).head(10)
-    fig, ax = plt.subplots(figsize=(10, 7))
-    wedges, texts, autotexts = ax.pie(
-        top10_colleges["Average Rating"],
-        labels=top10_colleges["College Name"],
-        autopct="%1.1f%%",
-        startangle=140,
-        wedgeprops={"linewidth": 1, "edgecolor": "black"},
-        textprops={"fontsize": 10},
-    )
-    centre_circle = plt.Circle((0, 0), 0.70, fc="white")
-    fig.gca().add_artist(centre_circle)
-    st.pyplot(fig)
+        # 💰 UG Fee - Bar Chart
+        st.markdown("### 💰 UG Fee - Bar Chart")
+        filtered_fee_data = filtered_data[
+            (filtered_data["UG fee (tuition fee)"] >= ug_fee_range[0]) & 
+            (filtered_data["UG fee (tuition fee)"] <= ug_fee_range[1])
+        ]
 
-    # 💰 UG Fee - Bar Chart
-    st.markdown("### 💰 UG Fee - Bar Chart")
-    filtered_fee_data = filtered_data[
-        (filtered_data["UG fee (tuition fee)"] >= ug_fee_range[0]) & 
-        (filtered_data["UG fee (tuition fee)"] <= ug_fee_range[1])
-    ]
+        if filtered_fee_data.empty:
+            st.warning("⚠ No colleges found with this UG Fee.")
+        else:
+            num_colleges = len(filtered_fee_data)
+            fig_width = max(15, min(35, num_colleges * 0.5))
+            fig_height = 7 if num_colleges <= 20 else 9
+            fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+            filtered_fee_data = filtered_fee_data.sort_values("UG fee (tuition fee)", ascending=False)
+            sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax)
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=10)
+            plt.xlabel("College Name")
+            plt.ylabel("UG Fee")
+            st.pyplot(fig)
 
-    if filtered_fee_data.empty:
-        st.warning("⚠ No colleges found with this UG Fee.")
-    else:
-        num_colleges = len(filtered_fee_data)
-        fig_width = max(15, min(35, num_colleges * 0.5))
-        fig_height = 7 if num_colleges <= 20 else 9
-        fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-        filtered_fee_data = filtered_fee_data.sort_values("UG fee (tuition fee)", ascending=False)
-        sns.barplot(x="College Name", y="UG fee (tuition fee)", data=filtered_fee_data, ax=ax)
-        ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=10)
-        plt.xlabel("College Name")
-        plt.ylabel("UG Fee")
+        # 💰 UG Fee - Histogram
+        st.markdown("### 💰 UG Fee - Histogram")
+        if "UG fee (tuition fee)" not in filtered_data.columns or filtered_data["UG fee (tuition fee)"].isna().all():
+            st.warning("⚠ No valid UG Fee data available.")
+        else:
+            fig, ax = plt.subplots(figsize=(10, 5))
+            sns.histplot(filtered_data["UG fee (tuition fee)"].dropna(), kde=True, bins=15, ax=ax)
+            ax.set_xlabel("UG Fee", fontsize=12)
+            ax.set_ylabel("Frequency", fontsize=12)
         st.pyplot(fig)
 
-    # 💰 UG Fee - Histogram
-    st.markdown("### 💰 UG Fee - Histogram")
-    if "UG fee (tuition fee)" not in filtered_data.columns or filtered_data["UG fee (tuition fee)"].isna().all():
-        st.warning("⚠ No valid UG Fee data available.")
-    else:
-        fig, ax = plt.subplots(figsize=(10, 5))
-        sns.histplot(filtered_data["UG fee (tuition fee)"].dropna(), kde=True, bins=15, ax=ax)
-        ax.set_xlabel("UG Fee", fontsize=12)
-        ax.set_ylabel("Frequency", fontsize=12)
-    st.pyplot(fig)
+        # 🏛 PG Fee - Bar Chart
+        st.markdown("### 🏛 PG Fee - Bar Chart")
+        filtered_pg_fee_data = filtered_data[
+            (filtered_data["PG fee"] >= pg_fee_range[0]) & 
+            (filtered_data["PG fee"] <= pg_fee_range[1])
+        ]
 
-    # 🏛 PG Fee - Bar Chart
-    st.markdown("### 🏛 PG Fee - Bar Chart")
-    filtered_pg_fee_data = filtered_data[
-        (filtered_data["PG fee"] >= pg_fee_range[0]) & 
-        (filtered_data["PG fee"] <= pg_fee_range[1])
-    ]
+        if filtered_pg_fee_data.empty:
+            st.warning("⚠ No colleges found with this PG Fee.")
+        else:
+            num_colleges = len(filtered_pg_fee_data)
+            fig_width = max(15, min(30, num_colleges * 0.5))  
+            fig_height = 7 if num_colleges <= 20 else 9  
+            fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+            filtered_pg_fee_data = filtered_pg_fee_data.sort_values("PG fee", ascending=False)
+            sns.barplot(x="College Name", y="PG fee", data=filtered_pg_fee_data, ax=ax)
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=10)
+            ax.set_xlabel("College Name")
+            ax.set_ylabel("PG Fee")
+            st.pyplot(fig)
 
-    if filtered_pg_fee_data.empty:
-        st.warning("⚠ No colleges found with this PG Fee.")
-    else:
-        num_colleges = len(filtered_pg_fee_data)
-        fig_width = max(15, min(30, num_colleges * 0.5))  
-        fig_height = 7 if num_colleges <= 20 else 9  
-        fig, ax = plt.subplots(figsize=(fig_width, fig_height))
-        filtered_pg_fee_data = filtered_pg_fee_data.sort_values("PG fee", ascending=False)
-        sns.barplot(x="College Name", y="PG fee", data=filtered_pg_fee_data, ax=ax)
-        ax.set_xticklabels(ax.get_xticklabels(), rotation=60, ha='right', fontsize=10)
-        ax.set_xlabel("College Name")
-        ax.set_ylabel("PG Fee")
-        st.pyplot(fig)
+with tabs[1]:
+    st.header("📄 Summary of Analysis")
+    st.write("""
+    - The highest-rated college in your selected area is {max_college_name} with a rating of {max_college_rating}.
+    - The best placement-to-fee ratio is observed in {best_ratio_college}.
+    - In Punjab, **Lovely Professional University** is recommended with a rating of **9.53434**.
+    - Based on your selection, the average UG fee ranges from {max_ug_fee} to {max_ug_fee}.
+    - The most popular stream in your area is **Computer Science** with the highest placement rate.
+    """)
+
+    st.success("🔍 This summary helps users who prefer a textual interpretation of the data.")
