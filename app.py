@@ -117,17 +117,21 @@ if mode == "GitHub Mode":
                 top: 70px;
                 left: 10px;
                 font-size: 14px;
-                font-weight: bold;
                 background: linear-gradient(135deg, #222222, #22cc66);
                 padding: 5px 10px;
                 border-radius: 5px;
                 z-index: 1000;
                 box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
             }
+            .sidebar-hint p{
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
             .sidebar-hint:hover {
                 box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
                 transform: scale(1.1);
-                background: linear-gradient(135deg, #003300, #008000);
+                background: linear-gradient(135deg, #22cc66, #222222);
             }
         </style>
         <div class="footer">
