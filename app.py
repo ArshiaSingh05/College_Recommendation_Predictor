@@ -544,7 +544,7 @@ with tabs[1]:
         <div class="summary-box">
             <p class="summary-text">
                 The highest-rated college in your selected area is <b>{max_college_name}</b> 
-                with a rating of <b>{float(max_college_rating):.2f}</b>.<br><br>
+                with a rating of <b>{max_college_rating}</b>.<br><br>
                 The best placement-to-fee ratio is observed in <b>{best_ratio_college}</b>.<br><br>
                 Based on your selection, the average UG fee ranges from <b>{max_ug_fee}</b> to <b>{max_ug_fee}</b>.
             </p>
