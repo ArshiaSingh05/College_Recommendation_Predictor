@@ -112,11 +112,26 @@ if mode == "GitHub Mode":
                 text-decoration: none;
                 font-weight: bold;
             }
+            .sidebar-hint {
+                position: fixed;
+                top: 70px;
+                left: 10px;
+                font-size: 14px;
+                font-weight: bold;
+                background-color: linear-gradient(135deg, #222222, #22cc66);
+                padding: 5px 10px;
+                border-radius: 5px;
+                z-index: 1000;
+                box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            }
         </style>
         <div class="footer">
             Developed by Arshia Singh | 
             <a href="https://github.com/ArshiaSingh05" target="_blank"> GitHub</a> | 
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">LinkedIn</a>
+        </div>
+        <div class="sidebar-hint">
+            ⬆️ Click here to open the sidebar
         </div>
         """,
         unsafe_allow_html=True
@@ -189,40 +204,32 @@ else:
             text-decoration: none;
             font-weight: bold;
         }
-        </style>
-        <div class="footer">
-            Developed by Arshia Singh | 
-            <a href="https://github.com/ArshiaSingh05" target="_blank"> GitHub</a> | 
-            <a href="https://www.linkedin.com/in/arshia05/" target="_blank">LinkedIn</a>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    plt.style.use("default")
-
-# Custom HTML + CSS for positioning the sidebar hint
-st.markdown(
-    """
-    <style>
         .sidebar-hint {
             position: fixed;
             top: 70px;
             left: 10px;
             font-size: 14px;
             font-weight: bold;
-            background-color: #ffcc00;
+            background-color: linear-gradient(135deg, #ffffff, #0073e6);
             padding: 5px 10px;
             border-radius: 5px;
             z-index: 1000;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         }
-    </style>
-    <div class="sidebar-hint">
-        ⬅️ Click here to open the sidebar
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+        </style>
+        <div class="footer">
+            Developed by Arshia Singh | 
+            <a href="https://github.com/ArshiaSingh05" target="_blank"> GitHub</a> | 
+            <a href="https://www.linkedin.com/in/arshia05/" target="_blank">LinkedIn</a>
+        </div>
+        <div class="sidebar-hint">
+            ⬆️ Click here to open the sidebar
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    plt.style.use("default")
+
 with st.sidebar:
     st.header("Adjust Parameters")
     average_rating = st.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
