@@ -508,9 +508,46 @@ with tabs[0]:
             st.pyplot(fig)
 
 with tabs[1]:
-    st.header("📄 Summary of Analysis")
-    st.write(
-        f"""The highest-rated college in your selected area is {max_college_name} with a rating of {max_college_rating}.
-        \nThe best placement-to-fee ratio is observed in {best_ratio_college}.\n
-        Based on your selection, the average UG fee ranges from {max_ug_fee} to {max_ug_fee}."""
+    st.markdown(
+        """
+        <style>
+            .summary-heading {
+                font-family: "Times New Roman", serif;
+                font-size: 32px;
+                font-weight: bold;
+                text-align: left;
+                color: #333;
+                padding-bottom: 5px;
+                border-bottom: 2px solid #d9534f;
+            }
+            .summary-text {
+                font-family: "Times New Roman", serif;
+                font-size: 18px;
+                color: #444;
+                line-height: 1.5;
+                text-align: justify;
+            }
+            .summary-box {
+                background-color: #f8f9fa;
+                padding: 12px;
+                border-radius: 5px;
+                border-left: 5px solid #d9534f;
+            }
+        </style>
+        <h2 class="summary-heading">📄 Summary of Analysis</h2>
+        """,
+        unsafe_allow_html=True
+    )
+    # Styled summary text inside a box
+    st.markdown(
+        f"""
+        <div class="summary-box">
+            <p class="summary-text">
+                The highest-rated college in your selected area is <b>{max_college_name}</b> with a rating of <b>{max_college_rating:.2f}</b>.<br><br>
+                The best placement-to-fee ratio is observed in <b>{best_ratio_college}</b>.<br><br>
+                Based on your selection, the average UG fee ranges from <b>{max_ug_fee}</b> to <b>{max_ug_fee}</b>.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
     )
