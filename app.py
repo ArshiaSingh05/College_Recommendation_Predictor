@@ -118,11 +118,16 @@ if mode == "GitHub Mode":
                 left: 10px;
                 font-size: 14px;
                 font-weight: bold;
-                background-color: linear-gradient(135deg, #222222, #22cc66);
+                background: linear-gradient(135deg, #222222, #22cc66);
                 padding: 5px 10px;
                 border-radius: 5px;
                 z-index: 1000;
                 box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            }
+            .sidebar-hint:hover {
+                box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+                transform: scale(1.1);
+                background: linear-gradient(135deg, #003300, #008000);
             }
         </style>
         <div class="footer">
@@ -210,11 +215,15 @@ else:
             left: 10px;
             font-size: 14px;
             font-weight: bold;
-            background-color: linear-gradient(135deg, #ffffff, #0073e6);
+            background: linear-gradient(135deg, #ffffff, #0073e6);
             padding: 5px 10px;
             border-radius: 5px;
             z-index: 1000;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+        .sidebar-hint:hover {
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+            transform: scale(1.1);
         }
         </style>
         <div class="footer">
@@ -223,7 +232,7 @@ else:
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">LinkedIn</a>
         </div>
         <div class="sidebar-hint">
-            ⬆️ Click here to open the sidebar
+            <p>⬆️ Click here to open the sidebar</p>
         </div>
         """,
         unsafe_allow_html=True
