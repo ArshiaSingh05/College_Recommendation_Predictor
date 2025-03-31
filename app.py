@@ -142,6 +142,24 @@ if mode == "GitHub Mode":
         <div class="sidebar-hint">
             ⬆️ Click here to open the sidebar
         </div>
+        <script>
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function() {
+            let hint = document.getElementById("sidebarHint");
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (hint) {
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    hint.style.opacity = "0";
+                } else {
+                    // Scrolling up
+                    hint.style.opacity = "1";
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+        </script>
         """,
         unsafe_allow_html=True
     )
@@ -149,103 +167,117 @@ if mode == "GitHub Mode":
     sns.set_palette("Greens")
 else:
     st.markdown(
-        """
-        <style>
-        .stApp { background-color: white; color: black; }
-                                            /* ABOUT ME CUSTOMIZATION */
-        .custom-box {
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), inset 2px 2px 5px rgba(255, 255, 255, 0.2);
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-        .about-box {
-            background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
-            color: black;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        .handles-box {
-            background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
-            color: black;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        .projects-box {
-            background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
-            color: black;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        h3 {
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-        a {
-            text-decoration: none;
-            font-weight: bold;
-            color: white;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #ffd700;
-        }
-                                           /* FOOTER */
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background: linear-gradient(to right, white, #7EC8E3);
-            color: black;
-            font-size: 14px;
-            font-weight: bold;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+    """
+    <style>
+    .stApp { background-color: white; color: black; }
+    
+    /* ABOUT ME CUSTOMIZATION */
+    .custom-box {
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), inset 2px 2px 5px rgba(255, 255, 255, 0.2);
+        margin-bottom: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+    }
+    .about-box, .handles-box, .projects-box {
+        background: linear-gradient(135deg, rgba(109, 213, 237, 0.7), rgba(33, 147, 176, 0.7));
+        color: black;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    h3 {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+    a {
+        text-decoration: none;
+        font-weight: bold;
+        color: white;
+    }
+    a:hover {
+        text-decoration: underline;
+        color: #ffd700;
+    }
+
+    /* FOOTER */
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background: linear-gradient(to right, white, #7EC8E3);
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+    .footer a {
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    /* SIDEBAR HINT */
+    .sidebar-hint {
+        position: fixed;
+        top: 70px;
+        left: 10px;
+        font-size: 14px;
+        background: linear-gradient(135deg, #ffffff, #0073e6);
+        padding: 5px 10px;
+        border-radius: 5px;
+        z-index: 1000;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        transition: opacity 0.3s ease-in-out;
+    }
+    .sidebar-hint p {
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .sidebar-hint:hover {
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+        transform: scale(1.1);
+        background: linear-gradient(135deg, #0073e6, #ffffff);
+    }
+    </style>
+    <div class="footer">
+        Developed by Arshia Singh | 
+        <a href="https://github.com/ArshiaSingh05" target="_blank">GitHub</a> | 
+        <a href="https://www.linkedin.com/in/arshia05/" target="_blank">LinkedIn</a>
+    </div>
+
+    <div class="sidebar-hint" id="sidebarHint">
+        ⬆️ Click here to open the sidebar
+    </div>
+    <script>
+    let lastScrollTop = 0;
+    window.addEventListener("scroll", function() {
+        let hint = document.getElementById("sidebarHint");
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (hint) {
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                hint.style.opacity = "0";
+            } else {
+                // Scrolling up
+                hint.style.opacity = "1";
             }
-        .footer a {
-            color: black;
-            text-decoration: none;
-            font-weight: bold;
         }
-        .sidebar-hint {
-            position: fixed;
-            top: 70px;
-            left: 10px;
-            font-size: 14px;
-            background: linear-gradient(135deg, #ffffff, #0073e6);
-            padding: 5px 10px;
-            border-radius: 5px;
-            z-index: 1000;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        }
-        .sidebar-hint p{
-            color: black;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .sidebar-hint:hover {
-            box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
-            transform: scale(1.1);
-            background: linear-gradient(135deg, #0073e6, #ffffff);
-        }
-        </style>
-        <div class="footer">
-            Developed by Arshia Singh | 
-            <a href="https://github.com/ArshiaSingh05" target="_blank"> GitHub</a> | 
-            <a href="https://www.linkedin.com/in/arshia05/" target="_blank">LinkedIn</a>
-        </div>
-        <div class="sidebar-hint">
-            ⬆️ Click here to open the sidebar
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+        lastScrollTop = scrollTop;
+    });
+    </script>
+    """,
+    unsafe_allow_html=True
+)
     plt.style.use("default")
 
 with st.sidebar:
@@ -546,7 +578,7 @@ with tabs[1]:
                 The highest-rated college in your selected area is <b>{max_college_name}</b> 
                 with a rating of <b>{max_college_rating}</b>.<br><br>
                 The best placement-to-fee ratio is observed in <b>{best_ratio_college}</b>.<br><br>
-                Based on your selection, the average UG fee ranges from <b>{max_ug_fee}</b> to <b>{max_ug_fee}</b>.
+                Based on your selection, the average UG fee ranges from <b>{min_ug_fee}</b> to <b>{max_ug_fee}</b>.
             </p>
         </div>
         """,
