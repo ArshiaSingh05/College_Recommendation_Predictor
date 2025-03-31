@@ -215,7 +215,7 @@ else:
                 left: 10px;
                 font-size: 14px;
                 font-weight: bold;
-                background: linear-gradient(135deg, #222222, #22cc66);
+                background: linear-gradient(135deg, #ffffff, #0073e6);
                 padding: 5px 10px;
                 border-radius: 5px;
                 z-index: 1000;
@@ -224,7 +224,7 @@ else:
         .sidebar-hint:hover {
             box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
             transform: scale(1.1);
-            background: linear-gradient(135deg, #003300, #008000);
+            background: linear-gradient(135deg, #0073e6, #ffffff);
         }
         </style>
         <div class="footer">
