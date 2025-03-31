@@ -250,8 +250,9 @@ else:
 
 with st.sidebar:
     st.header("Adjust Parameters")
-    average_rating = st.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
-    placement_vs_fee_ratio = st.slider("Placement vs Fee Ratio", min_value=0.0, max_value=1.0, value=0.0, step=0.01)
+    average_rating = st.slider("Average Rating", min_value=0, max_value=10, value=0, step=1)
+    max_ratio = filtered_data["Placement vs Fee Ratio"].max()
+    placement_vs_fee_ratio = st.slider("Placement vs Fee Ratio", min_value=0.0, max_value=max_ratio, value=0.0, step=0.01)
     min_ug_fee, max_ug_fee = data['UG fee (tuition fee)'].min(), data['UG fee (tuition fee)'].max()
     min_pg_fee, max_pg_fee = data['PG fee'].min(), data['PG fee'].max()
     ug_fee_range = st.slider("UG Fee Range", min_ug_fee, max_ug_fee, (min_ug_fee, max_ug_fee))
@@ -259,6 +260,23 @@ with st.sidebar:
     selected_area = st.selectbox("Select Area", ['All'] + sorted(data['State'].str.strip().str.title().fillna('Unknown').unique().tolist()))
     selected_stream = st.selectbox("Select Stream", ['All'] + sorted(data['Stream'].str.strip().str.title().fillna('Unknown').unique().tolist()))
     category_mapping = {0: "Poor", 1: "Average", 2: "Good", 3: "Excellent"}
+
+    filtered_by_area = filtered_data[filtered_data['State'].str.strip().str.lower() == selected_area.strip().lower()]
+    filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
+    if not filtered_by_area.empty:
+        max_rating_college = filtered_by_area.loc[filtered_by_area['Average Rating'].idxmax()]
+        max_college_name = max_rating_college['College Name']
+        max_college_rating = max_rating_college['Average Rating']
+        max_college_state = max_rating_college['State']
+        max_college_stream = max_rating_college['Stream']
+        best_ratio_college = filtered_ratio_data.loc[filtered_ratio_data['Placement vs Fee Ratio'].idxmax(), 'College Name']
+    else:
+        max_college_name = "Not Available"
+        max_college_rating = "N/A"
+        max_college_state = "N/A"
+        max_college_stream = "N/A"
+        best_ratio_college = "Not Available"
+
     # Predict button
     if st.button("Predict"):
         if selected_area.strip().lower() == "punjab":
@@ -306,11 +324,6 @@ with st.sidebar:
                     best_college_name = best_college['College Name']
                     st.info(f"🏆 **Best College with {selected_rating} Rating in {selected_area}:** {best_college_name}")
                 else:
-                    max_rating_college = filtered_by_area.loc[filtered_by_area['Average Rating'].idxmax()]
-                    max_college_name = max_rating_college['College Name']
-                    max_college_rating = max_rating_college['Average Rating']
-                    max_college_state = max_rating_college['State']
-                    max_college_stream = max_rating_college['Stream']
                     st.warning(f"No colleges found with an Average Rating of {selected_rating} in {selected_area}.\n")
                     st.info(f"🏆 **But Best College Available in {selected_area} ({selected_stream}):** {max_college_name} ({max_college_state}) with {max_college_rating} Rating")
         else:
@@ -348,7 +361,7 @@ st.sidebar.markdown(
     """, unsafe_allow_html=True
 )
 
-tabs=st.tabs[('Dashboard','Summary')]
+tabs=st.tabs(['Dashboard','Summary'])
 with tabs[0]:
     st.subheader(f"📍 Colleges in {selected_area}")
     st.subheader("Explore Colleges by Area and Desired Stream")
@@ -368,7 +381,7 @@ with tabs[0]:
         filtered_rating_data = filtered_data[filtered_data["Average Rating"] >= average_rating].copy()
         st.write(f"➡️ Number of colleges after filtering: {len(filtered_rating_data)}")
         st.markdown("### 🔎 Colleges Recommended for you")
-        st.write(filtered_data[["College Name","State","Stream","Average Rating",  "Placement vs Fee Ratio", "UG fee (tuition fee)", "PG fee"]])
+        st.write(filtered_rating_data[["College Name","State","Stream","Average Rating",  "Placement vs Fee Ratio", "UG fee (tuition fee)", "PG fee"]])
 
         # 📊 Average Rating - Bar Chart
         st.markdown("### 📊 Average Rating - Bar Chart")
@@ -406,9 +419,8 @@ with tabs[0]:
         st.pyplot(fig)
 
         # 📈 Placement vs Fee Ratio - Bar Chart
-        st.markdown("### 📈 Placement vs Fee Ratio - Bar Chart")
         filtered_ratio_data = filtered_data[filtered_data['Placement vs Fee Ratio'] >= placement_vs_fee_ratio]
-        best_ratio_college = data.loc[data['Placement vs Fee Ratio'].idxmax(), 'College Name']
+        st.markdown("### 📈 Placement vs Fee Ratio - Bar Chart")
         if filtered_ratio_data.empty:
             st.warning("No colleges match the selected Placement vs Fee Ratio.")
         else:
@@ -497,12 +509,8 @@ with tabs[0]:
 
 with tabs[1]:
     st.header("📄 Summary of Analysis")
-    st.write("""
-    - The highest-rated college in your selected area is {max_college_name} with a rating of {max_college_rating}.
-    - The best placement-to-fee ratio is observed in {best_ratio_college}.
-    - In Punjab, **Lovely Professional University** is recommended with a rating of **9.53434**.
-    - Based on your selection, the average UG fee ranges from {max_ug_fee} to {max_ug_fee}.
-    - The most popular stream in your area is **Computer Science** with the highest placement rate.
-    """)
-
-    st.success("🔍 This summary helps users who prefer a textual interpretation of the data.")
+    st.write(
+        f"""The highest-rated college in your selected area is {max_college_name} with a rating of {max_college_rating}.
+        \nThe best placement-to-fee ratio is observed in {best_ratio_college}.\n
+        Based on your selection, the average UG fee ranges from {max_ug_fee} to {max_ug_fee}."""
+    )
