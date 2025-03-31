@@ -200,15 +200,27 @@ else:
     )
     plt.style.use("default")
 
-st.markdown(
-        """
-        <div style="position: absolute; top: 10px; left: 10px; font-size: 16px; font-weight: bold; 
-                    background-color: #ffcc00; padding: 5px 10px; border-radius: 5px;">
-            ⬅️ Click here to open the sidebar
-        </div>
-        """, 
-        unsafe_allow_html=True
-)
+# Custom HTML + CSS for positioning
+sidebar_hint_html = """
+    <style>
+        .sidebar-hint {
+            position: fixed;
+            top: 70px;
+            left: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #ffcc00;
+            padding: 5px 10px;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+    <div class="sidebar-hint">
+        ⬅️ Click here to open the sidebar
+    </div>
+"""
+components.html(sidebar_hint_html, height=50)
 with st.sidebar:
     st.header("Adjust Parameters")
     average_rating = st.slider("Average Rating", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
