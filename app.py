@@ -241,7 +241,7 @@ else:
             <a href="https://www.linkedin.com/in/arshia05/" target="_blank">LinkedIn</a>
         </div>
         <div class="sidebar-hint">
-            <p>⬆️ Click here to open the sidebar</p>
+            ⬆️ Click here to open the sidebar
         </div>
         """,
         unsafe_allow_html=True
