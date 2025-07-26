@@ -2,8 +2,8 @@
 
 # College_Recommendation_Predictor
 
-🚀 An interactive Streamlit-based dashboard for analyzing colleges based on ratings, placement-to-fee ratio, and other key factors.
-
+🚀 An interactive Streamlit-based dashboard for analyzing colleges based on ratings, placement-to-fee ratio, and other key factors.  
+Deployed Link: https://collegerecommendationpredictor.streamlit.app/  
 🔗 Linkedln Profile Link: https://www.linkedin.com/in/arshia05/
 📢 Related Linkedln post Link: https://www.linkedin.com/posts/arshia05_machinelearning-ai-collegerecommendation-activity-7312715192029573120-W86S?utm_source=share&utm_medium=member_desktop&rcm=ACoAAET7I50BN_JsnnWbwEnbmzPIR-tOov4vBo4
 
